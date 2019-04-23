@@ -1,0 +1,41 @@
+@import '_settings';
+
+.title--home {
+  width: fit-content;
+  height: 1.5em;
+  border-bottom: 2px solid black;
+
+  line-height: 1.5em;
+  font-family: $serifFont;
+  font-weight: normal;
+  font-size: 3em;
+}
+
+.title--home a {
+  color: black;
+}
+
+.image--home {
+  padding: 2em;
+  width: 100%;
+}
+
+.publication--home {
+  font-family: $serifFont;
+  text-align: left;
+  font-size: 1em;
+}
+
+.publication__article-entry--home {
+
+}
+
+.article-entry__title--home {
+  font-size: 2em;
+}
+
+.article-entry__authors--home {
+  padding-left: 1.5em;
+
+  font-size: 0.8em;
+}

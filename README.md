@@ -5,6 +5,14 @@
 npm install
 ```
 
+### Set up environment
+Create a file titled .env.local
+Paste this variable declaration into it
+```
+VUE_APP_MAPBOX_API_ACCESS_TOKEN=
+```
+Paste a Mapbox Public API token following the equals, one is provided when you create an account.
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve

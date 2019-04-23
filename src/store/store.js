@@ -11,20 +11,30 @@ export default new Vuex.Store({
   },
   state: {
     spatialUnit: "districts",
-    mapFocusBoundary: null
+    mapFocusPadding: {
+      top: 100,
+      right: 100,
+      bottom: 100,
+      left: 100
+    }
+  },
+  getters: {
+    mapFocusPadding: state => {
+      return state.mapFocusPadding;
+    }
   },
   mutations: {
     /**
      * Initialize the state with essential map data from local storage.
      * https://www.mikestreety.co.uk/blog/vue-js-using-localstorage-with-the-vuex-store
      * TODO: Implement vuex-persistedstate if need more options
-     * @param {*} context 
+     * @param {*} context
      */
     initializeState(context) {
-      if (localStorage.getItem('store')) {
+      if (localStorage.getItem("store")) {
         this.replaceState(
-          Object.assign(state, JSON.parse(localStorage.getItem('store')))
-        )
+          Object.assign(state, JSON.parse(localStorage.getItem("store")))
+        );
       }
     }
   },

@@ -16,6 +16,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "styles/_settings";
+
 * {
   margin: 0;
   padding: 0;
@@ -24,14 +26,14 @@ export default {
   padding: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: $appWidth;
+  height: $appHeight;
 }
 .map-container {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: $appWidth;
+  height: $appHeight;
 }
 </style>
