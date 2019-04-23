@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import TheMap from "./components/TheMap";
+import TheMap from "@/components/TheMap";
 
 export default {
-  name: "TheMapContainer",
+  name: "TheMapDashboard",
   props: {},
   data: function() {
     return {};
