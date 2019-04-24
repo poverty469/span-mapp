@@ -21,6 +21,7 @@ export default {
     mb.accessToken = process.env.VUE_APP_MAPBOX_API_ACCESS_TOKEN;
     this.map = new mb.Map({
       container: "the-map",
+<<<<<<< HEAD
       style:
         process.env.NODE_ENV == "development"
           ? {
@@ -50,6 +51,9 @@ export default {
               ]
             }
           : "mapbox://styles/jacksonrya/cjuunpxmpbetg1fo7bniepqq4",
+=======
+      style: "mapbox://styles/jacksonrya/cjuunpxmpbetg1fo7bniepqq4",
+>>>>>>> f12fb68cdfb40513c26e2ffa7e44c937a8e06e9b
       bounds: new mb.LngLatBounds(
         boundsEnum.washington.sw,
         boundsEnum.washington.ne
