@@ -21,22 +21,15 @@ export default {
     mb.accessToken = process.env.VUE_APP_MAPBOX_API_ACCESS_TOKEN;
     this.map = new mb.Map({
       container: "the-map",
-<<<<<<< HEAD
       style:
+        // Set basemap to Stamen during development and to mapbox during production
         process.env.NODE_ENV == "development"
           ? {
               version: 8,
               sources: {
                 "simple-tiles": {
                   type: "raster",
-                  // point to our third-party tiles. Note that some examples
-                  // show a "url" property. This only applies to tilesets with
-                  // corresponding TileJSON (such as mapbox tiles).
-                  tiles: [
-                    // "http://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                    // "http://b.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    "http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"
-                  ],
+                  tiles: ["http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"],
                   tileSize: 256
                 }
               },
@@ -51,9 +44,6 @@ export default {
               ]
             }
           : "mapbox://styles/jacksonrya/cjuunpxmpbetg1fo7bniepqq4",
-=======
-      style: "mapbox://styles/jacksonrya/cjuunpxmpbetg1fo7bniepqq4",
->>>>>>> f12fb68cdfb40513c26e2ffa7e44c937a8e06e9b
       bounds: new mb.LngLatBounds(
         boundsEnum.washington.sw,
         boundsEnum.washington.ne
@@ -80,7 +70,9 @@ export default {
         padding: this.$store.getters.mapFocusPadding
       });
     },
+
     /**
+     * Adds the given geojson data as a layer to the map.
      * @param {String} id The name id to associate with the layer.
      * @param {Geojson} data The GeoJson source for the layer.
      */
