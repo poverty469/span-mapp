@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import TheFooter from "./components/TheFooter.vue";
-import TheHeader from "./components/TheHeader.vue";
-import TheLogo from "./components/TheLogo.vue";
-import TheMapDashboard from "./components/TheMapDashboard.vue";
-import TheTourDashboard from "./components/TheTourDashboard.vue";
-import TheSplashPage from "./components/TheSplashPage.vue";
+import TheFooter from "@/components/TheFooter.vue";
+import TheHeader from "@/components/TheHeader.vue";
+import TheLogo from "@/components/TheLogo.vue";
+import TheMapDashboard from "@/components/TheMapDashboard.vue";
+import TheTourDashboard from "@/components/TheTourDashboard.vue";
+import TheSplashPage from "@/components/TheSplashPage.vue";
 
 export default {
   name: "app",
