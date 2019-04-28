@@ -45,8 +45,11 @@ export default {
 }
 
 a {
-  width: fit-content;
-  height: fit-content;
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
 }
 
 #app {
