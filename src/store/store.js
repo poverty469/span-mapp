@@ -10,6 +10,7 @@ export default new Vuex.Store({
     story: story
   },
   state: {
+    appLoading: true,
     spatialUnit: "districts",
     mapFocusPadding: {
       top: 100,
@@ -21,6 +22,9 @@ export default new Vuex.Store({
   getters: {
     mapFocusPadding: state => {
       return state.mapFocusPadding;
+    },
+    appLoading: state => {
+      return state.appLoading;
     }
   },
   mutations: {
@@ -28,15 +32,22 @@ export default new Vuex.Store({
      * Initialize the state with essential map data from local storage.
      * https://www.mikestreety.co.uk/blog/vue-js-using-localstorage-with-the-vuex-store
      * TODO: Implement vuex-persistedstate if need more options
-     * @param {*} context
+     * @param {*} state
      */
-    initializeState(context) {
+    initializeState(state) {
       if (localStorage.getItem("store")) {
         this.replaceState(
           Object.assign(state, JSON.parse(localStorage.getItem("store")))
         );
       }
+    },
+    setAppLoading(state, loading) {
+      state.appLoading = loading;
     }
   },
-  actions: {}
+  actions: {
+    finishLoadingApp(context) {
+      context.commit("setAppLoading", false);
+    }
+  }
 });

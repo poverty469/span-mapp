@@ -3,7 +3,7 @@
     <a href="https://povertyaction.org" target="_blank">
       <svg
         class="logo"
-        :class="{ 'logo--glow': isGlowing }"
+        :class="{ 'logo--glow': forceLogoGlow }"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="-13.973 -15.393 450 310"
       >
@@ -70,25 +70,33 @@ export default {
   props: {},
   data: function() {
     return {
-      glowPulseInterval: "",
-      isGlowing: false
+      glowPulseInterval: "", // The interval of the logo glowing effect
+      forceLogoGlow: false // Whether or not the logo must glow
     };
   },
   mounted: function() {
     // Set a interval to which the logo with glow
     this.glowPulseInterval = setInterval(
       function() {
-        this.isGlowing = !this.isGlowing;
+        this.forceLogoGlow = !this.forceLogoGlow;
+
+        // If app is done loading, stop the animation
+        if (!this.$store.getters.appLoading) {
+          clearInterval(this.glowPulseInterval);
+          this.resetLogo();
+        }
       }.bind(this),
       1500
     );
-
-    // Remove the glowing interval when the app is loaded and ready to use
-    window.addEventListener("load", () => {
-      clearInterval(this.glowPulseInterval);
-    });
   },
-  components: {}
+  methods: {
+    /**
+     * Resets the logo state.
+     */
+    resetLogo() {
+      this.forceLogoGlow = false;
+    }
+  }
 };
 </script>
 

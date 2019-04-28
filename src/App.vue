@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <a class="force-load-test" href="#" @click="forceLoad()"></a>
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
     <the-splash-page class="the-splash-page" rel="preload"></the-splash-page>
@@ -26,6 +27,11 @@ export default {
     TheMapDashboard,
     TheSplashPage,
     TheTourDashboard
+  },
+  methods: {
+    forceLoad() {
+      this.$store.dispatch("finishLoadingApp");
+    }
   }
 };
 </script>
@@ -91,5 +97,17 @@ a {
   z-index: 10;
 
   background: $light-tan;
+}
+
+.force-load-test {
+  position: fixed;
+  top: 0;
+  left: 50vw;
+  width: 15px;
+  height: 15px;
+  background: transparent;
+  outline: 0.5px solid black;
+
+  z-index: 999;
 }
 </style>
