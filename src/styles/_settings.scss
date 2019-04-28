@@ -1,23 +1,39 @@
+// Colors
+$light-tan: #FFF6F2;
+$light-orange: #FEE3D7;
+$dark-orange: #FCD3C1;
+$light-purple: #BC99C7;
+$dark-purple: #572D85;
+$bright-red: #E6432E;
+$charcoal: #707070;
+$dark-grey: #4B4B4B;
+$shadow: #0000003e;
+
 // Fonts
-$sansSerifFont: 'Avenir', 'Open Sans', sans-serif;
-$serifFont: 'Amiri', serif;
+$standard-font-family: 'Muli', 'Avenir', 'Open Sans', 'Helvetica Neue', sans-serif;
+$standard-body-font: 400, 1em, $dark-grey; // 12px
+$tutorial-title: 900, 2em, $bright-red; // 25px
+$menu-item: 700, 1.2em, $dark-purple; // 14px
+
+@mixin char-style($weight, $size, $color, $lh: false, $all-caps: false) {
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+
+    @if $lh { line-height: $lh; }
+    @if $all-caps { text-transform: uppercase; }
+}
 
 // Site Structure
-$appWidth: 100vw;
-$appHeight: 100vh;
-$headerHeight: 120px;
-$footerHeight: 50px;
-$lefterWidth: 120px;
-$rightPageNavWidth: 360px;
-$headingCardHeight: 240px;
+$app-width: 100vw;
+$app-height: 100vh;
+$header-height: 50px;
+$footer-height: 30px;
+$righter-width: 170px;
 
-$borderWidth: 3px;
-$border: $borderWidth solid black;
+// Border
+$thick-border: 3px;
+$medium-border: 2px;
+$thin-border: 1px;
+$border: $thick-border solid $dark-grey;
 
-$navBarWidth: 240px;
-$buttonTextCenterAdjustment: 3px;
-
-$flyoutFontSize: 1.75em;
-
-// Color
-$bgColor: #fefefe;
