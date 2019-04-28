@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <the-logo></the-logo>
+    <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
-    <the-splash-page class="the-splash-page"></the-splash-page>
+    <the-splash-page class="the-splash-page" rel="preload"></the-splash-page>
     <the-tour-dashboard></the-tour-dashboard>
     <the-map-dashboard class="the-map-dashboard"></the-map-dashboard>
     <the-footer class="the-footer"></the-footer>
@@ -38,6 +38,11 @@ export default {
   padding: 0;
 }
 
+a {
+  width: fit-content;
+  height: fit-content;
+}
+
 #app {
   padding: absolute;
   top: 0;
@@ -46,6 +51,14 @@ export default {
   height: $app-height;
 
   font-family: $standard-font-family;
+}
+
+.the-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: $header-height;
+  z-index: 11;
 }
 
 .the-header {
