@@ -37,8 +37,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "styles/_settings";
-
 * {
   margin: 0;
   padding: 0;

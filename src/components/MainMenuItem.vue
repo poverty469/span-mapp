@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "MenuItem",
+  name: "MainMenuItem",
   props: {
     item: {
       default: function() {

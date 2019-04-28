@@ -29,27 +29,13 @@
         <defs>
           <filter id="sofGlow" height="300%" width="300%" x="-75%" y="-75%">
             <!-- Thicken out the original shape -->
-            <feMorphology
-              operator="dilate"
-              radius="4"
-              in="SourceAlpha"
-              result="thicken"
-            ></feMorphology>
+            <feMorphology operator="dilate" radius="4" in="SourceAlpha" result="thicken"></feMorphology>
             <!-- Use a gaussian blur to create the soft blurriness of the glow -->
-            <feGaussianBlur
-              in="thicken"
-              stdDeviation="10"
-              result="blurred"
-            ></feGaussianBlur>
+            <feGaussianBlur in="thicken" stdDeviation="10" result="blurred"></feGaussianBlur>
             <!-- Change the colour -->
             <feFlood flood-color="#ff6b10" result="glowColor"></feFlood>
             <!-- Color in the glows -->
-            <feComposite
-              in="glowColor"
-              in2="blurred"
-              operator="in"
-              result="softGlow_colored"
-            ></feComposite>
+            <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored"></feComposite>
             <!--	Layer the effects together -->
             <feMerge>
               <feMergeNode in="softGlow_colored"></feMergeNode>
@@ -101,8 +87,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../styles/_settings";
-
 .logo,
 .logo--glow {
   height: $header-height;

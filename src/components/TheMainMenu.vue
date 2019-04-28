@@ -1,19 +1,15 @@
 <template>
   <ul>
-    <menu-item
-      v-for="(item, index) of menuItems"
-      :key="index"
-      :item="item"
-      class="menu-item"
-    ></menu-item>
+    <main-menu-item v-for="(item, index) of menuItems" :key="index" :item="item" class="menu-item"></main-menu-item>
   </ul>
 </template>
 
 <script>
-import MenuItem from "@/components/MenuItem.vue";
+import MainMenuItem from "@/components/MainMenuItem.vue";
 
 export default {
   name: "TheMainMenu",
+  components: { MainMenuItem },
   props: {},
   data: function() {
     return {
@@ -45,8 +41,7 @@ export default {
         }
       ]
     };
-  },
-  components: { MenuItem }
+  }
 };
 </script>
 
