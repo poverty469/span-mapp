@@ -2,18 +2,21 @@
   <div>
     <mb-map :mapId="mapId"></mb-map>
     <map-legend></map-legend>
+    <map-sidebar></map-sidebar>
   </div>
 </template>
 
 <script>
 import MbMap from "@/components/MbMap";
 import MapLegend from "@/components/MapLegend";
+import MapSidebar from "@/components/MapSidebar";
 
 export default {
   name: "MapDashboard",
   components: {
     MapLegend,
-    MbMap
+    MbMap,
+    MapSidebar
   },
   props: {
     // Id of the mapbox map
