@@ -6,7 +6,7 @@
     <the-header class="the-header"></the-header>
     <the-splash-page class="the-splash-page" rel="preload"></the-splash-page>
     <the-tour-dashboard class="the-tour-dashboard"></the-tour-dashboard>
-    <map-dashboard mapId="main-map" class="the-map-dashboard"></map-dashboard>
+    <map-dashboard mapId="main-map" class="main-map-dashboard"></map-dashboard>
     <the-footer class="the-footer"></the-footer>
   </div>
 </template>
@@ -70,7 +70,7 @@ li {
   top: 0;
   left: 0;
   height: $header-height;
-  z-index: 11;
+  z-index: z("logo");
 }
 
 .the-header {
@@ -79,19 +79,23 @@ li {
   left: 0;
   width: $app-width;
   height: $header-height;
-  z-index: 10;
+  z-index: z("site-header");
 
   background: $light-tan;
 }
 
-.the-map-dashboard {
+.the-tour-dashboard {
+  z-index: z("tour-dashboard");
+}
+
+.main-map-dashboard {
   position: absolute;
   top: $header-height;
   bottom: $footer-height;
   left: 0;
   width: $app-width;
 
-  z-index: 0;
+  z-index: z("main-map");
 }
 
 .the-footer {
@@ -100,11 +104,16 @@ li {
   left: 0;
   width: $app-width;
   height: $footer-height;
-  z-index: 10;
+  z-index: z("site-footer");
 
   background: $light-tan;
 }
 
+.the-splash-page {
+  z-index: z("splash-page");
+}
+
+// Temporary
 .force-load-test {
   position: fixed;
   top: 0;
@@ -114,6 +123,6 @@ li {
   background: transparent;
   outline: 0.5px solid black;
 
-  z-index: 999;
+  z-index: z("test-object");
 }
 </style>

@@ -37,3 +37,23 @@ $medium-border: 2px;
 $thin-border: 1px;
 $border: $thick-border solid $dark-grey;
 
+// Z-index
+// Returns a z-index value of the requested name found in the z-index list
+@function z($name) {
+    @if index($z-indexes, $name) {
+        @return (length($z-indexes) - index($z-indexes, $name)) + 1;
+    } @else {
+        @warn 'There is no item "#{$name}" in this list; choose one of: #{$z-indexes}';
+        @return null;
+    }
+}
+// Z-index positions from high to low
+$z-indexes: (
+    "test-object", // Temporary
+    "logo",
+    "splash-page",
+    "site-header",
+    "tour-dashboard",
+    "site-footer",
+    "main-map"
+);
