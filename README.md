@@ -14,12 +14,11 @@
     - [Parent-Child Communication](https://vuejs.org/v2/guide/components.html#Passing-Data-to-Child-Components-with-Props)
     - [Child-Parent Communication](https://vuejs.org/v2/guide/components.html#Listening-to-Child-Components-Events)
 
-## Git branches
+### Git
 - Use [this as a diagram of branch relationships](https://nvie.com/posts/a-successful-git-branching-model/, we're only using 'dev' and 'master' until closer to finishing.
 - If comfortable, use a [directory naming structure](https://coderwall.com/p/qkofma/a-caution-about-git-branch-names-with-s) to organize branches
 - [Seperate concerns and boil down implementation steps in order to commit often](https://www.git-tower.com/learn/git/ebook/en/command-line/appendix/best-practices)
 - Write meaningful commit titles, if you can't clarify everything in the title write meaningful message bodies
-
 
 ## Project setup
 ```
