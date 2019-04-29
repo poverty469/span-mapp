@@ -5,13 +5,16 @@
 npm install
 ```
 
-### Set up environment (if you want to test production builds and use mapbox basemaps)
+### Set up environment
+If you want to test production builds and use your own mapbox basemaps...
+
 Create a file titled .env.local
-Paste this variable declaration into it
+Paste these variable declarations into it
 ```
 VUE_APP_MAPBOX_API_ACCESS_TOKEN=
+VUE_APP_MAPBOX_STYLE_URL=
 ```
-Paste a Mapbox Public API token following the equals, one is provided when you create an account.
+Paste in a Mapbox Public API token and a Mapbox Style URL of your choice basemap.
 
 ### Compiles and hot-reloads for development
 ```

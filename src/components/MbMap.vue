@@ -51,7 +51,7 @@ export default {
                 }
               ]
             }
-          : "mapbox://styles/jacksonrya/cjuunpxmpbetg1fo7bniepqq4",
+          : process.env.VUE_APP_MAPBOX_STYLE_URL,
       bounds: new mb.LngLatBounds(
         boundsEnum.washington.sw,
         boundsEnum.washington.ne
