@@ -1,11 +1,12 @@
 <template>
   <div id="app">
+    <!-- temp tag to test loading states -->
     <a class="force-load-test" href="#" @click="forceLoad()"></a>
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
     <the-splash-page class="the-splash-page" rel="preload"></the-splash-page>
-    <the-tour-dashboard></the-tour-dashboard>
-    <the-map-dashboard class="the-map-dashboard"></the-map-dashboard>
+    <the-tour-dashboard class="the-tour-dashboard"></the-tour-dashboard>
+    <map-dashboard mapId="main-map" class="the-map-dashboard"></map-dashboard>
     <the-footer class="the-footer"></the-footer>
   </div>
 </template>
@@ -14,21 +15,25 @@
 import TheFooter from "@/components/TheFooter.vue";
 import TheHeader from "@/components/TheHeader.vue";
 import TheLogo from "@/components/TheLogo.vue";
-import TheMapDashboard from "@/components/TheMapDashboard.vue";
+import MapDashboard from "@/components/MapDashboard.vue";
 import TheTourDashboard from "@/components/TheTourDashboard.vue";
 import TheSplashPage from "@/components/TheSplashPage.vue";
 
 export default {
   name: "app",
   components: {
+    MapDashboard,
     TheFooter,
     TheHeader,
     TheLogo,
-    TheMapDashboard,
     TheSplashPage,
     TheTourDashboard
   },
   methods: {
+    /**
+     * TEMPORARY
+     * Forces the state of the app from loading to loaded
+     */
     forceLoad() {
       this.$store.dispatch("finishLoadingApp");
     }

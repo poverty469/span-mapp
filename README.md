@@ -5,7 +5,7 @@
 npm install
 ```
 
-### Set up environment
+### Set up environment (if you want to test production builds and use mapbox basemaps)
 Create a file titled .env.local
 Paste this variable declaration into it
 ```

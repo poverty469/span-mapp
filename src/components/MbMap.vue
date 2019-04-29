@@ -1,17 +1,25 @@
 <template>
   <div class="map-container">
-    <div id="the-map" class="map"></div>
+    <div :id="mapId" class="map"></div>
   </div>
 </template>
 
 <script>
 import mb from "mapbox-gl";
-import boundsEnum from "../../mock-data/bounds";
-import legislativeLayer from "../../mock-data/layer";
+import boundsEnum from "@/../mock-data/bounds";
+import legislativeLayer from "@/../mock-data/layer";
 
 export default {
-  name: "TheMap",
-  props: {},
+  name: "MbMap",
+  props: {
+    mapId: {
+      type: String,
+      required: true,
+      validator: function(val) {
+        return !val.includes(" ");
+      }
+    }
+  },
   data: function() {
     return {
       map: undefined
@@ -20,7 +28,7 @@ export default {
   mounted: function() {
     mb.accessToken = process.env.VUE_APP_MAPBOX_API_ACCESS_TOKEN;
     this.map = new mb.Map({
-      container: "the-map",
+      container: this.mapId,
       style:
         // Set basemap to Stamen during development and to mapbox during production
         process.env.NODE_ENV == "development"
