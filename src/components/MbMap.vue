@@ -1,5 +1,6 @@
 <template>
   <div class="map-container">
+    <pop-up :map="map"></pop-up>
     <div :id="mapId" class="map"></div>
   </div>
 </template>
@@ -9,8 +10,13 @@ import mb from "mapbox-gl";
 import boundsEnum from "@/../mock-data/bounds";
 import legislativeLayer from "@/../mock-data/layer";
 
+import PopUp from "@/components/PopUp.vue";
+
 export default {
   name: "MbMap",
+  components: {
+    PopUp
+  },
   props: {
     mapId: {
       type: String,
@@ -29,29 +35,7 @@ export default {
     mb.accessToken = process.env.VUE_APP_MAPBOX_API_ACCESS_TOKEN;
     this.map = new mb.Map({
       container: this.mapId,
-      style:
-        // Set basemap to Stamen during development and to mapbox during production
-        process.env.NODE_ENV == "development"
-          ? {
-              version: 8,
-              sources: {
-                "simple-tiles": {
-                  type: "raster",
-                  tiles: ["http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"],
-                  tileSize: 256
-                }
-              },
-              layers: [
-                {
-                  id: "simple-tiles",
-                  type: "raster",
-                  source: "simple-tiles",
-                  minzoom: 0,
-                  maxzoom: 22
-                }
-              ]
-            }
-          : process.env.VUE_APP_MAPBOX_STYLE_URL,
+      style: this.getBaseMap(),
       bounds: new mb.LngLatBounds(
         boundsEnum.washington.sw,
         boundsEnum.washington.ne
@@ -61,6 +45,7 @@ export default {
       }
     });
 
+    // When map is loaded, add the initial layer
     this.map.on("load", () => {
       this.addGeoJsonLayer("districts", legislativeLayer.geometry);
     });
@@ -112,6 +97,37 @@ export default {
           "line-width": 2
         }
       });
+    },
+    /**
+     * Returns a Stamen raster basemap during development, or a mapbox vector basemap
+     * during production.
+     * @return {Object} Raster basemap object.
+     * @return {String} Mapbox style URL.
+     */
+    getBaseMap() {
+      if (process.env.NODE_ENV == "development") {
+        return {
+          version: 8,
+          sources: {
+            "simple-tiles": {
+              type: "raster",
+              tiles: ["http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"],
+              tileSize: 256
+            }
+          },
+          layers: [
+            {
+              id: "simple-tiles",
+              type: "raster",
+              source: "simple-tiles",
+              minzoom: 0,
+              maxzoom: 22
+            }
+          ]
+        };
+      } else {
+        return process.env.VUE_APP_MAPBOX_STYLE_URL;
+      }
     }
   }
 };
