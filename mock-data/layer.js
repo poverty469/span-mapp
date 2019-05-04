@@ -18,8 +18,8 @@ export default {
   },
   spatialUnit: "districts",
   boundingBox: {
-    sw: [-73.9876, 40.7661],
-    ne: [-73.9397, 40.8002]
+    sw: [-124.848974, 45.543541],
+    ne: [-116.916071, 49.002432]
   },
   geometry: legislativeGeometry.default,
   // "geometry": {

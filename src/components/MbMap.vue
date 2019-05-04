@@ -7,6 +7,8 @@
 
 <script>
 import mb from "mapbox-gl";
+import _ from "lodash";
+
 import boundsEnum from "@/../mock-data/bounds";
 import legislativeLayer from "@/../mock-data/layer";
 
@@ -28,9 +30,11 @@ export default {
   },
   data: function() {
     return {
-      map: undefined
+      map: undefined,
+      activeLayer: undefined
     };
   },
+  created: function() {},
   mounted: function() {
     mb.accessToken = process.env.VUE_APP_MAPBOX_API_ACCESS_TOKEN;
     this.map = new mb.Map({
@@ -45,10 +49,14 @@ export default {
       }
     });
 
+    /* LISTENERS */
     // When map is loaded, add the initial layer
     this.map.on("load", () => {
-      this.addGeoJsonLayer("districts", legislativeLayer.geometry);
+      this.addGeoJsonLayer("districts", legislativeLayer);
     });
+
+    // Handle the window resize event once per resize interaction
+    window.addEventListener("resize", _.debounce(this.handleWindowResize, 150));
   },
   methods: {
     /**
@@ -57,11 +65,22 @@ export default {
      * @property {array<number>} sw The southwest vertex coordinates.
      * @property {array<number>} ne The northeast vertex coordinates.
      */
-    zoomToBounds: function({ sw, ne }) {
-      let bounds = new mb.LngLatBounds(sw, ne);
-      this.map.fitBounds(bounds, {
+    zoomToBounds({ sw, ne }) {
+      this.map.fitBounds([sw, ne], {
         padding: this.$store.getters.mapFocusPadding
       });
+    },
+
+    /**
+     * Handles the window resize event.
+     * Zooms the map to the active layer bounds.
+     */
+    handleWindowResize() {
+      // TODO: If user did not adjust zoom or pan, resize map. When map is adjusted reveal recenter button
+      // Debounce prevents the map adjusting during the active resizing
+      if (this.activeLayer !== undefined) {
+        this.zoomToBounds(this.activeLayer.boundingBox);
+      }
     },
 
     /**
@@ -69,11 +88,11 @@ export default {
      * @param {String} id The name id to associate with the layer.
      * @param {Geojson} data The GeoJson source for the layer.
      */
-    addGeoJsonLayer(id, data) {
+    addGeoJsonLayer(id, layer) {
       // Add geojson source
       this.map.addSource(id, {
         type: "geojson",
-        data: data
+        data: layer.geometry
       });
 
       // Add polygon layer
@@ -97,7 +116,10 @@ export default {
           "line-width": 2
         }
       });
+
+      this.activeLayer = layer;
     },
+
     /**
      * Returns a Stamen raster basemap during development, or a mapbox vector basemap
      * during production.
