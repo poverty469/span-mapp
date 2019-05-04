@@ -31,10 +31,10 @@ export default {
   data: function() {
     return {
       map: undefined,
-      activeLayer: undefined
+      activeLayer: undefined,
+      popUp: undefined
     };
   },
-  created: function() {},
   mounted: function() {
     mb.accessToken = process.env.VUE_APP_MAPBOX_API_ACCESS_TOKEN;
     this.map = new mb.Map({
@@ -52,7 +52,9 @@ export default {
     /* LISTENERS */
     // When map is loaded, add the initial layer
     this.map.on("load", () => {
-      this.addGeoJsonLayer("districts", legislativeLayer);
+      this.addGeoJsonLayer(legislativeLayer);
+
+      this.addHoverPopUps(legislativeLayer);
     });
 
     // Handle the window resize event once per resize interaction
@@ -88,18 +90,19 @@ export default {
      * @param {String} id The name id to associate with the layer.
      * @param {Geojson} data The GeoJson source for the layer.
      */
-    addGeoJsonLayer(id, layer) {
+    addGeoJsonLayer(layer) {
+      let layerSourceId = layer.id + "-source";
       // Add geojson source
-      this.map.addSource(id, {
+      this.map.addSource(layerSourceId, {
         type: "geojson",
         data: layer.geometry
       });
 
       // Add polygon layer
       this.map.addLayer({
-        id: id + "-polygons",
+        id: layer.id,
         type: "fill",
-        source: id,
+        source: layerSourceId,
         paint: {
           "fill-color": "rgb(220, 174, 96)",
           "fill-opacity": 0.6
@@ -108,9 +111,9 @@ export default {
 
       // Add outline layer
       this.map.addLayer({
-        id: id + "-lines",
+        id: layer.id + "-lines",
         type: "line",
-        source: id,
+        source: layerSourceId,
         paint: {
           "line-color": "rgb(139, 103, 41)",
           "line-width": 2
@@ -119,6 +122,32 @@ export default {
 
       this.activeLayer = layer;
     },
+
+    addHoverPopUps(layer) {
+      this.popUp = new mb.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        offset: 10,
+        className: "mapboxgl-popup"
+      });
+
+      this.map.on("mousemove", layer.id, e => {
+        const props = e.features[0].properties;
+        this.map.getCanvas().style.cursor = "pointer";
+
+        this.popUp
+          .setLngLat(e.lngLat)
+          .setHTML(`<p>${props.name}</p>`)
+          .addTo(this.map);
+      });
+
+      this.map.on("mouseleave", layer.id, e => {
+        this.map.getCanvas().style.cursor = "";
+        this.popUp.remove();
+      });
+    },
+
+    showPopup() {},
 
     /**
      * Returns a Stamen raster basemap during development, or a mapbox vector basemap

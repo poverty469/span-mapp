@@ -5,7 +5,10 @@
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
     <the-splash-page class="the-splash-page" rel="preload"></the-splash-page>
-    <the-tour-dashboard class="the-tour-dashboard"></the-tour-dashboard>
+    <the-tour-dashboard
+      v-show="false"
+      class="the-tour-dashboard"
+    ></the-tour-dashboard>
     <map-dashboard mapId="main-map" class="main-map-dashboard"></map-dashboard>
     <the-footer class="the-footer"></the-footer>
   </div>

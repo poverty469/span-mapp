@@ -2,6 +2,7 @@ import stats from "./stats";
 import * as legislativeGeometry from "./lang_005_7";
 
 export default {
+  id: "legislative-districts",
   name: "Race",
   title: "Race/Ethnicity",
   source: {
