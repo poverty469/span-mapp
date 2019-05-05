@@ -52,9 +52,7 @@ export default {
     /* LISTENERS */
     // When map is loaded, add the initial layer
     this.map.on("load", () => {
-      this.addGeoJsonLayer(legislativeLayer);
-
-      this.addHoverPopUps(legislativeLayer);
+      this.addGeoJsonLayer(legislativeLayer, "test");
     });
 
     // Handle the window resize event once per resize interaction
@@ -87,43 +85,115 @@ export default {
 
     /**
      * Adds the given geojson data as a layer to the map.
-     * @param {String} id The name id to associate with the layer.
-     * @param {Geojson} data The GeoJson source for the layer.
+     * @param {String} sourceLayer The source geojson layer.
+     * @param {Geojson} layerId The id for the layer being added.
+     * @param {boolean} addHover Whether or not to add a hover effect.
+     * @param {boolean} addPopup Whether or not to add a popup on hover.
      */
-    addGeoJsonLayer(layer) {
-      let layerSourceId = layer.id + "-source";
+    addGeoJsonLayer(sourceLayer, layerId, addHover = true, addPopup = true) {
+      let layerSourceId = sourceLayer.id;
       // Add geojson source
       this.map.addSource(layerSourceId, {
         type: "geojson",
-        data: layer.geometry
+        data: sourceLayer.geometry
       });
 
       // Add polygon layer
       this.map.addLayer({
-        id: layer.id,
+        id: layerId, // TODO: make unique layer ids for multiple usages of same source
         type: "fill",
-        source: layerSourceId,
+        source: sourceLayer.id,
         paint: {
           "fill-color": "rgb(220, 174, 96)",
-          "fill-opacity": 0.6
+          // A conditional that changes opacity when the feature-state changes
+          "fill-opacity": [
+            "case",
+            ["boolean", ["feature-state", "hover"], false],
+            1,
+            0.6
+          ]
         }
       });
 
       // Add outline layer
       this.map.addLayer({
-        id: layer.id + "-lines",
+        id: layerId + "-outline",
         type: "line",
-        source: layerSourceId,
+        source: sourceLayer.id,
         paint: {
           "line-color": "rgb(139, 103, 41)",
           "line-width": 2
         }
       });
 
-      this.activeLayer = layer;
+      addHover ? this.addHoverPopUps(sourceLayer, layerId) : null;
+      addPopup ? this.addHoverEffect(layerId) : null;
+
+      this.activeLayer = sourceLayer;
     },
 
-    addHoverPopUps(layer) {
+    /**
+     * Adds a hover effect to the data layer associated with the given layer id.
+     * @param {String} layerId The id of a data layer.
+     */
+    addHoverEffect(layerId) {
+      let hoveredFeature = null;
+
+      this.map.on("mousemove", layerId, e => {
+        this.map.getCanvas().style.cursor = "crosshair";
+
+        // Turn off hover effect on former feature
+        if (hoveredFeature) {
+          this.map.setFeatureState(
+            {
+              id: hoveredFeature.id,
+              source: hoveredFeature.source
+            },
+            {
+              hover: false
+            }
+          );
+        }
+
+        hoveredFeature = e.features[0]; // Update hovered feature
+
+        // Turn on hover effect on former feature
+        this.map.setFeatureState(
+          {
+            id: hoveredFeature.id,
+            source: hoveredFeature.source
+          },
+          {
+            hover: true
+          }
+        );
+      });
+
+      // Turn off hover remaining effect when no longer hovering over layer
+      this.map.on("mouseleave", layerId, e => {
+        this.map.getCanvas().style.cursor = "";
+        if (hoveredFeature) {
+          this.map.setFeatureState(
+            {
+              source: hoveredFeature.source,
+              id: hoveredFeature.id
+            },
+            {
+              hover: false
+            }
+          );
+        }
+        hoveredFeature = null;
+      });
+    },
+
+    /**
+     * Adds a popup on hover for the data layer associated with the given layer id.
+     * @param {Object} sourceLayer Geojson source for the given layer.
+     * @param {String} layerId The id of a data layer
+     */
+    // TODO: find better solution for popup html, don't use source layer plz?
+    addHoverPopUps(sourceLayer, layerId) {
       this.popUp = new mb.Popup({
         closeButton: false,
         closeOnClick: false,
@@ -131,23 +201,23 @@ export default {
         className: "mapboxgl-popup"
       });
 
-      this.map.on("mousemove", layer.id, e => {
-        const props = e.features[0].properties;
-        this.map.getCanvas().style.cursor = "pointer";
+      let hoveredFeature;
+
+      this.map.on("mousemove", layerId, e => {
+        hoveredFeature = e.features[0]; // Update hovered feature
+        this.map.getCanvas().style.cursor = "crosshair";
 
         this.popUp
           .setLngLat(e.lngLat)
-          .setHTML(`<p>${props.name}</p>`)
+          .setHTML(sourceLayer.popUpHtml(hoveredFeature))
           .addTo(this.map);
       });
 
-      this.map.on("mouseleave", layer.id, e => {
+      this.map.on("mouseleave", layerId, e => {
         this.map.getCanvas().style.cursor = "";
         this.popUp.remove();
       });
     },
-
-    showPopup() {},
 
     /**
      * Returns a Stamen raster basemap during development, or a mapbox vector basemap
@@ -193,5 +263,9 @@ export default {
   width: 100%;
   height: 100%;
   color: rgb(220, 174, 96);
+}
+
+.popup--race {
+  font-size: 2rem;
 }
 </style>

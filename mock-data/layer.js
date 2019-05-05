@@ -1,10 +1,18 @@
 import stats from "./stats";
-import * as legislativeGeometry from "./lang_005_7";
+import * as legislativeGeometry from "./districts_id";
+
+// TODO: Add feature subtitle
+// TODO: Change feature name to title
+// TODO: convert id from string to number
 
 export default {
   id: "legislative-districts",
   name: "Race",
   title: "Race/Ethnicity",
+  popUpHtml: feature => {
+    return `<h3 class="popup--race__title">${feature.properties.name}</h3>
+    <p class="popup--race__text">${feature.properties.subtitle}</p>`;
+  },
   source: {
     institution: "U.S. Census Bureau",
     program: {
