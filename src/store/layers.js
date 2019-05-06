@@ -1,7 +1,7 @@
 import Vue from "vue";
 import api from "@/util/api.js";
 
-import districts from "@/../mock-data/districts_id";
+import districts from "@/assets/geometry/districts";
 
 export default {
   namespaced: false,

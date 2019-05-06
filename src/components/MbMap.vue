@@ -8,18 +8,13 @@
 <script>
 import mb from "mapbox-gl";
 import _ from "lodash";
-import api from "@/util/api.js";
 
+import geographies from "@/assets/geographies";
 import boundsEnum from "@/../mock-data/bounds";
-import legislativeLayer from "@/../mock-data/layer";
-
-import PopUp from "@/components/PopUp.vue";
 
 export default {
   name: "MbMap",
-  components: {
-    PopUp
-  },
+  components: {},
   props: {
     mapId: {
       type: String,
@@ -31,8 +26,8 @@ export default {
   },
   data: function() {
     return {
-      map: undefined,
-      activeLayer: undefined,
+      map: undefined, // The mapbox map
+      activeLayer: undefined, // The currently active layer
       popUp: undefined
     };
   },
@@ -50,21 +45,29 @@ export default {
       }
     });
 
-    const districtsDataset = this.$store.getters.getGeometry(
-      "LegislativeDistricts"
-    );
-
     /* LISTENERS */
     // Handle the window resize event once per resize interaction
     window.addEventListener("resize", _.debounce(this.handleWindowResize, 150));
 
     // Add/ show initial layer,
     this.map.on("load", () => {
-      this.addGeoJsonLayer(districtsDataset, "districts", "test");
+      this.initializeLayerSources();
+      this.addGeoJsonDataLayer(geographies.districts, "test");
       _.delay(() => this.$store.dispatch("mapLoaded"), 250);
     });
   },
   methods: {
+    initializeLayerSources() {
+      for (let geogName in geographies) {
+        let geog = geographies[geogName];
+        this.map.addSource(geog.id, {
+          type: "geojson",
+          data: geog.geometry,
+          attribution: `${geog.source.title} ${geog.source.year}`,
+          tolerance: 0.375
+        });
+      }
+    },
     /**
      * Zooms to the provided bounding box corners.
      * @param {Object} corners The boundind box vertices coordinates.
@@ -102,24 +105,12 @@ export default {
      * @param {boolean} addHover Whether or not to add a hover effect.
      * @param {boolean} addPopup Whether or not to add a popup on hover.
      */
-    addGeoJsonLayer(
-      sourceLayer,
-      sourceLayerId,
-      layerId,
-      addHover = true,
-      addPopup = true
-    ) {
-      // Add geojson source
-      this.map.addSource(sourceLayerId, {
-        type: "geojson",
-        data: sourceLayer
-      });
-
+    addGeoJsonDataLayer(geography, layerId, addHover = true, addPopup = true) {
       // Add polygon layer
-      this.map.addLayer({
+      this.activeLayer = this.map.addLayer({
         id: layerId, // TODO: make unique layer ids for multiple usages of same source
         type: "fill",
-        source: sourceLayerId,
+        source: geography.id,
         paint: {
           "fill-color": "rgb(220, 174, 96)",
           // A conditional that changes opacity when the feature-state changes
@@ -136,17 +127,15 @@ export default {
       this.map.addLayer({
         id: layerId + "-outline",
         type: "line",
-        source: sourceLayerId,
+        source: geography.id,
         paint: {
           "line-color": "rgb(139, 103, 41)",
           "line-width": 2
         }
       });
 
-      addHover ? this.addHoverPopUps(sourceLayer, layerId) : null;
+      addHover ? this.addHoverPopUps(layerId) : null;
       addPopup ? this.addHoverEffect(layerId) : null;
-
-      this.activeLayer = sourceLayer;
     },
 
     /**
@@ -206,11 +195,10 @@ export default {
 
     /**
      * Adds a popup on hover for the data layer associated with the given layer id.
-     * @param {Object} sourceLayer Geojson source for the given layer.
      * @param {String} layerId The id of a data layer
      */
     // TODO: find better solution for popup html, don't use source layer plz?
-    addHoverPopUps(sourceLayer, layerId) {
+    addHoverPopUps(layerId) {
       this.popUp = new mb.Popup({
         closeButton: false,
         closeOnClick: false,
