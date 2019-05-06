@@ -48,7 +48,8 @@ export default {
     // Add/ show initial layer,
     this.map.on("load", () => {
       this.initializeLayerSources();
-      this.addGeoJsonDataLayer(geographies.districts, "test");
+      this.addOutlineDataLayer(geographies.washington, "splash-page");
+      // this.addPolygonDataLayer(geographies.districts, "test");
       _.delay(() => this.$store.dispatch("mapLoaded"), 250);
     });
   },
@@ -92,6 +93,18 @@ export default {
       }
     },
 
+    addOutlineDataLayer(geography, layerId) {
+      // Add outline layer
+      this.map.addLayer({
+        id: layerId + "-outline",
+        type: "line",
+        source: geography.id,
+        paint: {
+          "line-color": "black",
+          "line-width": 3
+        }
+      });
+    },
     /**
      * Adds the given geojson data as a layer to the map.
      * @param {String} sourceLayer The source geojson layer.
@@ -100,7 +113,7 @@ export default {
      * @param {boolean} addHover Whether or not to add a hover effect.
      * @param {boolean} addPopup Whether or not to add a popup on hover.
      */
-    addGeoJsonDataLayer(geography, layerId, addHover = true, addPopup = true) {
+    addPolygonDataLayer(geography, layerId, addHover = true, addPopup = true) {
       // Add polygon layer
       this.activeLayer = this.map.addLayer({
         id: layerId, // TODO: make unique layer ids for multiple usages of same source
