@@ -1,5 +1,6 @@
 import * as districtsGeom from "@/assets/geometry/districts";
 import * as countiesGeom from "@/assets/geometry/counties";
+import * as washingtonGeom from "@/assets/geometry/washington";
 
 export default {
   districts: {
@@ -12,10 +13,7 @@ export default {
         "https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2018&layergroup=State+Legislative+Districts"
     },
     geometry: districtsGeom.default,
-    boundingBox: {
-      sw: [-124.848974, 45.543541],
-      ne: [-116.916071, 49.002432]
-    }
+    bounds: [[-124.848974, 45.543541], [-116.916071, 49.002432]]
   },
   counties: {
     id: "counties",
@@ -27,9 +25,18 @@ export default {
         "https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2018&layergroup=Counties+%28and+equivalent%29"
     },
     geometry: countiesGeom.default,
-    boundingBox: {
-      sw: [-124.848974, 45.543541],
-      ne: [-116.916071, 49.002432]
-    }
+    bounds: [[-124.848974, 45.543541], [-116.916071, 49.002432]]
+  },
+  washington: {
+    id: "washington",
+    title: "Washington",
+    source: {
+      title: "U.S. Census Bureau, Geography Division",
+      year: 2018,
+      url:
+        "https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2018&layergroup=Counties+%28and+equivalent%29"
+    },
+    geometry: washingtonGeom.default,
+    bounds: [[-124.848974, 45.543541], [-116.916071, 49.002432]]
   }
 };

@@ -10,7 +10,6 @@ import mb from "mapbox-gl";
 import _ from "lodash";
 
 import geographies from "@/assets/geographies";
-import boundsEnum from "@/../mock-data/bounds";
 
 export default {
   name: "MbMap",
@@ -36,10 +35,7 @@ export default {
     this.map = new mb.Map({
       container: this.mapId,
       style: this.getBaseMap(),
-      bounds: new mb.LngLatBounds(
-        boundsEnum.washington.sw,
-        boundsEnum.washington.ne
-      ),
+      bounds: geographies.washington.bounds,
       fitBoundsOptions: {
         padding: this.$store.getters.mapFocusPadding
       }
@@ -74,8 +70,8 @@ export default {
      * @property {array<number>} sw The southwest vertex coordinates.
      * @property {array<number>} ne The northeast vertex coordinates.
      */
-    zoomToBounds({ sw, ne }) {
-      this.map.fitBounds([sw, ne], {
+    zoomToBounds(bounds) {
+      this.map.fitBounds(bounds, {
         padding: this.$store.getters.mapFocusPadding
       });
     },
@@ -86,14 +82,13 @@ export default {
      */
     handleWindowResize() {
       // TODO: If user did not adjust zoom or pan, resize map. When map is adjusted reveal recenter button
-      // Debounce prevents the map adjusting during the active resizing
       if (
         this.activeLayer !== undefined &&
         this.activeLayer.boundingBox !== undefined
       ) {
         this.zoomToBounds(this.activeLayer.boundingBox);
       } else {
-        this.zoomToBounds(boundsEnum.washington);
+        this.zoomToBounds(geographies.washington.bounds);
       }
     },
 
