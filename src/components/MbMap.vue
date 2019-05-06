@@ -37,8 +37,37 @@ export default {
       bounds: geographies.washington.bounds,
       fitBoundsOptions: {
         padding: this.$store.getters.mapFocusPadding
-      }
+      },
+      attributionControl: false,
+      pitchWithRotate: false,
+      minZoom: 5,
+      maxZoom: 15,
+      // TODO: make maxbounds at ends of line where center is washington centroid
+      // TODO: This will center washington on zoom out
+      maxBounds: [
+        [-135.009469975438662, 40.415064061658647],
+        [-107.721240134848074, 53.181822152409069]
+      ]
     });
+
+    this.map.addControl(
+      new mb.AttributionControl({
+        compact: true
+      })
+    );
+
+    this.map.addControl(
+      new mb.ScaleControl({
+        maxWidth: 80,
+        unit: "imperial"
+      })
+    );
+
+    this.map.addControl(
+      new mb.NavigationControl({
+        showCompass: false
+      })
+    );
 
     /* LISTENERS */
     // Handle the window resize event once per resize interaction
