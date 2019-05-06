@@ -1,6 +1,5 @@
 <template>
   <div class="map-container">
-    <!--pop-up :map="map"></pop-up-->
     <div :id="mapId" class="map"></div>
   </div>
 </template>

@@ -155,4 +155,13 @@ li {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
+
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl-bottom-right {
+  position: fixed !important;
+}
+
+.mapboxgl-ctrl-attrib {
+  background-color: transparent !important;
+}
 </style>
