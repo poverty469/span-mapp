@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    <div class="splash"></div>
+  </div>
 </template>
 
 <script>
@@ -13,4 +15,13 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.splash {
+  background: $light-tan;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>

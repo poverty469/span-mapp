@@ -1,6 +1,6 @@
 <template>
   <div class="map-container">
-    <pop-up :map="map"></pop-up>
+    <!--pop-up :map="map"></pop-up-->
     <div :id="mapId" class="map"></div>
   </div>
 </template>
@@ -8,6 +8,7 @@
 <script>
 import mb from "mapbox-gl";
 import _ from "lodash";
+import api from "@/util/api.js";
 
 import boundsEnum from "@/../mock-data/bounds";
 import legislativeLayer from "@/../mock-data/layer";
@@ -49,14 +50,19 @@ export default {
       }
     });
 
-    /* LISTENERS */
-    // When map is loaded, add the initial layer
-    this.map.on("load", () => {
-      this.addGeoJsonLayer(legislativeLayer, "test");
-    });
+    const districtsDataset = this.$store.getters.getGeometry(
+      "LegislativeDistricts"
+    );
 
+    /* LISTENERS */
     // Handle the window resize event once per resize interaction
     window.addEventListener("resize", _.debounce(this.handleWindowResize, 150));
+
+    // Add/ show initial layer,
+    this.map.on("load", () => {
+      this.addGeoJsonLayer(districtsDataset, "districts", "test");
+      _.delay(() => this.$store.dispatch("mapLoaded"), 250);
+    });
   },
   methods: {
     /**
@@ -78,31 +84,42 @@ export default {
     handleWindowResize() {
       // TODO: If user did not adjust zoom or pan, resize map. When map is adjusted reveal recenter button
       // Debounce prevents the map adjusting during the active resizing
-      if (this.activeLayer !== undefined) {
+      if (
+        this.activeLayer !== undefined &&
+        this.activeLayer.boundingBox !== undefined
+      ) {
         this.zoomToBounds(this.activeLayer.boundingBox);
+      } else {
+        this.zoomToBounds(boundsEnum.washington);
       }
     },
 
     /**
      * Adds the given geojson data as a layer to the map.
      * @param {String} sourceLayer The source geojson layer.
+     * @param {String} sourceLayerId The id for the source layer;
      * @param {Geojson} layerId The id for the layer being added.
      * @param {boolean} addHover Whether or not to add a hover effect.
      * @param {boolean} addPopup Whether or not to add a popup on hover.
      */
-    addGeoJsonLayer(sourceLayer, layerId, addHover = true, addPopup = true) {
-      let layerSourceId = sourceLayer.id;
+    addGeoJsonLayer(
+      sourceLayer,
+      sourceLayerId,
+      layerId,
+      addHover = true,
+      addPopup = true
+    ) {
       // Add geojson source
-      this.map.addSource(layerSourceId, {
+      this.map.addSource(sourceLayerId, {
         type: "geojson",
-        data: sourceLayer.geometry
+        data: sourceLayer
       });
 
       // Add polygon layer
       this.map.addLayer({
         id: layerId, // TODO: make unique layer ids for multiple usages of same source
         type: "fill",
-        source: sourceLayer.id,
+        source: sourceLayerId,
         paint: {
           "fill-color": "rgb(220, 174, 96)",
           // A conditional that changes opacity when the feature-state changes
@@ -119,7 +136,7 @@ export default {
       this.map.addLayer({
         id: layerId + "-outline",
         type: "line",
-        source: sourceLayer.id,
+        source: sourceLayerId,
         paint: {
           "line-color": "rgb(139, 103, 41)",
           "line-width": 2
@@ -209,7 +226,14 @@ export default {
 
         this.popUp
           .setLngLat(e.lngLat)
-          .setHTML(sourceLayer.popUpHtml(hoveredFeature))
+          .setHTML(
+            `<h3 class="popup--race__title">
+              ${hoveredFeature.properties.name}
+            </h3>
+            <p class="popup--race__text">
+              ${hoveredFeature.properties.subtitle}
+            </p>`
+          )
           .addTo(this.map);
       });
 

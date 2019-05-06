@@ -23,6 +23,10 @@ export default {
     mapId: {
       type: String,
       required: true
+    },
+    dataLoaded: {
+      type: Boolean,
+      required: true
     }
   },
   data: function() {

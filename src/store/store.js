@@ -2,15 +2,17 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import story from "./story";
+import layers from "./layers";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    story: story
+    story: story,
+    layers: layers
   },
   state: {
-    appLoading: true,
+    mapLoading: true,
     spatialUnit: "districts",
     mapFocusPadding: {
       top: 100,
@@ -24,7 +26,10 @@ export default new Vuex.Store({
       return state.mapFocusPadding;
     },
     appLoading: state => {
-      return state.appLoading;
+      return state.mapLoading;
+    },
+    dataLoaded: state => {
+      return state.layers.geometries.length == 1;
     }
   },
   mutations: {
@@ -41,13 +46,13 @@ export default new Vuex.Store({
         );
       }
     },
-    setAppLoading(state, loading) {
-      state.appLoading = loading;
+    setMapLoading(state, loading) {
+      state.mapLoading = loading;
     }
   },
   actions: {
-    finishLoadingApp(context) {
-      context.commit("setAppLoading", false);
+    mapLoaded(context) {
+      context.commit("setMapLoading", false);
     }
   }
 });

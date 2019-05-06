@@ -4,12 +4,19 @@
     <a class="force-load-test" href="#" @click="forceLoad()"></a>
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
-    <the-splash-page class="the-splash-page" rel="preload"></the-splash-page>
-    <the-tour-dashboard
-      v-show="false"
-      class="the-tour-dashboard"
-    ></the-tour-dashboard>
-    <map-dashboard mapId="main-map" class="main-map-dashboard"></map-dashboard>
+    <transition name="fade">
+      <the-splash-page
+        v-show="appLoading"
+        class="the-splash-page"
+        rel="preload"
+      ></the-splash-page>
+    </transition>
+    <the-tour-dashboard class="the-tour-dashboard"></the-tour-dashboard>
+    <map-dashboard
+      mapId="main-map"
+      class="main-map-dashboard"
+      :dataLoaded="dataLoaded"
+    ></map-dashboard>
     <the-footer class="the-footer"></the-footer>
   </div>
 </template>
@@ -22,6 +29,8 @@ import MapDashboard from "@/components/MapDashboard.vue";
 import TheTourDashboard from "@/components/TheTourDashboard.vue";
 import TheSplashPage from "@/components/TheSplashPage.vue";
 
+import { mapGetters } from "vuex";
+
 export default {
   name: "app",
   components: {
@@ -32,14 +41,20 @@ export default {
     TheSplashPage,
     TheTourDashboard
   },
+  created: async function() {
+    await this.$store.dispatch("initLayerData");
+  },
   methods: {
     /**
      * TEMPORARY
      * Forces the state of the app from loading to loaded
      */
     forceLoad() {
-      this.$store.dispatch("finishLoadingApp");
+      this.$store.dispatch("mapLoaded");
     }
+  },
+  computed: {
+    ...mapGetters(["appLoading", "dataLoaded"])
   }
 };
 </script>
@@ -113,7 +128,11 @@ li {
 }
 
 .the-splash-page {
+  position: absolute;
   z-index: z("splash-page");
+  top: $header-height;
+  bottom: $footer-height;
+  width: 100vw;
 }
 
 // Temporary
@@ -127,5 +146,13 @@ li {
   outline: 0.5px solid black;
 
   z-index: z("test-object");
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1500ms;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
