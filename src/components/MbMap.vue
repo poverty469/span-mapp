@@ -15,17 +15,11 @@ export default {
   components: {},
   props: {
     mapId: {
+      // Unique id for instance of map
       type: String,
       required: true,
       validator: function(val) {
         return !val.includes(" ");
-      }
-    },
-    activeGeographyKey: {
-      type: String,
-      required: false,
-      default: function() {
-        return "washington";
       }
     },
     activeData: {
@@ -34,6 +28,9 @@ export default {
       default: function() {
         return [];
       }
+    },
+    activeGeography: {
+      type: Object
     }
   },
   data: function() {
@@ -43,95 +40,125 @@ export default {
     };
   },
   computed: {
-    boundsOfAllLayers() {
-      // FIND THE MIN AND MAX COORDINATES OF ALL ACTIVE LAYERS
-      return undefined;
-    },
     activeGeographyId() {
-      return geographies[this.activeGeographyKey].id;
+      return this.activeGeography.id;
+    },
+    boundsOfAllLayers() {
+      // TODO: FIND THE MIN AND MAX COORDINATES OF ALL ACTIVE LAYERS
+      return geographies.washington.bounds;
     }
   },
   watch: {
     activeData: {
-      handler: function(curr, prev) {
-        let diff = _.xorWith(this.activeLayers, curr, (arrVal, othVal) => {
-          return arrVal.id === othVal.id;
-        });
-        for (let layer of diff) {
-          let found = curr.includes(layer);
-          if (found) {
-            this.addLayer(layer);
-          } else if (!found && layer !== undefined && layer !== null) {
-            console.log("not found layer", layer);
-            this.removeLayer(layer);
-          }
-        }
-        // compare arrays, remove and add layers depending on differences
-      },
-      deep: true
+      handler: function(currentData) {
+        this.updateDrawnLayers(currentData);
+      }
     }
   },
   mounted: function() {
-    mb.accessToken = process.env.VUE_APP_MAPBOX_API_ACCESS_TOKEN;
-    this.map = new mb.Map({
-      container: this.mapId,
-      style: this.getBaseMap(),
-      bounds: geographies.washington.bounds,
-      fitBoundsOptions: {
-        padding: this.$store.getters.mapFocusPadding
-      },
-      attributionControl: false,
-      pitchWithRotate: false,
-      minZoom: 5,
-      maxZoom: 15,
-      // TODO: make maxbounds at ends of line where center is washington centroid
-      // TODO: This will center washington on zoom out
-      maxBounds: [
-        [-135.009469975438662, 40.415064061658647],
-        [-107.721240134848074, 53.181822152409069]
-      ]
-    });
+    this.createMap();
 
-    this.map.addControl(
-      new mb.AttributionControl({
-        compact: true
-      })
-    );
-
-    this.map.addControl(
-      new mb.ScaleControl({
-        maxWidth: 80,
-        unit: "imperial"
-      })
-    );
-
-    this.map.addControl(
-      new mb.NavigationControl({
-        showCompass: false
-      })
-    );
-
-    /* LISTENERS */
     // Handle the window resize event once per resize interaction
     window.addEventListener("resize", _.debounce(this.handleWindowResize, 150));
 
-    // Add/ show initial layer,
+    // Add/ show initial layer
     this.map.on("load", () => {
       this.initializeLayerSources();
-      this.addOutlineDataLayer(geographies.washington, "splash-page");
-      // this.addPolygonDataLayer(geographies.districts, "test");
-      _.delay(() => this.$store.dispatch("mapLoaded"), 250);
+      this.addBlackOutlineLayer(geographies.washington, "splash-page");
+      _.delay(() => this.$store.dispatch("mapLoaded"), 250); // Delay to hide loading of layer
     });
   },
   methods: {
+    /**
+     * Creates a map with an initial state.
+     */
+    createMap() {
+      mb.accessToken = process.env.VUE_APP_MAPBOX_API_ACCESS_TOKEN;
+
+      this.map = new mb.Map({
+        container: this.mapId,
+        style: this.getBaseMap(),
+        bounds: geographies.washington.bounds,
+        fitBoundsOptions: {
+          padding: this.$store.getters.mapFocusPadding
+        },
+        attributionControl: false,
+        pitchWithRotate: false,
+        minZoom: 5,
+        maxZoom: 15,
+        // TODO: make maxbounds at ends of line where center is washington centroid
+        // TODO: This will center washington on zoom out
+        maxBounds: [
+          [-135.009469975438662, 40.415064061658647],
+          [-107.721240134848074, 53.181822152409069]
+        ]
+      });
+
+      // Add attribution button
+      this.map.addControl(
+        new mb.AttributionControl({
+          compact: true
+        })
+      );
+    },
+    /**
+     * Adds the interaction controls to the map.
+     */
+    addControls() {
+      this.map.addControl(
+        new mb.ScaleControl({
+          maxWidth: 80,
+          unit: "imperial"
+        })
+      );
+
+      this.map.addControl(
+        new mb.NavigationControl({
+          showCompass: false
+        })
+      );
+    },
+    /**
+     * Updates the map layers to match the provided layer list.
+     * Draws new layers and removes active layers not present in the list.
+     * @param {Array[Object]} newData List of data to be drawn.
+     */
+    updateDrawnLayers(newData) {
+      let diff = _.xorWith(this.activeLayers, newData, (arrVal, othVal) => {
+        return arrVal.id === othVal.id;
+      });
+
+      for (let layer of diff) {
+        let found = newData.includes(layer);
+        if (found) {
+          this.addLayer(layer);
+        } else if (!found && layer !== undefined && layer !== null) {
+          this.removeLayer(layer);
+        }
+      }
+    },
+    /**
+     * Returns a unique layer id based off of the given layer.
+     * @param {Object} layer A map layer.
+     * @return {String} The layer id.
+     */
     getLayerId(layer) {
       // TODO: might be better to keep track of current mapbox layers and reference them, rather than
       // relying on the correctness of the activeGeography
       return `${layer.id}-${this.activeGeographyId}`;
     },
+    /**
+     * Returns a unique layer id for outlines based off of the given layer.
+     * @param {Object} layer A map layer.
+     * @return {String} The outline layer id.
+     */
     getOutlineId(layer) {
       return this.getLayerId(layer) + "-outline";
     },
+    /**
+     * Removes the provided layer from the map.
+     * @param {Object} layer A map layer.
+     */
     removeLayer(layer) {
       this.activeLayers = this.activeLayers.filter(activeLayer => {
         return activeLayer.id !== layer.id;
@@ -141,6 +168,7 @@ export default {
     },
     /**
      * Adds the given geojson data as a layer to the map.
+     * @param {Object} layer A map layer.
      * @param {boolean} addHover Whether or not to add a hover effect.
      * @param {boolean} addPopup Whether or not to add a popup on hover.
      */
@@ -179,6 +207,9 @@ export default {
       addHover ? this.addHoverPopUps(layerId) : null;
       addPopup ? this.addHoverEffect(layerId) : null;
     },
+    /**
+     * Adds all essential geography geometries as map sources.
+     */
     initializeLayerSources() {
       for (let geogName in geographies) {
         let geog = geographies[geogName];
@@ -192,16 +223,13 @@ export default {
     },
     /**
      * Zooms to the provided bounding box corners.
-     * @param {Object} corners The boundind box vertices coordinates.
-     * @property {array<number>} sw The southwest vertex coordinates.
-     * @property {array<number>} ne The northeast vertex coordinates.
+     * @param {Array[Array[number]]} bounds A list of a box's southwest and northeast coordinates.
      */
     zoomToBounds(bounds) {
       this.map.fitBounds(bounds, {
         padding: this.$store.getters.mapFocusPadding
       });
     },
-
     /**
      * Handles the window resize event.
      * Zooms the map to the active layer bounds.
@@ -215,8 +243,12 @@ export default {
         this.zoomToBounds(geographies.washington.bounds);
       }
     },
-
-    addOutlineDataLayer(geography, layerId) {
+    /**
+     * Adds an outline layer to the map.
+     * @param {Object} geography The id of the geography to be outlined.
+     * @param {String} layerId A unique id for the outline layer.
+     */
+    addBlackOutlineLayer(geography, layerId) {
       // Add outline layer
       this.map.addLayer({
         id: layerId + "-outline",
@@ -230,8 +262,7 @@ export default {
     },
     /**
      * Adds the given geojson data as a layer to the map.
-     * @param {String} sourceLayer The source geojson layer.
-     * @param {String} sourceLayerId The id for the source layer;
+     * @param {Object} geography A type of geography.
      * @param {Geojson} layerId The id for the layer being added.
      * @param {boolean} addHover Whether or not to add a hover effect.
      * @param {boolean} addPopup Whether or not to add a popup on hover.
@@ -244,9 +275,8 @@ export default {
         source: geography.id,
         paint: {
           "fill-color": "rgb(220, 174, 96)",
-          // A conditional that changes opacity when the feature-state changes
           "fill-opacity": [
-            "case",
+            "case", // A conditional that changes opacity when the feature-state changes
             ["boolean", ["feature-state", "hover"], false],
             1,
             0.6

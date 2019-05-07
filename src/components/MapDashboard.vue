@@ -3,7 +3,7 @@
     <mb-map
       :mapId="mapId"
       :activeData="activeData"
-      :activeGeographyKey="activeGeographyKey"
+      :activeGeography="activeGeography"
     ></mb-map>
     <map-legend></map-legend>
     <map-sidebar></map-sidebar>
@@ -46,8 +46,8 @@ export default {
   data: function() {
     return {
       // The currently active data layers on the map
-      // activeLayers: [],
-      activeGeographyKey: geographies.districts.id
+      // activeLayers: []
+      activeGeography: geographies.districts
     };
   },
   computed: {
@@ -70,6 +70,15 @@ export default {
           classColors
         }))(layer);
       });
+    }
+  },
+  watch: {
+    activeGeographyId: {
+      handler: function(curr, prev) {
+        // change active data to be represented in current geography
+        // remove layers of old geography
+        // add layers of current geography with current data
+      }
     }
   }
 };

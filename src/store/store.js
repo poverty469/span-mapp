@@ -4,6 +4,8 @@ import Vuex from "vuex";
 import story from "./story";
 import layers from "./layers";
 
+import geographies from "@/assets/geographies";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -13,7 +15,6 @@ export default new Vuex.Store({
   },
   state: {
     mapLoading: true,
-    spatialUnit: "districts",
     mapFocusPadding: {
       top: 100,
       right: 100,
