@@ -2,6 +2,7 @@ import * as districtsGeom from "@/assets/geometry/districts";
 import * as countiesGeom from "@/assets/geometry/counties";
 import * as washingtonGeom from "@/assets/geometry/washington";
 
+// ID MUST MATCH PROPERTY NAME
 export default {
   districts: {
     id: "districts",

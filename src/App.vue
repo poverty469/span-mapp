@@ -16,6 +16,7 @@
       mapId="main-map"
       class="main-map-dashboard"
       :dataLoaded="dataLoaded"
+      :activeData="activeData"
     ></map-dashboard>
     <the-footer class="the-footer"></the-footer>
   </div>
@@ -28,6 +29,8 @@ import TheLogo from "@/components/TheLogo.vue";
 import MapDashboard from "@/components/MapDashboard.vue";
 import TheTourDashboard from "@/components/TheTourDashboard.vue";
 import TheSplashPage from "@/components/TheSplashPage.vue";
+
+import povertyData from "@/../mock-data/dataLayer";
 
 import { mapGetters } from "vuex";
 
@@ -44,6 +47,11 @@ export default {
   created: async function() {
     await this.$store.dispatch("initLayerData");
   },
+  data: function() {
+    return {
+      activeData: []
+    };
+  },
   methods: {
     /**
      * TEMPORARY
@@ -51,6 +59,9 @@ export default {
      */
     forceLoad() {
       this.$store.dispatch("mapLoaded");
+      this.activeData.length == 0
+        ? this.activeData.push(povertyData)
+        : this.activeData.pop();
     }
   },
   computed: {
@@ -158,10 +169,6 @@ li {
 
 .mapboxgl-ctrl-logo {
   position: fixed !important;
-}
-
-.mapboxgl-ctrl-attrib {
-  background-color: transparent !important;
 }
 
 .mapboxgl-ctrl-attrib.mapboxgl-compact {

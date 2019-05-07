@@ -20,14 +20,56 @@ export default {
       validator: function(val) {
         return !val.includes(" ");
       }
+    },
+    activeGeographyKey: {
+      type: String,
+      required: false,
+      default: function() {
+        return "washington";
+      }
+    },
+    activeData: {
+      type: Array,
+      required: true,
+      default: function() {
+        return [];
+      }
     }
   },
   data: function() {
     return {
       map: undefined, // The mapbox map
-      activeLayer: undefined, // The currently active layer
-      popUp: undefined
+      activeLayers: []
     };
+  },
+  computed: {
+    boundsOfAllLayers() {
+      // FIND THE MIN AND MAX COORDINATES OF ALL ACTIVE LAYERS
+      return undefined;
+    },
+    activeGeographyId() {
+      return geographies[this.activeGeographyKey].id;
+    }
+  },
+  watch: {
+    activeData: {
+      handler: function(curr, prev) {
+        let diff = _.xorWith(this.activeLayers, curr, (arrVal, othVal) => {
+          return arrVal.id === othVal.id;
+        });
+        for (let layer of diff) {
+          let found = curr.includes(layer);
+          if (found) {
+            this.addLayer(layer);
+          } else if (!found && layer !== undefined && layer !== null) {
+            console.log("not found layer", layer);
+            this.removeLayer(layer);
+          }
+        }
+        // compare arrays, remove and add layers depending on differences
+      },
+      deep: true
+    }
   },
   mounted: function() {
     mb.accessToken = process.env.VUE_APP_MAPBOX_API_ACCESS_TOKEN;
@@ -82,6 +124,61 @@ export default {
     });
   },
   methods: {
+    getLayerId(layer) {
+      // TODO: might be better to keep track of current mapbox layers and reference them, rather than
+      // relying on the correctness of the activeGeography
+      return `${layer.id}-${this.activeGeographyId}`;
+    },
+    getOutlineId(layer) {
+      return this.getLayerId(layer) + "-outline";
+    },
+    removeLayer(layer) {
+      this.activeLayers = this.activeLayers.filter(activeLayer => {
+        return activeLayer.id !== layer.id;
+      });
+      this.map.removeLayer(this.getLayerId(layer));
+      this.map.removeLayer(this.getOutlineId(layer));
+    },
+    /**
+     * Adds the given geojson data as a layer to the map.
+     * @param {boolean} addHover Whether or not to add a hover effect.
+     * @param {boolean} addPopup Whether or not to add a popup on hover.
+     */
+    addLayer(layer, addHover = true, addPopup = true) {
+      this.activeLayers.push(layer);
+
+      let layerId = this.getLayerId(layer);
+      // Add polygon layer
+      this.activeLayer = this.map.addLayer({
+        id: layerId, // TODO: make unique layer ids for multiple usages of same source
+        type: "fill",
+        source: this.activeGeographyId,
+        paint: {
+          "fill-color": "rgb(220, 174, 96)",
+          // A conditional that changes opacity when the feature-state changes
+          "fill-opacity": [
+            "case",
+            ["boolean", ["feature-state", "hover"], false],
+            1,
+            0.6
+          ]
+        }
+      });
+
+      // Add outline layer
+      this.map.addLayer({
+        id: this.getOutlineId(layer),
+        type: "line",
+        source: this.activeGeographyId,
+        paint: {
+          "line-color": "rgb(139, 103, 41)",
+          "line-width": 2
+        }
+      });
+
+      addHover ? this.addHoverPopUps(layerId) : null;
+      addPopup ? this.addHoverEffect(layerId) : null;
+    },
     initializeLayerSources() {
       for (let geogName in geographies) {
         let geog = geographies[geogName];
@@ -111,11 +208,9 @@ export default {
      */
     handleWindowResize() {
       // TODO: If user did not adjust zoom or pan, resize map. When map is adjusted reveal recenter button
-      if (
-        this.activeLayer !== undefined &&
-        this.activeLayer.boundingBox !== undefined
-      ) {
-        this.zoomToBounds(this.activeLayer.boundingBox);
+      let outerBounds = this.boundsOfAllLayers;
+      if (this.activeLayers.length !== 0 && outerBounds !== undefined) {
+        this.zoomToBounds(outerBounds);
       } else {
         this.zoomToBounds(geographies.washington.bounds);
       }

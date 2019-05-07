@@ -1,6 +1,10 @@
 <template>
   <div>
-    <mb-map :mapId="mapId"></mb-map>
+    <mb-map
+      :mapId="mapId"
+      :activeData="activeData"
+      :activeGeographyKey="activeGeographyKey"
+    ></mb-map>
     <map-legend></map-legend>
     <map-sidebar></map-sidebar>
   </div>
@@ -10,6 +14,9 @@
 import MbMap from "@/components/MbMap";
 import MapLegend from "@/components/MapLegend";
 import MapSidebar from "@/components/MapSidebar";
+
+import geographies from "@/assets/geographies";
+import povertyData from "@/../mock-data/dataLayer";
 
 export default {
   name: "MapDashboard",
@@ -27,16 +34,20 @@ export default {
     dataLoaded: {
       type: Boolean,
       required: true
+    },
+    activeData: {
+      type: Array,
+      required: true,
+      default: function() {
+        return [];
+      }
     }
   },
   data: function() {
     return {
       // The currently active data layers on the map
-      activeLayers: [
-        {
-          name: "temp-layer"
-        }
-      ]
+      // activeLayers: [],
+      activeGeographyKey: geographies.districts.id
     };
   },
   computed: {

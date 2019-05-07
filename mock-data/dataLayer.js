@@ -1,14 +1,17 @@
-import geographies from "../src/assets/geographies";
-import stats from "./stats";
+import * as districtsData from "./percentBelowPoverty.json";
 
 // TODO: Add feature subtitle
 
 export default {
-  id: "race",
-  title: "Race/Ethnicity",
+  id: "percent-below-poverty",
+  title: "Percent Below Poverty",
   popUpHtml: feature => {
-    return `<h3 class="popup--race__title">${feature.properties.name}</h3>
+    return `<h3 class="popup--race__title">${feature.properties.title}</h3>
     <p class="popup--race__text">${feature.properties.subtitle}</p>`;
+  },
+  data: {
+    districts: districtsData, // stats needs to be contained within the data object?
+    counties: undefined
   },
   source: {
     institution: "U.S. Census Bureau",
@@ -17,11 +20,6 @@ export default {
       title: "ACS",
       detail: "5-Year Estimates"
     },
-    year: {
-      start: 2013,
-      end: 2017
-    }
-  },
-  geography: geographies.DISTRICTS,
-  stats: stats
+    year: 2017
+  }
 };
