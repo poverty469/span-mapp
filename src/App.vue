@@ -5,7 +5,11 @@
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
     <transition name="fade">
-      <the-splash-page v-show="appLoading" class="the-splash-page" rel="preload"></the-splash-page>
+      <the-splash-page
+        v-show="appLoading"
+        class="the-splash-page"
+        rel="preload"
+      ></the-splash-page>
     </transition>
     <the-tour-dashboard class="the-tour-dashboard"></the-tour-dashboard>
     <map-dashboard

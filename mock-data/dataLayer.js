@@ -11,7 +11,8 @@ export default {
   },
   data: {
     districts: povertyDistrictsData, // stats needs to be contained within the data object?
-    counties: undefined
+    counties: undefined,
+    heatmap: undefined
   },
   source: {
     institution: "U.S. Census Bureau",
