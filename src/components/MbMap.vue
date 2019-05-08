@@ -28,9 +28,6 @@ export default {
       default: function() {
         return [];
       }
-    },
-    activeGeography: {
-      type: Object
     }
   },
   data: function() {
@@ -40,9 +37,6 @@ export default {
     };
   },
   computed: {
-    activeGeographyId() {
-      return this.activeGeography.id;
-    },
     boundsOfAllLayers() {
       // TODO: FIND THE MIN AND MAX COORDINATES OF ALL ACTIVE LAYERS
       return geographies.washington.bounds;
@@ -52,7 +46,8 @@ export default {
     activeData: {
       handler: function(currentData) {
         this.updateDrawnLayers(currentData);
-      }
+      },
+      immediate: true
     }
   },
   mounted: function() {
@@ -121,18 +116,26 @@ export default {
     /**
      * Updates the map layers to match the provided layer list.
      * Draws new layers and removes active layers not present in the list.
-     * @param {Array[Object]} newData List of data to be drawn.
+     * @param {Array[Object]} newData List of data to be drawn, requires data property and optional geography property.
      */
     updateDrawnLayers(newData) {
       let diff = _.xorWith(this.activeLayers, newData, (arrVal, othVal) => {
-        return arrVal.id === othVal.id;
+        if (_.isNil(arrVal.theme) && _.isNil(othVal.theme)) {
+          return true;
+        }
+
+        return (
+          arrVal.theme.id === othVal.theme.id &&
+          arrVal.geographyId === othVal.geographyId
+        );
       });
 
       for (let layer of diff) {
         let found = newData.includes(layer);
+
         if (found) {
           this.addLayer(layer);
-        } else if (!found && layer !== undefined && layer !== null) {
+        } else if (!found && !_.isNil(layer)) {
           this.removeLayer(layer);
         }
       }
@@ -143,9 +146,7 @@ export default {
      * @return {String} The layer id.
      */
     getLayerId(layer) {
-      // TODO: might be better to keep track of current mapbox layers and reference them, rather than
-      // relying on the correctness of the activeGeography
-      return `${layer.id}-${this.activeGeographyId}`;
+      return `${layer.theme.id}-${layer.geographyId}`;
     },
     /**
      * Returns a unique layer id for outlines based off of the given layer.
@@ -161,7 +162,7 @@ export default {
      */
     removeLayer(layer) {
       this.activeLayers = this.activeLayers.filter(activeLayer => {
-        return activeLayer.id !== layer.id;
+        return activeLayer.theme.id !== layer.theme.id;
       });
       this.map.removeLayer(this.getLayerId(layer));
       this.map.removeLayer(this.getOutlineId(layer));
@@ -180,7 +181,7 @@ export default {
       this.activeLayer = this.map.addLayer({
         id: layerId, // TODO: make unique layer ids for multiple usages of same source
         type: "fill",
-        source: this.activeGeographyId,
+        source: layer.geographyId,
         paint: {
           "fill-color": "rgb(220, 174, 96)",
           // A conditional that changes opacity when the feature-state changes
@@ -197,7 +198,7 @@ export default {
       this.map.addLayer({
         id: this.getOutlineId(layer),
         type: "line",
-        source: this.activeGeographyId,
+        source: layer.geographyId,
         paint: {
           "line-color": "rgb(139, 103, 41)",
           "line-width": 2

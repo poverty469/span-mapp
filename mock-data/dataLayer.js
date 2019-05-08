@@ -1,4 +1,4 @@
-import * as districtsData from "./percentBelowPoverty.json";
+import * as povertyDistrictsData from "./percentBelowPoverty.json";
 
 // TODO: Add feature subtitle
 
@@ -10,7 +10,7 @@ export default {
     <p class="popup--race__text">${feature.properties.subtitle}</p>`;
   },
   data: {
-    districts: districtsData, // stats needs to be contained within the data object?
+    districts: povertyDistrictsData, // stats needs to be contained within the data object?
     counties: undefined
   },
   source: {

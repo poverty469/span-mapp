@@ -1,15 +1,11 @@
 <template>
   <div id="app">
     <!-- temp tag to test loading states -->
-    <a class="force-load-test" href="#" @click="forceLoad()"></a>
+    <button class="force-load-test" @click="forceLoad()"></button>
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
     <transition name="fade">
-      <the-splash-page
-        v-show="appLoading"
-        class="the-splash-page"
-        rel="preload"
-      ></the-splash-page>
+      <the-splash-page v-show="appLoading" class="the-splash-page" rel="preload"></the-splash-page>
     </transition>
     <the-tour-dashboard class="the-tour-dashboard"></the-tour-dashboard>
     <map-dashboard
@@ -30,6 +26,7 @@ import MapDashboard from "@/components/MapDashboard.vue";
 import TheTourDashboard from "@/components/TheTourDashboard.vue";
 import TheSplashPage from "@/components/TheSplashPage.vue";
 
+import geographies from "@/assets/geographies";
 import povertyData from "@/../mock-data/dataLayer";
 
 import { mapGetters } from "vuex";
@@ -49,7 +46,13 @@ export default {
   },
   data: function() {
     return {
-      activeData: []
+      // Object with data layer and geography to be selected
+      activeData: [
+        // {
+        //   theme: undefined,
+        //   geographyId: undefined
+        // }
+      ]
     };
   },
   methods: {
@@ -60,7 +63,10 @@ export default {
     forceLoad() {
       this.$store.dispatch("mapLoaded");
       this.activeData.length == 0
-        ? this.activeData.push(povertyData)
+        ? this.activeData.push({
+            theme: povertyData,
+            geographyId: geographies.districts.id
+          })
         : this.activeData.pop();
     }
   },
