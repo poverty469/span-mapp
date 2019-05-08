@@ -7,6 +7,7 @@
 <script>
 import mb from "mapbox-gl";
 import _ from "lodash";
+import palette from "google-palette";
 
 import geographies from "@/assets/geographies";
 
@@ -64,6 +65,91 @@ export default {
     });
   },
   methods: {
+    getChoroplethExpression(data, classified = true) {
+      let joinId = "DISTRICT_ID"; // TODO: create function that retreives the column name associated with the data's geography
+      let rowName = "unemployment";
+      let classBreaks;
+      let dataMinMax;
+
+      // Get quantile class breaks if no class breaks were provided provided
+      if (classified && _.isNil(data.classBreaks)) {
+        // get max and min values of dataset
+        let dataMinMax = data.reduce(
+          (minMax, val) => {
+            if (val < minMax[0]) {
+              minMax[0] = val;
+            }
+            if (val > minMax[1]) {
+              minMax[1] = val;
+            }
+
+            return minMax;
+          },
+          [100000000, -10000000]
+        );
+
+        let range = dataMinMax[1] - dataMinMax[0];
+        let quantile = range / 5;
+        classBreaks = _.range(dataMinMax[0], dataMinMax[1], quantile);
+      }
+
+      let expression = ["match", ["get", joinId]];
+      data.forEach(row => {
+        let color;
+
+        if (classified) {
+          // check which classbreak the value (row[rowName]) falls under
+          // set color to the associated pallete color
+          // palette(schemeName, numberOfColors)
+        } else {
+          color = (row[rowName] / dataMinMax[1]) * 255;
+        }
+
+        expression.push(row[joinId], color);
+      });
+    },
+    addChoroplethLayer(layer, addHover = true, addPopup = true) {},
+    /**
+     * Adds the given geojson data as a layer to the map.
+     * @param {Object} layer A map layer.
+     * @param {boolean} addHover Whether or not to add a hover effect.
+     * @param {boolean} addPopup Whether or not to add a popup on hover.
+     */
+    addLayer(layer, addHover = true, addPopup = true) {
+      this.activeLayers.push(layer);
+
+      let layerId = this.getLayerId(layer);
+      // Add polygon layer
+      this.activeLayer = this.map.addLayer({
+        id: layerId, // TODO: make unique layer ids for multiple usages of same source
+        type: "fill",
+        source: layer.geographyId,
+        paint: {
+          "fill-color": "rgb(220, 174, 96)",
+          // A conditional that changes opacity when the feature-state changes
+          "fill-opacity": [
+            "case",
+            ["boolean", ["feature-state", "hover"], false],
+            1,
+            0.6
+          ]
+        }
+      });
+
+      // Add outline layer
+      this.map.addLayer({
+        id: this.getOutlineId(layer),
+        type: "line",
+        source: layer.geographyId,
+        paint: {
+          "line-color": "rgb(139, 103, 41)",
+          "line-width": 2
+        }
+      });
+
+      addHover ? this.addHoverPopUps(layerId) : null;
+      addPopup ? this.addHoverEffect(layerId) : null;
+    },
     /**
      * Creates a map with an initial state.
      */
@@ -120,12 +206,12 @@ export default {
      */
     updateDrawnLayers(newData) {
       let diff = _.xorWith(this.activeLayers, newData, (arrVal, othVal) => {
-        if (_.isNil(arrVal.theme) && _.isNil(othVal.theme)) {
+        if (_.isNil(arrVal.dataset) && _.isNil(othVal.dataset)) {
           return true;
         }
 
         return (
-          arrVal.theme.id === othVal.theme.id &&
+          arrVal.dataset.id === othVal.dataset.id &&
           arrVal.geographyId === othVal.geographyId
         );
       });
@@ -146,7 +232,7 @@ export default {
      * @return {String} The layer id.
      */
     getLayerId(layer) {
-      return `${layer.theme.id}-${layer.geographyId}`;
+      return `${layer.dataset.id}-${layer.geographyId}`;
     },
     /**
      * Returns a unique layer id for outlines based off of the given layer.
@@ -162,51 +248,10 @@ export default {
      */
     removeLayer(layer) {
       this.activeLayers = this.activeLayers.filter(activeLayer => {
-        return activeLayer.theme.id !== layer.theme.id;
+        return activeLayer.dataset.id !== layer.dataset.id;
       });
       this.map.removeLayer(this.getLayerId(layer));
       this.map.removeLayer(this.getOutlineId(layer));
-    },
-    /**
-     * Adds the given geojson data as a layer to the map.
-     * @param {Object} layer A map layer.
-     * @param {boolean} addHover Whether or not to add a hover effect.
-     * @param {boolean} addPopup Whether or not to add a popup on hover.
-     */
-    addLayer(layer, addHover = true, addPopup = true) {
-      this.activeLayers.push(layer);
-
-      let layerId = this.getLayerId(layer);
-      // Add polygon layer
-      this.activeLayer = this.map.addLayer({
-        id: layerId, // TODO: make unique layer ids for multiple usages of same source
-        type: "fill",
-        source: layer.geographyId,
-        paint: {
-          "fill-color": "rgb(220, 174, 96)",
-          // A conditional that changes opacity when the feature-state changes
-          "fill-opacity": [
-            "case",
-            ["boolean", ["feature-state", "hover"], false],
-            1,
-            0.6
-          ]
-        }
-      });
-
-      // Add outline layer
-      this.map.addLayer({
-        id: this.getOutlineId(layer),
-        type: "line",
-        source: layer.geographyId,
-        paint: {
-          "line-color": "rgb(139, 103, 41)",
-          "line-width": 2
-        }
-      });
-
-      addHover ? this.addHoverPopUps(layerId) : null;
-      addPopup ? this.addHoverEffect(layerId) : null;
     },
     /**
      * Adds all essential geography geometries as map sources.

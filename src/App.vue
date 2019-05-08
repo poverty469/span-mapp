@@ -53,7 +53,7 @@ export default {
       // Object with data layer and geography to be selected
       activeData: [
         // {
-        //   theme: undefined,
+        //   dataset: undefined,
         //   geographyId: undefined
         // }
       ]
@@ -68,7 +68,7 @@ export default {
       this.$store.dispatch("mapLoaded");
       this.activeData.length == 0
         ? this.activeData.push({
-            theme: povertyData,
+            dataset: povertyData,
             geographyId: geographies.districts.id
           })
         : this.activeData.pop();

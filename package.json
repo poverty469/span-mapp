@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
+    "google-palette": "^1.1.0",
     "lodash": "^4.17.11",
     "mapbox-gl": "^0.53.1",
     "vue": "^2.6.10",

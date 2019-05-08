@@ -8,11 +8,11 @@ describe("MbMap.vue", () => {
         mapId: "test",
         activeData: [
           {
-            theme: {},
+            dataset: {},
             geography: "districts"
           },
           {
-            theme: {},
+            dataset: {},
             geography: "counties"
           }
         ]
