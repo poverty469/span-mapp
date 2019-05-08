@@ -1,3 +1,13 @@
 
-Todo:
-  ☐ Item
+Explore mode:
+
+Tour mode:
+
+Personalized experience:
+
+Map functionality:
+  ✔ Change accepted property of activedata to include specific 'geography' type @created(19-05-08 09:27) @started(19-05-08 09:31) @done(19-05-08 10:06) @lasted(35m36s)
+    ☐ Prevent mixing of geographies @created(19-05-08 09:27)
+    ☐ Allow mixing of a single geography and other visualizations (e.g. heatmap) @created(19-05-08 09:27)
+  ☐ Update layer z-indexes when active layer data is updated @created(19-05-08 10:33)
+    ☐ Put into the order that data comes in within the list @created(19-05-08 10:33)
