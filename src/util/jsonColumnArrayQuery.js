@@ -7,10 +7,15 @@ import _ from "lodash";
  */
 export default class jsonColumnArrayQuery {
   constructor(table) {
+    // TODO: verify table is in column array format
     this.table = table;
     this.columnNames = Object.keys(this.table);
-    this.columnNames.shift(); // Removes the 'ids' from the list
-    this.foreignKeys = this.table.ids;
+    this.idColumnName = this.columnNames.shift(); // Removes the 'ids' from the list
+    this.foreignKeys = this.table[this.idColumnName];
+  }
+
+  getIdColumnName() {
+    return this.idColumnName;
   }
 
   /**
@@ -37,29 +42,29 @@ export default class jsonColumnArrayQuery {
   }
 
   getColumnSummary(columnName, classBreakName = "quantile") {
-    if (!this._verifyColumn()) return;
+    if (!this._verifyColumn(columnName)) return undefined;
 
     return {
       data: this._getColumnData(columnName),
       stats: this._getColumnStats(columnName),
-      classBreak: this._getColumnClassBreaks(columnName, classBreakName)
+      classBreaks: this._getColumnClassBreaks(columnName, classBreakName)
     };
   }
 
   getColumnData(columnName) {
-    if (!this._verifyColumn()) return;
+    if (!this._verifyColumn(columnName)) return undefined;
 
     return this._getColumnData(columnName);
   }
 
   getColumnStats(columnName) {
-    if (!this._verifyColumn()) return;
+    if (!this._verifyColumn(columnName)) return undefined;
 
     return this._getColumnStats(columnName);
   }
 
   getColumnClassBreaks(columnName, classBreakName) {
-    if (!this._verifyColumn()) return;
+    if (!this._verifyColumn(columnName)) return undefined;
 
     let column = this.table[columnName];
 

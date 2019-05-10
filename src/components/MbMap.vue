@@ -9,6 +9,8 @@ import mb from "mapbox-gl";
 import _ from "lodash";
 import palette from "google-palette";
 
+import jsonColumnArrayQuery from "@/util/jsonColumnArrayQuery";
+
 import geographies from "@/assets/geographies";
 
 export default {
@@ -68,40 +70,40 @@ export default {
     /**
      *
      */
-    getChoroplethExpression(dataPackage, classified = true) {
-      let joinId = "id"; // TODO: create function that retreives the column name associated with the data's geography
-      let attributeName = "HC03_EST_VC04";
-      let attribute = dataPackage[attributeName];
-      let classBreaks;
+    getChoroplethExpression(dataPackage, attributeId, classified = true) {
+      const dataQuery = new jsonColumnArrayQuery(dataPackage);
+      let attributeSummary = dataQuery.getColumnSummary(attributeId);
+      if (_.isNil(attributeSummary)) {
+        return undefined;
+      }
+
+      let foreignKeyName = dataQuery
+        .getIdColumnName()
+        .substring(0, dataQuery.getIdColumnName().length - 1);
+      let ids = dataQuery.getIds();
+      let stats = attributeSummary.stats;
+      let data = attributeSummary.data;
+      let classBreaks = attributeSummary.classBreaks;
 
       // Get class breaks
-      if (classified) {
-        if (
-          attribute.hasOwnProperty("classBreaks") &&
-          (_.isNil(attribute.classBreaks) ||
-            Object.keys(attribute.classBreaks).length === 0)
-        ) {
-          // If classified, but data does not have class breaks included
-          console.error(
-            `Include class break information to this data: ${attribute}`
-          );
+      if (classified && classBreaks === undefined) {
+        // If classified, but data does not have class breaks included
+        console.error(
+          `Include class break information to this data: ${attributeId}`
+        );
 
-          let range = attribute.stats.RANGE;
-          let min = attribute.stats.MIN;
-          let max = attribute.stats.MAX;
-          let quantile = range / 4;
-          classBreaks = _.range(min + quantile, max, quantile);
-        } else {
-          // Data has class breaks included
-          classBreaks = attribute.classBreaks.quantile;
-        }
+        let range = stats.RANGE;
+        let min = stats.MIN;
+        let max = stats.MAX;
+        let quantile = range / 4;
+        classBreaks = _.range(min + quantile, max, quantile);
       }
 
       let fullColorPalette = palette("cb-Blues", classBreaks.length + 2);
       let colorPalette = fullColorPalette.slice(2);
 
-      let expression = ["match", ["get", joinId]];
-      attribute.data.forEach((value, rowIndex) => {
+      let expression = ["match", ["get", foreignKeyName]];
+      data.forEach((value, rowIndex) => {
         let color;
 
         if (!_.isNil(classBreaks)) {
@@ -118,21 +120,23 @@ export default {
           if (classBreakIndex == -1) {
             console.error(
               "Class breaks not representative of data.",
-              `${value} not found under ${classBreaks[classBreaks.length - 1]}`
+              `${value} is higher than the max class break: ${
+                classBreaks[classBreaks.length - 1]
+              }`
             );
           }
 
           color = "#" + colorPalette[classBreakIndex];
         } else {
-          color = (value / attribute.stats.MAX) * 255;
+          color = (value / stats.MAX) * 255;
         }
 
-        expression.push(dataPackage.ids[rowIndex], color);
+        expression.push(ids[rowIndex], color);
       });
 
       // Last color is default for null/ empty data
       expression.push("rgba(0,0,0,255)");
-      
+
       return expression;
     },
     addChoroplethLayer(layer, addHover = true, addPopup = true) {
@@ -141,7 +145,8 @@ export default {
         addHover,
         addPopup,
         this.getChoroplethExpression(
-          layer.dataset.geographies[layer.geographyId]
+          layer.dataset.geographies[layer.geographyId],
+          layer.attributeId
         )
       );
     },
