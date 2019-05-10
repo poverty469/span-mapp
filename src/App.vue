@@ -69,7 +69,7 @@ export default {
       this.activeData.length == 0
         ? this.activeData.push({
             dataset: povertyData,
-            geographyId: geographies.districts.id
+            geographyId: geographies.counties.id
           })
         : this.activeData.pop();
     }

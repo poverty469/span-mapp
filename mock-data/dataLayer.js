@@ -1,4 +1,4 @@
-import * as povertyDistrictsData from "./percentBelowPoverty_districts.json";
+import * as povertyCountiesData from "./percentBelowPoverty_counties.json";
 
 // TODO: Add feature subtitle
 
@@ -10,11 +10,8 @@ export default {
     <p class="popup--race__text">${feature.properties.subtitle}</p>`;
   },
   geographies: {
-    districts: {
-      data: povertyDistrictsData,
-      classBreaks: [] // TODO: where should the classbreaks be stored? with the data?
-    }, // stats needs to be contained within the data object?
-    counties: undefined,
+    districts: undefined,
+    counties: povertyCountiesData,
     heatmap: undefined
   },
   source: {
