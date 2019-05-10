@@ -11,7 +11,7 @@ export default {
   },
   geographies: {
     districts: undefined,
-    counties: povertyCountiesData,
+    counties: povertyCountiesData.default,
     heatmap: undefined
   },
   source: {

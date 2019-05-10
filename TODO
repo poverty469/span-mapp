@@ -10,5 +10,10 @@ Map functionality:
     ✔ Prevent mixing of geographies @created(19-05-08 09:27) @done(19-05-08 12:05)
     ☐ Confirm allowance of mixing of a single geography and other visualizations (e.g. heatmap) @created(19-05-08 09:27)
   ☐ Update layer z-indexes when active layer data is updated @created(19-05-08 10:33)
-    ☐ Put into the order that data comes in within the list @created(19-05-08 10:33)
-  ☐ Enable choropleth data handling @started(19-05-08 12:36)
+    ☐ Put into the order that data comes in within the list @created(19-05-09 21:55)
+  ✔ Enable choropleth data handling @started(19-05-08 12:36) @done(19-05-09 21:53) @lasted(1d9h17m59s)
+  
+
+Data Management:
+  ☐ Write required standard for geometry IDs, across all geographies @created(19-05-09 21:55)
+    ☐ Fix ids in percentBeloewPoverty_counties.json and in geographies/counties.js -> choropleth will work after @created(19-05-09 21:55)

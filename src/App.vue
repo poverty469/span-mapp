@@ -69,7 +69,9 @@ export default {
       this.activeData.length == 0
         ? this.activeData.push({
             dataset: povertyData,
-            geographyId: geographies.counties.id
+            geographyId: geographies.counties.id,
+            attributeId: "HC03_EST_VC03",
+            style: "choropleth"
           })
         : this.activeData.pop();
     }

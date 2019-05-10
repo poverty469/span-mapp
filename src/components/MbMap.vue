@@ -65,57 +65,99 @@ export default {
     });
   },
   methods: {
-    getChoroplethExpression(data, classified = true) {
-      let joinId = "DISTRICT_ID"; // TODO: create function that retreives the column name associated with the data's geography
-      let rowName = "unemployment";
+    /**
+     *
+     */
+    getChoroplethExpression(dataPackage, classified = true) {
+      let joinId = "id"; // TODO: create function that retreives the column name associated with the data's geography
+      let attributeName = "HC03_EST_VC04";
+      let attribute = dataPackage[attributeName];
       let classBreaks;
-      let dataMinMax;
 
-      // Get quantile class breaks if no class breaks were provided provided
-      if (classified && _.isNil(data.classBreaks)) {
-        // get max and min values of dataset
-        let dataMinMax = data.reduce(
-          (minMax, val) => {
-            if (val < minMax[0]) {
-              minMax[0] = val;
-            }
-            if (val > minMax[1]) {
-              minMax[1] = val;
-            }
+      // Get class breaks
+      if (classified) {
+        if (
+          attribute.hasOwnProperty("classBreaks") &&
+          (_.isNil(attribute.classBreaks) ||
+            Object.keys(attribute.classBreaks).length === 0)
+        ) {
+          // If classified, but data does not have class breaks included
+          console.error(
+            `Include class break information to this data: ${attribute}`
+          );
 
-            return minMax;
-          },
-          [100000000, -10000000]
-        );
-
-        let range = dataMinMax[1] - dataMinMax[0];
-        let quantile = range / 5;
-        classBreaks = _.range(dataMinMax[0], dataMinMax[1], quantile);
+          let range = attribute.stats.RANGE;
+          let min = attribute.stats.MIN;
+          let max = attribute.stats.MAX;
+          let quantile = range / 4;
+          classBreaks = _.range(min + quantile, max, quantile);
+        } else {
+          // Data has class breaks included
+          classBreaks = attribute.classBreaks.quantile;
+        }
       }
 
+      let fullColorPalette = palette("cb-Blues", classBreaks.length + 2);
+      let colorPalette = fullColorPalette.slice(2);
+      console.log(colorPalette);
+
       let expression = ["match", ["get", joinId]];
-      data.forEach(row => {
+      attribute.data.forEach((value, rowIndex) => {
         let color;
 
-        if (classified) {
+        if (!_.isNil(classBreaks)) {
           // check which classbreak the value (row[rowName]) falls under
-          // set color to the associated pallete color
-          // palette(schemeName, numberOfColors)
+          let classBreakIndex = -1;
+
+          for (let index in classBreaks) {
+            if (value <= classBreaks[index]) {
+              classBreakIndex = index;
+              break;
+            }
+          }
+
+          if (classBreakIndex == -1) {
+            console.error(
+              "Class breaks not representative of data.",
+              `${value} not found under ${classBreaks[classBreaks.length - 1]}`
+            );
+          }
+
+          color = "#" + colorPalette[classBreakIndex];
         } else {
-          color = (row[rowName] / dataMinMax[1]) * 255;
+          color = (value / attribute.stats.MAX) * 255;
         }
 
-        expression.push(row[joinId], color);
+        expression.push(dataPackage.ids[rowIndex], color);
       });
+
+      // Last color is default for null/ empty data
+      expression.push("rgba(0,0,0,255)");
+      console.log(expression);
+      return expression;
     },
-    addChoroplethLayer(layer, addHover = true, addPopup = true) {},
+    addChoroplethLayer(layer, addHover = true, addPopup = true) {
+      this.addLayer(
+        layer,
+        addHover,
+        addPopup,
+        this.getChoroplethExpression(
+          layer.dataset.geographies[layer.geographyId]
+        )
+      );
+    },
     /**
      * Adds the given geojson data as a layer to the map.
      * @param {Object} layer A map layer.
      * @param {boolean} addHover Whether or not to add a hover effect.
      * @param {boolean} addPopup Whether or not to add a popup on hover.
      */
-    addLayer(layer, addHover = true, addPopup = true) {
+    addLayer(
+      layer,
+      addHover = true,
+      addPopup = true,
+      fillColor = "rgb(220, 174, 96)"
+    ) {
       this.activeLayers.push(layer);
 
       let layerId = this.getLayerId(layer);
@@ -125,13 +167,13 @@ export default {
         type: "fill",
         source: layer.geographyId,
         paint: {
-          "fill-color": "rgb(220, 174, 96)",
+          "fill-color": fillColor,
           // A conditional that changes opacity when the feature-state changes
           "fill-opacity": [
             "case",
             ["boolean", ["feature-state", "hover"], false],
             1,
-            0.6
+            0.8
           ]
         }
       });
@@ -220,7 +262,11 @@ export default {
         let found = newData.includes(layer);
 
         if (found) {
-          this.addLayer(layer);
+          if (layer.style === "choropleth") {
+            this.addChoroplethLayer(layer);
+          } else {
+            this.addLayer(layer);
+          }
         } else if (!found && !_.isNil(layer)) {
           this.removeLayer(layer);
         }
@@ -422,7 +468,11 @@ export default {
         this.popUp
           .setLngLat(e.lngLat)
           .setHTML(
-            `<h3 class="popup--race__title">
+            `
+            <h2 class="popup--race__title">
+              ${hoveredFeature.properties.id}
+            </h2>
+            <h3 class="popup--race__title">
               ${hoveredFeature.properties.name}
             </h3>
             <p class="popup--race__text">
