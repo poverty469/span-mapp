@@ -99,7 +99,6 @@ export default {
 
       let fullColorPalette = palette("cb-Blues", classBreaks.length + 2);
       let colorPalette = fullColorPalette.slice(2);
-      console.log(colorPalette);
 
       let expression = ["match", ["get", joinId]];
       attribute.data.forEach((value, rowIndex) => {
@@ -133,7 +132,7 @@ export default {
 
       // Last color is default for null/ empty data
       expression.push("rgba(0,0,0,255)");
-      console.log(expression);
+      
       return expression;
     },
     addChoroplethLayer(layer, addHover = true, addPopup = true) {
