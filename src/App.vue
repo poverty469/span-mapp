@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <!-- temp tag to test loading states -->
-    <button class="force-load-test" @click="forceLoad()"></button>
+    <div class="test-button-container">
+      <button class="test-button" @click="forceToggleMapData()">
+        Toggle Map Data
+      </button>
+      <button class="test-button" @click="forceLoad()">'Force load'</button>
+    </div>
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
     <transition name="fade">
@@ -66,6 +71,8 @@ export default {
      */
     forceLoad() {
       this.$store.dispatch("mapLoaded");
+    },
+    forceToggleMapData() {
       this.activeData.length == 0
         ? this.activeData.push({
             dataset: povertyData,
@@ -158,17 +165,26 @@ li {
   width: 100vw;
 }
 
-// Temporary
-.force-load-test {
+.test-button-container {
   position: fixed;
+  width: fit-content;
+  height: auto;
   top: 0;
   left: 50vw;
-  width: 15px;
+
+  z-index: z("test-object");
+}
+
+// Temporary
+.test-button {
+  position: relative;
+  display: inline-block;
+  margin-right: 3px;
+
+  width: auto;
   height: 15px;
   background: transparent;
   outline: 0.5px solid black;
-
-  z-index: z("test-object");
 }
 
 .fade-enter-active,
