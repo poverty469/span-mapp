@@ -35,6 +35,8 @@ VUE_APP_MAPBOX_API_ACCESS_TOKEN=
 VUE_APP_MAPBOX_STYLE_URL=
 ```
 Paste in a Mapbox Public API token and a Mapbox Style URL of your choice basemap.
+To improve load times paste `?optimize=true` at the end of the Style URL, this prevents the Mapbox Server from sending
+data that is impossible to access (areas beyond the max pan-area and beyond the zoom scope).
 
 ### Compiles and hot-reloads for development
 ```
