@@ -47,6 +47,7 @@ $border: $thick-border solid $dark-grey;
         @return null;
     }
 }
+
 // Z-index positions from high to low
 $z-indexes: (
     "test-object", // Temporary

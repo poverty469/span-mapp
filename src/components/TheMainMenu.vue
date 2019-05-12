@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <main-menu-item v-for="(item, index) of menuItems" :key="index" :item="item" class="menu-item"></main-menu-item>
+    <main-menu-item v-for="(item, index) of menuItems" :key="index" :menuItem="item" class="menu-item"></main-menu-item>
   </ul>
 </template>
 
@@ -16,28 +16,28 @@ export default {
       menuItems: [
         {
           title: "map",
-          path: "#",
-          description: ""
+          path: "#map",
+          description: "Displays a interactive visualization of the map."
         },
         {
           title: "stories",
-          path: "#",
-          description: ""
+          path: "#stories",
+          description: "Displays multiple narratives from different locations."
         },
         {
           title: "tour",
-          path: "#",
-          description: ""
+          path: "#tour",
+          description: "Displays a pop-up with a walkthrough to help the user gain a deeper understanding of the mission."
         },
         {
           title: "about",
-          path: "#",
-          description: ""
+          path: "#about",
+          description: "Displays a narrative about what State-wide Poverty Action Network does."
         },
         {
           title: "faq",
-          path: "#",
-          description: ""
+          path: "#faq",
+          description: "Common facts and questions are displayed."
         }
       ]
     };
@@ -49,5 +49,11 @@ export default {
 .menu-item {
   display: inline-block;
   height: 100%;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.menu-item:hover {
+  background-color: $dark-orange;
 }
 </style>
