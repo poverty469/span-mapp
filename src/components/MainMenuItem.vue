@@ -50,7 +50,6 @@ export default {
   color: $dark-purple;
   height: 100%;
   width: 100%;
-  @include char-style($menu-item...);
   text-transform: uppercase;
   transition: 0.5s;
 }
@@ -60,6 +59,7 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   padding: 0 0.8rem;
+  @include char-style($menu-item...);
 }
 
 @media (max-width: 400px) {

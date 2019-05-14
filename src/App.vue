@@ -13,13 +13,7 @@
     </div>
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
-    <transition name="fade">
-      <the-splash-page
-        v-show="appLoading"
-        class="the-splash-page"
-        rel="preload"
-      ></the-splash-page>
-    </transition>
+    <the-splash-page class="the-splash-page"></the-splash-page>
     <the-tour-dashboard class="the-tour-dashboard"></the-tour-dashboard>
     <map-dashboard
       mapId="main-map"
@@ -94,19 +88,6 @@ export default {
 </script>
 
 <style lang="scss">
-* {
-  margin: 0;
-  padding: 0;
-}
-
-a {
-  text-decoration: none;
-}
-
-li {
-  list-style: none;
-}
-
 #app {
   padding: absolute;
   top: 0;
@@ -160,8 +141,12 @@ li {
 .the-splash-page {
   position: absolute;
   z-index: z("splash-page");
-  height: 100vh;
   width: 100vw;
+  height: 0;
+}
+
+.the-splash-page--not-loaded {
+  height: 100vh;
 }
 
 .test-button-container {

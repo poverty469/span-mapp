@@ -6,18 +6,165 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Muli:400,700,900" as="font">
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
   <link href="https://fonts.googleapis.com/css?family=Muli:400,700,900" rel="stylesheet">
   <title>The State of Poverty in Washington - A Project by The Statewide Poverty Action Network</title>
 </head>
 
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  body {
+    /* light-orange */
+    background: #FEE3D7;
+  }
+
+  #loading-wrapper {
+    position: fixed;
+    width: 25vh;
+    height: 25vh;
+    right: 0;
+    bottom: 0;
+  }
+
+  #loading-text {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: rgb(20, 121, 60);
+    width: 100px;
+    height: 30px;
+    margin: -7px 0 0 -45px;
+    text-align: center;
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 20px;
+  }
+
+  #loading-content {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 170px;
+    height: 170px;
+    margin: -85px 0 0 -85px;
+    border: 3px solid #F00;
+  }
+
+  #loading-content {
+    border: 3px solid transparent;
+    border-top-color: rgb(121, 61, 185);
+    border-bottom-color: rgb(121, 61, 185);
+    border-radius: 50%;
+    -webkit-animation: loader 2s linear infinite;
+    -moz-animation: loader 2s linear infinite;
+    -o-animation: loader 2s linear infinite;
+    animation: loader 2s linear infinite;
+  }
+
+  @keyframes loader {
+    0% {
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+
+    100% {
+      -webkit-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+
+  .the-splash-page--preloaded {
+    position: fixed;
+    background: #FEE3D7;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .splash-page__text-container {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    top: 18vh;
+    width: 35vw;
+    min-width: 400px;
+    max-width: 550px;
+    max-height: 70vh;
+    overflow: auto;
+    height: fit-content;
+
+    /* light-orange */
+    background: #FEE3D7;
+    border: 3px solid white;
+  }
+
+  .splash-page__text {
+    padding: 50px;
+    font-family: 'Muli', 'Avenir', 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 1.2rem;
+  }
+
+  .splash-page__text b {
+    font-weight: 700;
+  }
+</style>
+
 <body>
   <noscript>
-    <strong>We're sorry but span-mapp doesn't work properly without JavaScript enabled. Please enable it to
+    <strong>We're sorry but 'The State of Poverty in Washington' application doesn't work properly without JavaScript
+      enabled. Please enable it to
       continue.</strong>
   </noscript>
-  <div id="app"></div>
-  <!-- built files will be auto injected -->
+  <div id="app">
+    <div class="splash-page--preloaded">
+      <div class="splash-page__text-container">
+        <p class="splash-page__text">
+          <b>
+            Poverty is complex, and the reasons surrounding its existence are deeply historical and multifaceted. At
+            Poverty
+            Action, we believe that poverty can be solved through progressive and inclusive policy legislation. However,
+            in
+            order to pass anti-poverty reforms that are both equitable and sustainable, we must first understand the
+            scope
+            of poverty in our state.
+          </b>
+          <br><br>
+          This interactive map allows users to explore the social, economic, and historical elements behind poverty in
+          Washington state.<br><br>
+          Our map shows the spread of poverty through a variety of factors, and includes stories of
+          people affected by poverty in our state.
+          In order to make the most of your time, we invite you to <b>take the tour of the state of poverty in
+            Washington.</b>
+        </p>
+      </div>
+      <div id="loading-wrapper">
+        <div id="loading-text">LOADING</div>
+        <div id="loading-content"></div>
+      </div>
+    </div>
+  </div>
+  <!-- built files will be auto injected and replace the loading wrapper-->
 </body>
 
 </html>
