@@ -160,8 +160,7 @@ li {
 .the-splash-page {
   position: absolute;
   z-index: z("splash-page");
-  top: $header-height;
-  bottom: $footer-height;
+  height: 100vh;
   width: 100vw;
 }
 
