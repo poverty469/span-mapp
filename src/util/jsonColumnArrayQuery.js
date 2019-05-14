@@ -6,11 +6,11 @@ import _ from "lodash";
  * Takes JSON data formatted as a column arrays. (http://www.convertcsv.com/csv-to-json.htm)
  */
 export default class jsonColumnArrayQuery {
-  constructor(table) {
+  constructor(table, idName) {
     // TODO: verify table is in column array format
     this.table = table;
     this.columnNames = Object.keys(this.table);
-    this.idColumnName = this.columnNames.shift(); // Removes the 'ids' from the list
+    this.idColumnName = idName + "s"; // Removes the 'ids' from the list
     this.foreignKeys = this.table[this.idColumnName];
   }
 

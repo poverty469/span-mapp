@@ -46,7 +46,8 @@ class MapSupport {
    * list for Mapbox styling.
    */
   getChoroplethExpression(dataPackage, attributeId, classified = true) {
-    const dataQuery = new jsonColumnArrayQuery(dataPackage);
+    // TODO: final id name should be "id", not "id2". Geometries should include the long "id"
+    const dataQuery = new jsonColumnArrayQuery(dataPackage, "id2");
     let attributeSummary = dataQuery.getColumnSummary(attributeId);
     if (_.isNil(attributeSummary)) {
       return undefined;
@@ -105,7 +106,6 @@ class MapSupport {
       } else {
         color = (value / stats.MAX) * 255;
       }
-
       expression.push(ids[rowIndex], color);
     });
 

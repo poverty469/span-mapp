@@ -1,4 +1,4 @@
-import * as povertyCountiesData from "./percentBelowPoverty_counties.json";
+import * as belowPoverty_Counties from "./selectedEconomicCharacteristics_161-180_2017_counties_summary.json";
 
 // TODO: Add feature subtitle
 
@@ -11,7 +11,7 @@ export default {
   },
   geographies: {
     districts: undefined,
-    counties: povertyCountiesData.default,
+    counties: belowPoverty_Counties.default,
     heatmap: undefined
   },
   source: {

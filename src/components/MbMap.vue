@@ -8,9 +8,11 @@
 import mb from "mapbox-gl";
 import _ from "lodash";
 
-import mapSupport from "@/utils/mapSupport";
+import mapSupport from "@/util/mapSupport";
 
 import geographies from "@/assets/geographies";
+
+import povertyData from "@/assets/data/dataLayer";
 
 export default {
   name: "MbMap",
@@ -62,6 +64,12 @@ export default {
     this.map.on("load", () => {
       this.initializeLayerSources();
       this.addBlackOutlineLayer(geographies.washington, "splash-page");
+      // Test layer geometry below
+      // this.addLayer({
+      //   dataset: povertyData,
+      //   geographyId: geographies.counties.id,
+      //   attributeId: "HC03_VC161"
+      // });
       _.delay(() => this.$store.dispatch("mapLoaded"), 250); // Delay to hide loading of layer
     });
   },
@@ -93,7 +101,7 @@ export default {
 
       let layerId = this.getLayerId(layer);
       // Add polygon layer
-      this.activeLayer = this.map.addLayer({
+      let activeLayer = this.map.addLayer({
         id: layerId, // TODO: make unique layer ids for multiple usages of same source
         type: "fill",
         source: layer.geographyId,
@@ -103,8 +111,8 @@ export default {
           "fill-opacity": [
             "case",
             ["boolean", ["feature-state", "hover"], false],
-            1,
-            0.8
+            0.5,
+            1
           ]
         }
       });

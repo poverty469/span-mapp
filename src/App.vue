@@ -36,7 +36,7 @@ import TheTourDashboard from "@/components/TheTourDashboard.vue";
 import TheSplashPage from "@/components/TheSplashPage.vue";
 
 import geographies from "@/assets/geographies";
-import povertyData from "@/../mock-data/dataLayer";
+import povertyData from "@/assets/data/dataLayer";
 
 import { mapGetters } from "vuex";
 
@@ -77,7 +77,7 @@ export default {
         ? this.activeData.push({
             dataset: povertyData,
             geographyId: geographies.counties.id,
-            attributeId: "HC03_EST_VC03",
+            attributeId: "HC03_VC161",
             style: "choropleth"
           })
         : this.activeData.pop();
