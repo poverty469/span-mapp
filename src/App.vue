@@ -2,7 +2,11 @@
   <div id="app">
     <!-- temp tag to test loading states -->
     <div class="test-button-container">
-      <button class="test-button" @click="forceToggleMapData()">
+      <button
+        v-show="!appLoading"
+        class="test-button"
+        @click="forceToggleMapData()"
+      >
         Toggle Map Data
       </button>
       <button class="test-button" @click="forceLoad()">'Force load'</button>

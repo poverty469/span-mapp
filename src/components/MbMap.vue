@@ -70,7 +70,11 @@ export default {
       //   geographyId: geographies.counties.id,
       //   attributeId: "HC03_VC161"
       // });
-      _.delay(() => this.$store.dispatch("mapLoaded"), 250); // Delay to hide loading of layer
+
+      if (process.env.NODE_ENV == "production") {
+        // Only in production to control loading for tests
+        _.delay(() => this.$store.dispatch("mapLoaded"), 250); // Delay to hide loading of layer
+      }
     });
   },
   methods: {
