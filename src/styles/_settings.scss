@@ -11,9 +11,9 @@ $shadow: #0000003e;
 
 // Fonts
 $standard-font-family: 'Muli', 'Avenir', 'Open Sans', 'Helvetica Neue', sans-serif;
-$standard-body-font: 400, 1em, $dark-grey; // 12px
-$tutorial-title: 900, 2em, $bright-red; // 25px
-$menu-item: 700, 1.2em, $dark-purple; // 14px
+$standard-body-font: 400, 1rem, $dark-grey; // 12px
+$tutorial-title: 900, 2rem, $bright-red; // 25px
+$menu-item: 700, 1rem, $dark-purple; // 14px
 
 @mixin char-style($weight, $size, $color, $lh: false, $all-caps: false) {
     font-size: $size;

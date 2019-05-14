@@ -1,9 +1,11 @@
 <template>
   <li>
     <!-- Might use router links instead of standard links -->
-    <div class="menu-item-container">
-      <a :href="''+ menuItem.path" >{{ menuItem.title }}</a>
-    </div>
+    <a class="menu-item__click-area" :href="menuItem.path">
+      <div class="menu-item__text-container">
+        <p class="menu-item__text">{{ menuItem.title }}</p>
+      </div>
+    </a>
   </li>
 </template>
 
@@ -23,31 +25,37 @@ export default {
     }
   },
   data: function() {
-    return {
-    }
+    return {};
   },
-  methods: {
-  },
+  methods: {},
   components: {}
 };
 </script>
 
 <style lang="scss">
-.menu-item-container {
-  padding: 1vh 1vw 1vh 1vw;
+.menu-item__click-area {
+  width: fit-content;
+  height: fit-content;
+}
+
+.menu-item__text-container {
+  color: $dark-purple;
   height: 100%;
-  font-size: 32px;
-  font-family: $standard-font-family;
+  width: 100%;
+  @include char-style($menu-item...);
   text-transform: uppercase;
   transition: 0.5s;
 }
 
-.menu-item-container a {
-  color: $dark-purple;
+.menu-item__text {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0 0.8rem;
 }
 
 @media (max-width: 400px) {
-  .menu-item-container {
+  .menu-item__click-area {
     font-size: 14px;
   }
 }

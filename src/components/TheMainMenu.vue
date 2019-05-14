@@ -1,6 +1,11 @@
 <template>
   <ul>
-    <main-menu-item v-for="(item, index) of menuItems" :key="index" :menuItem="item" class="menu-item"></main-menu-item>
+    <main-menu-item
+      v-for="(item, index) of menuItems"
+      :key="`main-menu-item-${index}`"
+      :menuItem="item"
+      class="menu-item"
+    ></main-menu-item>
   </ul>
 </template>
 
@@ -27,12 +32,14 @@ export default {
         {
           title: "tour",
           path: "#tour",
-          description: "Displays a pop-up with a walkthrough to help the user gain a deeper understanding of the mission."
+          description:
+            "Displays a pop-up with a walkthrough to help the user gain a deeper understanding of the mission."
         },
         {
           title: "about",
           path: "#about",
-          description: "Displays a narrative about what State-wide Poverty Action Network does."
+          description:
+            "Displays a narrative about what State-wide Poverty Action Network does."
         },
         {
           title: "faq",
