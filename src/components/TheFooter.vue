@@ -101,6 +101,10 @@ export default {
   background: $dark-orange;
 }
 
+.action-button__container:active {
+  background: $dark-orange--shadow;
+}
+
 .action-button__text {
   position: relative;
   top: 50%;
