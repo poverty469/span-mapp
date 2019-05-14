@@ -5,6 +5,8 @@
       :key="`main-menu-item-${index}`"
       :menuItem="item"
       class="menu-item"
+      :class="{ 'menu-item--active': activeMenuItemIndex == index }"
+      @menuItemClicked="handleMenuItemClick(index)"
     ></main-menu-item>
   </ul>
 </template>
@@ -18,6 +20,7 @@ export default {
   props: {},
   data: function() {
     return {
+      activeMenuItemIndex: 2, // Initialize to 'Tour' menu item
       menuItems: [
         {
           title: "map",
@@ -48,6 +51,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    handleMenuItemClick(menuItemIndex) {
+      this.activeMenuItemIndex = menuItemIndex;
+    }
   }
 };
 </script>
@@ -58,6 +66,10 @@ export default {
   height: 100%;
   overflow: hidden;
   text-decoration: none;
+}
+
+.menu-item--active {
+  background-color: $light-orange;
 }
 
 .menu-item:hover {

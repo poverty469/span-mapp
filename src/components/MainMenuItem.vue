@@ -1,7 +1,11 @@
 <template>
   <li>
     <!-- Might use router links instead of standard links -->
-    <a class="menu-item__click-area" :href="menuItem.path">
+    <a
+      class="menu-item__click-area"
+      :href="menuItem.path"
+      @click="handleMenuItemClick"
+    >
       <div class="menu-item__text-container">
         <p class="menu-item__text">{{ menuItem.title }}</p>
       </div>
@@ -27,7 +31,11 @@ export default {
   data: function() {
     return {};
   },
-  methods: {},
+  methods: {
+    handleMenuItemClick() {
+      this.$emit("menuItemClicked");
+    }
+  },
   components: {}
 };
 </script>
