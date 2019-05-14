@@ -101,7 +101,7 @@ export default {
 
       let layerId = this.getLayerId(layer);
       // Add polygon layer
-      let activeLayer = this.map.addLayer({
+      this.map.addLayer({
         id: layerId, // TODO: make unique layer ids for multiple usages of same source
         type: "fill",
         source: layer.geographyId,
@@ -354,6 +354,7 @@ export default {
         }
 
         hoveredFeature = e.features[0]; // Update hovered feature
+        this.handleHoverOverFeature(hoveredFeature);
 
         // Turn on hover effect on former feature
         this.map.setFeatureState(
@@ -409,7 +410,7 @@ export default {
           .setHTML(
             `
             <h2 class="popup--race__title">
-              ${hoveredFeature.properties.id}
+              ${hoveredFeature.properties.NAMELSAD}
             </h2>
             <h3 class="popup--race__title">
               ${hoveredFeature.properties.name}
@@ -425,6 +426,10 @@ export default {
         this.map.getCanvas().style.cursor = "";
         this.popUp.remove();
       });
+    },
+
+    handleHoverOverFeature(feature) {
+      this.$emit("hoverOverFeature", feature);
     }
   }
 };
