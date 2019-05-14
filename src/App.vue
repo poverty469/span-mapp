@@ -7,7 +7,7 @@
         class="test-button"
         @click="forceToggleMapData()"
       >
-        Toggle Map Data
+        Toggle Map Data (don't click until washington outline loads)
       </button>
       <button class="test-button" @click="forceLoad()">'Force load'</button>
     </div>
@@ -170,6 +170,7 @@ li {
   height: auto;
   top: 0;
   left: 50vw;
+  transform: translateX(-50%);
 
   z-index: z("test-object");
 }
