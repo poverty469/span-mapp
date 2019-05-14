@@ -132,8 +132,6 @@ li {
   width: $app-width;
   height: $header-height;
   z-index: z("site-header");
-
-  background: $light-tan;
 }
 
 .the-tour-dashboard {
@@ -157,8 +155,6 @@ li {
   width: $app-width;
   height: $footer-height;
   z-index: z("site-footer");
-
-  background: $light-tan;
 }
 
 .the-splash-page {

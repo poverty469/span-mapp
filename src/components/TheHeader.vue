@@ -17,6 +17,12 @@ export default {
 </script>
 
 <style lang="scss">
+.the-header {
+  background: $light-tan;
+  box-shadow: $standard-box-shadow;
+  border-bottom: $thin-border solid $charcoal;
+}
+
 .the-main-menu {
   top: 0;
   right: 0;
