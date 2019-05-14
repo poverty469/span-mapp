@@ -5,8 +5,11 @@
 - Use [BEM naming convention](http://getbem.com/naming/)
 - Use [SCSS variables](https://sass-lang.com/documentation/variables) where ever possible, found in _settings.scss
 
-### Syntax Style
-- Turn on [autolinting](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) in your IDE
+### Syntax Style and IDE
+- Turn on [autolinting](https://alligator.io/vuejs/eslint-vue-vetur/) in your IDE
+    - If using VSCode
+        - Download [Vue Extension Pack by Raza](https://marketplace.visualstudio.com/items?itemName=mubaidr.vuejs-extension-pack)
+        - If you want to partake in TODO tracking, download [TODO+](https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-todo-plus)
 
 ### Vue
 - Follow [Vue style guide](https://vuejs.org/v2/style-guide/)
