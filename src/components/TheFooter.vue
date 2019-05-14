@@ -16,6 +16,7 @@
     <a
       href="https://povertyaction.org/advocacy-actions/"
       class="action-button__click-area"
+      target="_blank"
     >
       <div class="action-button__container">
         <div class="action-button__text">TAKE ACTION</div>
