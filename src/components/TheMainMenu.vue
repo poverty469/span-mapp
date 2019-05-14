@@ -75,4 +75,8 @@ export default {
 .menu-item:hover {
   background-color: $dark-orange;
 }
+
+.menu-item:active {
+  background-color: $dark-orange--shadow;
+}
 </style>
