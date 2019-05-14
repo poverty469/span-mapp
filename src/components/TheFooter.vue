@@ -13,7 +13,14 @@
         <facebook-logo class="social-media__icon facebook-icon"></facebook-logo>
       </a>
     </div>
-    <img src="@/assets/Untitled-11.png" class="takeaction" />
+    <a
+      href="https://povertyaction.org/advocacy-actions/"
+      class="action-button__click-area"
+    >
+      <div class="action-button__container">
+        <div class="action-button__text">TAKE ACTION</div>
+      </div>
+    </a>
   </div>
 </template>
 
@@ -37,7 +44,8 @@ export default {
   display: flex;
   justify-content: space-between;
   background: $light-tan;
-  border-top: 1px solid $charcoal;
+  border-top: $thin-border solid $charcoal;
+  box-shadow: $standard-box-shadow;
 
   overflow: hidden;
 }
@@ -74,6 +82,33 @@ export default {
 .facebook-icon {
   height: 1.4rem;
   width: 1.8rem;
+}
+
+.action-button__container {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
+  width: fit-content;
+  height: 60%;
+
+  border: 2px solid $bright-red;
+  border-radius: 3px;
+}
+
+.action-button__container:hover {
+  background: $dark-orange;
+}
+
+.action-button__text {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+
+  padding: 0 0.5rem;
+  @include char-style($action-button...);
+  letter-spacing: 1px;
+  left: 1px; // Compensates an offset from the letter-spacing
 }
 
 .takeaction {
