@@ -105,8 +105,6 @@ li {
   width: $app-width;
   height: $footer-height;
   z-index: z("site-footer");
-
-  background: $light-tan;
 }
 
 .the-splash-page {

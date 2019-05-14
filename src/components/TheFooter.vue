@@ -1,22 +1,34 @@
 <template>
-  <div class="the-footer">  
-      <div class= "social-media">
-        <a href="https://www.instagram.com/poverty_action/" target="_blank"><img src="@/assets/instagram_icon.svg" class="icon"/> </a>
-        <a href="https://twitter.com/PovertyActionWA" target="_blank"><img src="@/assets/twitter_icon.svg" class="icon1"/> </a>
-        <a href="https://www.facebook.com/PovertyAction" target="_blank"><img src="@/assets/facebook_icon.svg" class="icon2"/> </a>
-      </div>
-      <img src="@/assets/Untitled-11.png" class="takeaction"/>
-  </div> 
+  <div class="the-footer">
+    <div class="social-media__container">
+      <a href="https://www.instagram.com/poverty_action/" target="_blank">
+        <instagram-logo
+          class="social-media__icon instagram-icon"
+        ></instagram-logo>
+      </a>
+      <a href="https://twitter.com/PovertyActionWA" target="_blank">
+        <twitter-logo class="social-media__icon twitter-icon"></twitter-logo>
+      </a>
+      <a href="https://www.facebook.com/PovertyAction" target="_blank">
+        <facebook-logo class="social-media__icon facebook-icon"></facebook-logo>
+      </a>
+    </div>
+    <img src="@/assets/Untitled-11.png" class="takeaction" />
+  </div>
 </template>
 
 <script>
+import TwitterLogo from "@/assets/svg/twitter_icon.svg";
+import InstagramLogo from "@/assets/svg/instagram_icon.svg";
+import FacebookLogo from "@/assets/svg/facebook_icon.svg";
+
 export default {
   name: "TheFooter",
+  components: { InstagramLogo, TwitterLogo, FacebookLogo },
   props: {},
   data: function() {
     return {};
-  },
-  components: {}
+  }
 };
 </script>
 
@@ -24,40 +36,49 @@ export default {
 .the-footer {
   display: flex;
   justify-content: space-between;
-  position: absolute;
-  background: #fff6f2;
-  height: 40px !important;
-  width: 100vw;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-  border-top: 3px solid #fcd3c1;
+  background: $light-tan;
+  border-top: 1px solid $charcoal;
 
-  .icon {
-    height: 25px;
-    width: 25px;
-    margin-top: 2px;
-    margin-left: 18px;
-    margin-right: 10px;
-  }
-  .icon1 {
-    height: 23px;
-    width: 29px;
-    margin-top: 2px;
-    margin-left: 12px;
-    margin-right: 10px;
-  }
-  .icon2 {
-    height: 25px;
-    width: 20px;
-    margin-top: 4px;
-    margin-left: 8px;
-  }
+  overflow: hidden;
+}
 
-  .takeaction {
-    margin-top: 5px;
-    margin-left: 980px;
-    right: 0;
-  }
+.social-media__container {
+  display: flex;
+}
+
+.social-media__icon {
+  transform: translateY(-50%);
+  top: 50%;
+  position: relative;
+  width: 40px;
+  padding: 0 3% 0 0;
+}
+
+.social-media__icon:not(.twitter-icon) > .vectors {
+  fill: $bright-red;
+}
+
+.social-media__icon.twitter-icon {
+  fill: $light-tan;
+  stroke: $bright-red;
+}
+
+.instagram-icon {
+  height: 1.4rem;
+}
+
+.twitter-icon {
+  height: 1.2rem;
+}
+
+.facebook-icon {
+  height: 1.4rem;
+  width: 1.8rem;
+}
+
+.takeaction {
+  margin-top: 5px;
+  margin-left: 980px;
+  right: 0;
 }
 </style>
