@@ -95,6 +95,8 @@ export default {
 
   border: 2px solid $bright-red;
   border-radius: 3px;
+
+  user-select: none;
 }
 
 .action-button__container:hover {

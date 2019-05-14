@@ -29,5 +29,7 @@ export default {
   position: absolute;
   width: fit-content;
   height: 100%;
+
+  user-select: none;
 }
 </style>
