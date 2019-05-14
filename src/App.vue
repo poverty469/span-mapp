@@ -194,10 +194,6 @@ li {
   opacity: 0;
 }
 
-.mapboxgl-ctrl-logo {
-  position: fixed !important;
-}
-
 .mapboxgl-ctrl-attrib.mapboxgl-compact {
   margin: 0 !important;
 }
