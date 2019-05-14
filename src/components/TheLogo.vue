@@ -103,7 +103,11 @@ export default {
 <style lang="scss">
 .logo,
 .logo--glow {
-  height: $header-height;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  height: calc(#{$header-height} * 0.7);
+  left: 0.5rem;
 
   transition: opacity 250ms ease-in;
 }
