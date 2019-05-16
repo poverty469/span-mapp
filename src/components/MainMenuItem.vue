@@ -1,15 +1,15 @@
 <template>
   <li>
     <!-- Might use router links instead of standard links -->
-    <a
+    <router-link
       class="menu-item__click-area"
-      :href="menuItem.path"
-      @click="handleMenuItemClick"
+      :to="menuItem.path"
+      @click.native="handleMenuItemClick"
     >
       <div class="menu-item__text-container">
         <p class="menu-item__text">{{ menuItem.title }}</p>
       </div>
-    </a>
+    </router-link>
   </li>
 </template>
 
@@ -21,7 +21,7 @@ export default {
       default: function() {
         return {
           title: "",
-          path: "#",
+          path: "/",
           description: ""
         };
       },

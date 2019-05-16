@@ -10,10 +10,10 @@ export default new VueRouter({
   mode: "history",
   routes: [
     { path: "/", redirect: "/tour" },
-    { path: "/about", component: TheAboutView },
-    { path: "/faq", component: TheFaqView },
-    { path: "/map", component: TheMapView },
-    { path: "/stories", component: TheStoriesView },
-    { path: "/tour", component: TheTourView }
+    { name: "about", path: "/about", component: TheAboutView },
+    { name: "faq", path: "/faq", component: TheFaqView },
+    { name: "map", path: "/map", component: TheMapView },
+    { name: "stories", path: "/stories", component: TheStoriesView },
+    { name: "tour", path: "/tour", component: TheTourView }
   ]
 });
