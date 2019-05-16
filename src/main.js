@@ -9,6 +9,8 @@ Vue.config.productionTip = false;
 
 Vue.use(VueRouter);
 
+router.replace("/");
+
 new Vue({
   store,
   router,

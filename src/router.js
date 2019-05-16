@@ -9,7 +9,7 @@ import TheTourView from "@/views/TheTourView";
 export default new VueRouter({
   mode: "history",
   routes: [
-    { path: "/", redirect: "/tour" },
+    { name: "home", path: "/", redirect: "/tour" },
     { name: "about", path: "/about", component: TheAboutView },
     { name: "faq", path: "/faq", component: TheFaqView },
     { name: "map", path: "/map", component: TheMapView },
