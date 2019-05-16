@@ -34,7 +34,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "TheSplashPage",
+  name: "TheTourSplash",
   props: {},
   data: function() {
     return {};

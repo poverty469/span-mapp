@@ -13,7 +13,6 @@
     </div>
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
-    <the-splash-page class="the-splash-page"></the-splash-page>
     <the-tour-dashboard class="the-tour-dashboard"></the-tour-dashboard>
     <map-dashboard
       mapId="main-map"
@@ -31,7 +30,6 @@ import TheHeader from "@/components/TheHeader.vue";
 import TheLogo from "@/components/TheLogo.vue";
 import MapDashboard from "@/components/MapDashboard.vue";
 import TheTourDashboard from "@/components/TheTourDashboard.vue";
-import TheSplashPage from "@/components/TheSplashPage.vue";
 
 import geographies from "@/assets/geographies";
 import povertyData from "@/assets/data/dataLayer";
@@ -45,7 +43,6 @@ export default {
     TheFooter,
     TheHeader,
     TheLogo,
-    TheSplashPage,
     TheTourDashboard
   },
   created: async function() {
@@ -116,6 +113,11 @@ export default {
 }
 
 .the-tour-dashboard {
+  position: absolute;
+  top: $header-height;
+  bottom: $footer-height;
+  left: 0;
+  width: $app-width;
   z-index: z("tour-dashboard");
 }
 
@@ -136,13 +138,6 @@ export default {
   width: $app-width;
   height: $footer-height;
   z-index: z("site-footer");
-}
-
-.the-splash-page {
-  position: absolute;
-  z-index: z("splash-page");
-  width: 100vw;
-  height: 0;
 }
 
 .the-splash-page--not-loaded {
