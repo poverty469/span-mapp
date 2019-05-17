@@ -1,6 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import VueRouter from "vue-router";
+import VModal from "vue-js-modal";
 
 import router from "./router.js";
 import store from "./store/store";
@@ -9,8 +10,9 @@ import menuItems from "@/util/menuItems";
 
 Vue.config.productionTip = false;
 
-Vue.use(VueRouter);
+Vue.use(VModal);
 
+Vue.use(VueRouter);
 router.replace("/");
 router.beforeEach((to, from, next) => {
   const menuItemIndex = menuItems.findIndex(menuItem => {
