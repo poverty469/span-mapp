@@ -1,11 +1,12 @@
 <template>
   <div class="the-tour-dashboard">
     <div class="tour__header">
-      <h1 class="tour__title"></h1>
+      <h1 class="tour__title">{{activeSlide.title}}</h1>
+      <h2 v-show="activeSlide.subtitle" class="tour__subtitle">{{activeSlide.subtitle}}</h2>
       <div class="tour__close-button"></div>
     </div>
     <div class="tour__body">
-      <mb-map mapId="tour__map"></mb-map>
+      <mb-map v-show="activeData" :mapId="mapId" :activeData="activeData" @mapLoaded="handleMapLoaded"></mb-map>
       <div class="tour__sidebar">
         <the-tour-info></the-tour-info>
         <the-tour-nav></the-tour-nav>
@@ -19,6 +20,8 @@ import MbMap from "@/components/MbMap.vue";
 import TheTourInfo from "@/components/TheTourInfo.vue";
 import TheTourNav from "@/components/TheTourNav.vue";
 
+import tourSlides from "@/assets/data/TourSlides.js";
+
 export default {
   name: "TheTourDashboard",
   components: {
@@ -28,9 +31,37 @@ export default {
   },
   props: {},
   data: function() {
-    return {};
+    return {
+      mapId: "tour__map",
+      tourSlides: tourSlides,
+      activeTourSlideIndex: 0,
+      mapLoaded: false
+    };
   },
-  methods: {}
+  methods: {
+    nextTourSlide() {
+      this.activeTourSlideIndex++;
+    },
+    handleMapLoaded() {
+      this.mapLoaded = true;
+    }
+  },
+  computed: {
+    activeSlide: function() {
+      if (this.tourSlides) {
+        return this.tourSlides[this.activeTourSlideIndex];
+      }
+
+      return null;
+    },
+    activeData: function() {
+      if (this.mapLoaded && this.activeSlide && this.activeSlide.hasOwnProperty('dataLayers')) {
+        return this.activeSlide.dataLayers;
+      } else {
+        return [];
+      }
+    }
+  }
 };
 </script>
 

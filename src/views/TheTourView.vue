@@ -46,6 +46,9 @@ export default {
       this.$router.push("/map");
       e.stop();
     }
+  },
+  mounted: function() {
+      // this.$modal.show("the-tour-dashboard");
   }
 };
 </script>

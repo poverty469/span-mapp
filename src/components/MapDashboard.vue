@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mb-map :mapId="mapId" :activeData="activeData"></mb-map>
+    <mb-map :mapId="mapId" :activeData="activeData" @mapLoaded="handleMapLoaded"></mb-map>
     <map-legend></map-legend>
     <map-sidebar></map-sidebar>
   </div>
@@ -60,6 +60,13 @@ export default {
       // The currently active data layers on the map
       // activeLayers: []
     };
+  },
+  methods: {
+    handleMapLoaded: function() {
+      if (process.env.NODE_ENV == "production") {
+        _.delay(() => this.$store.dispatch("mapLoaded"), 250);
+      }
+    }
   },
   computed: {
     /**
