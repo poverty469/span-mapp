@@ -118,15 +118,6 @@ body {
   z-index: z("site-header");
 }
 
-.the-tour-dashboard {
-  position: absolute;
-  top: $header-height;
-  bottom: $footer-height;
-  left: 0;
-  width: $app-width;
-  z-index: z("tour-dashboard");
-}
-
 .router-view {
   position: absolute;
   top: $header-height;
