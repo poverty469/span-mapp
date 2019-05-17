@@ -49,6 +49,7 @@ export default {
   watch: {
     activeData: {
       handler: function(currentData) {
+        console.log(currentData);
         this.updateDrawnLayers(currentData);
       },
       immediate: true
@@ -71,10 +72,7 @@ export default {
       //   attributeId: "HC03_VC161"
       // });
 
-      if (process.env.NODE_ENV == "production") {
-        // Only in production to control loading for tests
-        _.delay(() => this.$store.dispatch("mapLoaded"), 250); // Delay to hide loading of layer
-      }
+      this.$emit("mapLoaded");
     });
   },
   methods: {
@@ -190,9 +188,15 @@ export default {
      * @param {Array[Object]} newData List of data to be drawn, requires data property and optional geography property.
      */
     updateDrawnLayers(newData) {
+      // Retrieve the difference between the current layers and the new layers
       let diff = _.xorWith(this.activeLayers, newData, (arrVal, othVal) => {
         if (_.isNil(arrVal.dataset) && _.isNil(othVal.dataset)) {
           return true;
+        }
+
+        // return false if one is an empty object and the other is not
+        if (!(_.isEmpty(arrVal) && _.isEmpty(othVal))) {
+          return false;
         }
 
         return (
@@ -210,7 +214,7 @@ export default {
           } else {
             this.addLayer(layer);
           }
-        } else if (!found && !_.isNil(layer)) {
+        } else if (!found && !_.isNil(layer) && !_.isEmpty(layer)) {
           this.removeLayer(layer);
         }
       }
@@ -237,6 +241,10 @@ export default {
      */
     removeLayer(layer) {
       this.activeLayers = this.activeLayers.filter(activeLayer => {
+        if (_.isEmpty(activeLayer)) {
+          return false;
+        }
+
         return activeLayer.dataset.id !== layer.dataset.id;
       });
       this.map.removeLayer(this.getLayerId(layer));
