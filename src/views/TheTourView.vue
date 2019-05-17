@@ -92,5 +92,6 @@ $modal-width-padding: calc((100vw - #{$modal-width}));
   bottom: calc(#{$modal-width-padding} / 2) !important;
 
   background: $light-orange;
+  box-shadow: 0 0px 21px 2px rgba(27, 33, 58, 0.4) !important;
 }
 </style>
