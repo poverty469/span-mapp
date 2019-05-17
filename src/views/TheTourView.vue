@@ -62,7 +62,7 @@ export default {
   top: 0;
   bottom: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   z-index: z("tour-dashboard");
 }
 
@@ -90,5 +90,7 @@ $modal-width-padding: calc((100vw - #{$modal-width}));
   left: calc(#{$modal-width-padding} / 2) !important;
   top: calc(#{$modal-width-padding} / 2) !important;
   bottom: calc(#{$modal-width-padding} / 2) !important;
+
+  background: $light-orange;
 }
 </style>

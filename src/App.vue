@@ -125,6 +125,8 @@ body {
   left: 0;
   width: $app-width;
   z-index: z("router-view");
+
+  overflow: hidden; // Removes modal jump on showing of modal
 }
 
 .main-map-dashboard {
