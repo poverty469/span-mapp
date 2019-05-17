@@ -1,12 +1,20 @@
 <template>
   <div class="the-tour-dashboard">
     <div class="tour__header">
-      <h1 class="tour__title">{{activeSlide.title}}</h1>
-      <h2 v-show="activeSlide.subtitle" class="tour__subtitle">{{activeSlide.subtitle}}</h2>
+      <h1 class="tour__title">{{ activeSlide.title }}</h1>
+      <h2 v-show="activeSlide.subtitle" class="tour__subtitle">
+        {{ activeSlide.subtitle }}
+      </h2>
       <div class="tour__close-button"></div>
     </div>
     <div class="tour__body">
-      <mb-map v-show="activeData" :mapId="mapId" :activeData="activeData" @mapLoaded="handleMapLoaded"></mb-map>
+      <mb-map
+        v-show="activeData"
+        :mapId="mapId"
+        :activeData="activeData"
+        :class="{ 'map-container--hidden': !mapVisible }"
+        @mapLoaded="handleMapLoaded"
+      ></mb-map>
       <div class="tour__sidebar">
         <the-tour-info></the-tour-info>
         <the-tour-nav></the-tour-nav>
@@ -16,6 +24,8 @@
 </template>
 
 <script>
+import _ from "lodash";
+
 import MbMap from "@/components/MbMap.vue";
 import TheTourInfo from "@/components/TheTourInfo.vue";
 import TheTourNav from "@/components/TheTourNav.vue";
@@ -35,7 +45,8 @@ export default {
       mapId: "tour__map",
       tourSlides: tourSlides,
       activeTourSlideIndex: 0,
-      mapLoaded: false
+      mapLoaded: false,
+      mapVisible: false
     };
   },
   methods: {
@@ -44,6 +55,7 @@ export default {
     },
     handleMapLoaded() {
       this.mapLoaded = true;
+      _.delay(() => (this.mapVisible = true), 250);
     }
   },
   computed: {
@@ -55,7 +67,11 @@ export default {
       return null;
     },
     activeData: function() {
-      if (this.mapLoaded && this.activeSlide && this.activeSlide.hasOwnProperty('dataLayers')) {
+      if (
+        this.mapLoaded &&
+        this.activeSlide &&
+        this.activeSlide.hasOwnProperty("dataLayers")
+      ) {
         return this.activeSlide.dataLayers;
       } else {
         return [];
@@ -107,9 +123,17 @@ $tour__map-margin-left: 22px;
   border: $thick-border solid $dark-orange--border;
 
   overflow: hidden;
+  opacity: 1;
+
+  transition: 150ms;
 }
 
 .tour__sidebar {
   width: $tour__sidebar-width;
+}
+
+.tour__body > .map-container--hidden {
+  opacity: 0;
+  transition: 150ms;
 }
 </style>
