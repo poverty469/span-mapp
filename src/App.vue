@@ -13,7 +13,11 @@
     </div>
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
-    <the-tour-dashboard class="the-tour-dashboard"></the-tour-dashboard>
+    <transition name="fade-quick">
+      <keep-alive>
+        <router-view class="router-view"></router-view>
+      </keep-alive>
+    </transition>
     <map-dashboard
       mapId="main-map"
       class="main-map-dashboard"
@@ -29,7 +33,6 @@ import TheFooter from "@/components/TheFooter.vue";
 import TheHeader from "@/components/TheHeader.vue";
 import TheLogo from "@/components/TheLogo.vue";
 import MapDashboard from "@/components/MapDashboard.vue";
-import TheTourDashboard from "@/components/TheTourDashboard.vue";
 
 import geographies from "@/assets/geographies";
 import povertyData from "@/assets/data/dataLayer";
@@ -42,8 +45,7 @@ export default {
     MapDashboard,
     TheFooter,
     TheHeader,
-    TheLogo,
-    TheTourDashboard
+    TheLogo
   },
   created: async function() {
     await this.$store.dispatch("initLayerData");
@@ -121,6 +123,15 @@ export default {
   z-index: z("tour-dashboard");
 }
 
+.router-view {
+  position: absolute;
+  top: $header-height;
+  bottom: $footer-height;
+  left: 0;
+  width: $app-width;
+  z-index: z("router-view");
+}
+
 .main-map-dashboard {
   position: absolute;
   top: $header-height;
@@ -172,6 +183,14 @@ export default {
   transition: opacity 1500ms;
 }
 .fade-long-enter, .fade-long-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.fade-quick-enter-active,
+.fade-quick-leave-active {
+  transition: opacity 250ms;
+}
+.fade-quick-enter, .fade-quick-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
 
