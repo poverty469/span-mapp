@@ -5,11 +5,21 @@ import VueRouter from "vue-router";
 import router from "./router.js";
 import store from "./store/store";
 
+import menuItems from "@/util/menuItems";
+
 Vue.config.productionTip = false;
 
 Vue.use(VueRouter);
 
 router.replace("/");
+router.beforeEach((to, from, next) => {
+  const menuItemIndex = menuItems.findIndex(menuItem => {
+    return menuItem.path == to.name;
+  });
+
+  store.dispatch("setActiveMainMenuItemIndex", menuItemIndex);
+  next();
+});
 
 new Vue({
   store,

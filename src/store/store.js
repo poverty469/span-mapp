@@ -4,8 +4,6 @@ import Vuex from "vuex";
 import story from "./story";
 import layers from "./layers";
 
-import geographies from "@/assets/geographies";
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -20,7 +18,8 @@ export default new Vuex.Store({
       right: 100,
       bottom: 100,
       left: 100
-    }
+    },
+    activeMainMenuItemIndex: 2
   },
   getters: {
     mapFocusPadding: state => {
@@ -31,6 +30,9 @@ export default new Vuex.Store({
     },
     dataLoaded: state => {
       return state.layers.geometries.length == 1;
+    },
+    activeMainMenuItemIndex: state => {
+      return state.activeMainMenuItemIndex;
     }
   },
   mutations: {
@@ -49,11 +51,19 @@ export default new Vuex.Store({
     },
     setMapLoading(state, loading) {
       state.mapLoading = loading;
+    },
+    setActiveMainMenuItemIndex(state, index) {
+      state.activeMainMenuItemIndex = index;
     }
   },
   actions: {
     mapLoaded(context) {
       context.commit("setMapLoading", false);
+    },
+    setActiveMainMenuItemIndex(context, index) {
+      if (index > -1) {
+        context.commit("setActiveMainMenuItemIndex", index);
+      }
     }
   }
 });

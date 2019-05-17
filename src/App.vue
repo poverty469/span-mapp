@@ -13,8 +13,11 @@
     </div>
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
-    <the-splash-page class="the-splash-page"></the-splash-page>
-    <the-tour-dashboard class="the-tour-dashboard"></the-tour-dashboard>
+    <transition name="fade-quick">
+      <keep-alive>
+        <router-view class="router-view"></router-view>
+      </keep-alive>
+    </transition>
     <map-dashboard
       mapId="main-map"
       class="main-map-dashboard"
@@ -30,8 +33,6 @@ import TheFooter from "@/components/TheFooter.vue";
 import TheHeader from "@/components/TheHeader.vue";
 import TheLogo from "@/components/TheLogo.vue";
 import MapDashboard from "@/components/MapDashboard.vue";
-import TheTourDashboard from "@/components/TheTourDashboard.vue";
-import TheSplashPage from "@/components/TheSplashPage.vue";
 
 import geographies from "@/assets/geographies";
 import povertyData from "@/assets/data/dataLayer";
@@ -44,9 +45,7 @@ export default {
     MapDashboard,
     TheFooter,
     TheHeader,
-    TheLogo,
-    TheSplashPage,
-    TheTourDashboard
+    TheLogo
   },
   created: async function() {
     await this.$store.dispatch("initLayerData");
@@ -88,6 +87,10 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  background: $light-tan;
+}
+
 #app {
   padding: absolute;
   top: 0;
@@ -116,7 +119,21 @@ export default {
 }
 
 .the-tour-dashboard {
+  position: absolute;
+  top: $header-height;
+  bottom: $footer-height;
+  left: 0;
+  width: $app-width;
   z-index: z("tour-dashboard");
+}
+
+.router-view {
+  position: absolute;
+  top: $header-height;
+  bottom: $footer-height;
+  left: 0;
+  width: $app-width;
+  z-index: z("router-view");
 }
 
 .main-map-dashboard {
@@ -136,13 +153,6 @@ export default {
   width: $app-width;
   height: $footer-height;
   z-index: z("site-footer");
-}
-
-.the-splash-page {
-  position: absolute;
-  z-index: z("splash-page");
-  width: 100vw;
-  height: 0;
 }
 
 .the-splash-page--not-loaded {
@@ -172,14 +182,23 @@ export default {
   outline: 0.5px solid black;
 }
 
-.fade-enter-active,
-.fade-leave-active {
+.fade-long-enter-active,
+.fade-long-leave-active {
   transition: opacity 1500ms;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-long-enter, .fade-long-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
 
+.fade-quick-enter-active,
+.fade-quick-leave-active {
+  transition: opacity 250ms;
+}
+.fade-quick-enter, .fade-quick-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+/* Mapbox styling */
 .mapboxgl-ctrl-attrib.mapboxgl-compact {
   margin: 0 !important;
 }

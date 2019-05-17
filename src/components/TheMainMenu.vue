@@ -5,14 +5,15 @@
       :key="`main-menu-item-${index}`"
       :menuItem="item"
       class="menu-item"
-      :class="{ 'menu-item--active': activeMenuItemIndex == index }"
-      @menuItemClicked="handleMenuItemClick(index)"
+      :class="{ 'menu-item--active': activeMainMenuItemIndex == index }"
     ></main-menu-item>
   </ul>
 </template>
 
 <script>
 import MainMenuItem from "@/components/MainMenuItem.vue";
+import menuItems from "@/util/menuItems.js";
+import { mapGetters } from "vuex";
 
 export default {
   name: "TheMainMenu",
@@ -20,42 +21,12 @@ export default {
   props: {},
   data: function() {
     return {
-      activeMenuItemIndex: 2, // Initialize to 'Tour' menu item
-      menuItems: [
-        {
-          title: "map",
-          path: "map",
-          description: "Displays a interactive visualization of the map."
-        },
-        {
-          title: "stories",
-          path: "stories",
-          description: "Displays multiple narratives from different locations."
-        },
-        {
-          title: "tour",
-          path: "tour",
-          description:
-            "Displays a pop-up with a walkthrough to help the user gain a deeper understanding of the mission."
-        },
-        {
-          title: "about",
-          path: "about",
-          description:
-            "Displays a narrative about what State-wide Poverty Action Network does."
-        },
-        {
-          title: "faq",
-          path: "faq",
-          description: "Common facts and questions are displayed."
-        }
-      ]
+      menuItems: menuItems
     };
   },
-  methods: {
-    handleMenuItemClick(menuItemIndex) {
-      this.activeMenuItemIndex = menuItemIndex;
-    }
+  methods: {},
+  computed: {
+    ...mapGetters(["activeMainMenuItemIndex"])
   }
 };
 </script>
