@@ -13,15 +13,11 @@
         <facebook-logo class="social-media__icon facebook-icon"></facebook-logo>
       </a>
     </div>
-    <a
-      href="https://povertyaction.org/advocacy-actions/"
-      class="action-button__click-area"
-      target="_blank"
-    >
-      <div class="action-button__container">
-        <div class="action-button__text">TAKE ACTION</div>
-      </div>
-    </a>
+    <action-button
+      class="take-action-button"
+      text="take action"
+      urlLink="https://povertyaction.org/advocacy-actions/"
+    ></action-button>
   </div>
 </template>
 
@@ -29,10 +25,11 @@
 import TwitterLogo from "@/assets/svg/twitter_icon.svg";
 import InstagramLogo from "@/assets/svg/instagram_icon.svg";
 import FacebookLogo from "@/assets/svg/facebook_icon.svg";
+import ActionButton from "@/components/ActionButton";
 
 export default {
   name: "TheFooter",
-  components: { InstagramLogo, TwitterLogo, FacebookLogo },
+  components: { InstagramLogo, TwitterLogo, FacebookLogo, ActionButton },
   props: {},
   data: function() {
     return {};
@@ -85,7 +82,7 @@ export default {
   width: 1.8rem;
 }
 
-.action-button__container {
+.take-action-button > .action-button__container {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
@@ -97,30 +94,5 @@ export default {
   border-radius: 3px;
 
   user-select: none;
-}
-
-.action-button__container:hover {
-  background: $dark-orange;
-}
-
-.action-button__container:active {
-  background: $dark-orange--shadow;
-}
-
-.action-button__text {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-
-  padding: 0 0.5rem;
-  @include char-style($action-button...);
-  letter-spacing: 1px;
-  left: 1px; // Compensates an offset from the letter-spacing
-}
-
-.takeaction {
-  margin-top: 5px;
-  margin-left: 980px;
-  right: 0;
 }
 </style>
