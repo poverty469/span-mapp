@@ -167,14 +167,15 @@ export default {
   outline: 0.5px solid black;
 }
 
-.fade-enter-active,
-.fade-leave-active {
+.fade-long-enter-active,
+.fade-long-leave-active {
   transition: opacity 1500ms;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-long-enter, .fade-long-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
 
+/* Mapbox styling */
 .mapboxgl-ctrl-attrib.mapboxgl-compact {
   margin: 0 !important;
 }

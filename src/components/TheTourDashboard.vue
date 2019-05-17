@@ -1,6 +1,9 @@
 <template>
   <div>
-    <the-tour-splash class="the-tour-splash"></the-tour-splash>
+    <the-tour-splash
+      class="the-tour-splash"
+      @startTour="handleStartTour"
+    ></the-tour-splash>
     <div class="tour__header">
       <h1 class="tour__title"></h1>
       <div class="tour__close-button"></div>
@@ -32,6 +35,11 @@ export default {
   props: {},
   data: function() {
     return {};
+  },
+  methods: {
+    handleStartTour() {
+      console.log("start tour");
+    }
   }
 };
 </script>
