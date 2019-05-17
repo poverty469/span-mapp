@@ -19,6 +19,9 @@
 
     font-weight: normal;
     font-style: normal;
+
+    /* $dark-grey */
+    color: #4B4B4B;
   }
 
   a {
@@ -92,37 +95,55 @@
     }
   }
 
-  .splash-page-container--preloaded {
+  .splash-page {
     position: fixed;
-    background: #FEE3D7;
-    z-index: 100;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
   }
 
-  .splash-page__text-container {
+  .splash-page--preloaded {
+    background: #FEE3D7;
+    z-index: 100;
+  }
+
+  .splash-page__container {
     position: relative;
-    display: block;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
     top: 18vh;
+
     width: 35vw;
     min-width: 400px;
-    max-width: 550px;
-    max-height: 70vh;
-    overflow: auto;
+    max-width: 40rem;
+
     height: fit-content;
 
     /* light-orange */
+    background: transparent;
+  }
+
+  .splash-page__card {
+    position: relative;
+    max-height: 70vh;
     background: #FEE3D7;
-    border: 3px solid white;
+    border-radius: 3px;
+    overflow-y: auto;
+    pointer-events: auto;
+  }
+
+  .splash-page__card--loading {
+    border: 3px solid white !important;
   }
 
   .splash-page__text {
     padding: 50px;
     font-family: 'Muli', 'Avenir', 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1.2rem;
+    overflow: auto;
   }
 
   .splash-page__text b {
@@ -137,26 +158,29 @@
       continue.</strong>
   </noscript>
   <div id="app">
-    <div class="splash-page-container--preloaded">
-      <div class="splash-page__text-container">
-        <p class="splash-page__text">
-          <b>
-            Poverty is complex, and the reasons surrounding its existence are deeply historical and multifaceted. At
-            Poverty
-            Action, we believe that poverty can be solved through progressive and inclusive policy legislation. However,
-            in
-            order to pass anti-poverty reforms that are both equitable and sustainable, we must first understand the
-            scope
-            of poverty in our state.
-          </b>
-          <br><br>
-          This interactive map allows users to explore the social, economic, and historical elements behind poverty in
-          Washington state.<br><br>
-          Our map shows the spread of poverty through a variety of factors, and includes stories of
-          people affected by poverty in our state.
-          In order to make the most of your time, we invite you to <b>take the tour of the state of poverty in
-            Washington.</b>
-        </p>
+    <div class="splash-page">
+      <div class="splash-page__container splash-page__container--loading">
+        <div class=" splash-page__card splash-page__card--loading">
+          <p class="splash-page__text">
+            <b>
+              Poverty is complex, and the reasons surrounding its existence are deeply historical and multifaceted. At
+              Poverty
+              Action, we believe that poverty can be solved through progressive and inclusive policy legislation.
+              However,
+              in
+              order to pass anti-poverty reforms that are both equitable and sustainable, we must first understand the
+              scope
+              of poverty in our state.
+            </b>
+            <br><br>
+            This interactive map allows users to explore the social, economic, and historical elements behind poverty in
+            Washington state.<br><br>
+            Our map shows the spread of poverty through a variety of factors, and includes stories of
+            people affected by poverty in our state.
+            In order to make the most of your time, we invite you to <b>take the tour of the state of poverty in
+              Washington.</b>
+          </p>
+        </div>
       </div>
       <div id="loading-wrapper">
         <div id="loading-text">LOADING</div>
