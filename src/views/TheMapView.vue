@@ -13,4 +13,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.the-map-view {
+  pointer-events: none;
+}
+</style>

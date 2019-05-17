@@ -87,6 +87,10 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  background: $light-tan;
+}
+
 #app {
   padding: absolute;
   top: 0;
