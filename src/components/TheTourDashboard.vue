@@ -35,16 +35,11 @@ export default {
 </script>
 
 <style lang="scss">
-$tour-dashboard-padding-vertical: 30px;
-$tour-dashboard-padding-horizontal: 22px;
-$tour-dashboard-height: calc(100% - #{$tour-dashboard-padding-vertical});
-$tour-dashboard-width: calc(100% - #{$tour-dashboard-padding-horizontal});
-
 $tour-dashboard__header-height: 65px;
 $tour-dashboard__body-height: calc(100% - #{$tour-dashboard__header-height});
 
 .the-tour-dashboard {
-  padding: $tour-dashboard-padding-vertical $tour-dashboard-padding-horizontal;
+  padding: 20px 0px 35px 0px;
 }
 
 .tour__header,
@@ -52,7 +47,6 @@ $tour-dashboard__body-height: calc(100% - #{$tour-dashboard__header-height});
   position: relative;
   display: block;
   width: 100%;
-  outline: 1px solid black;
 }
 
 .tour__header {
@@ -60,7 +54,31 @@ $tour-dashboard__body-height: calc(100% - #{$tour-dashboard__header-height});
 }
 
 .tour__body {
+  display: inline-flex;
   height: $tour-dashboard__body-height;
-  bottom: calc(0 + #{$tour-dashboard-padding-vertical});
+}
+
+.tour__map,
+.tour__sidebar {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+}
+
+$tour__sidebar-width: 30%;
+$tour__map-margin-left: 22px;
+
+.tour__body > .map-container {
+  width: calc(100% - #{$tour__sidebar-width} - #{$tour__map-margin-left});
+  margin-left: $tour__map-margin-left;
+
+  border-radius: 8px;
+  border: $thick-border solid $dark-orange--border;
+
+  overflow: hidden;
+}
+
+.tour__sidebar {
+  width: $tour__sidebar-width;
 }
 </style>
