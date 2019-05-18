@@ -48,7 +48,7 @@ export default {
     }
   },
   mounted: function() {
-      // this.$modal.show("the-tour-dashboard");
+    // this.$modal.show("the-tour-dashboard");
   }
 };
 </script>
@@ -76,9 +76,9 @@ export default {
 }
 
 .the-tour-dashboard__modal > .v--modal-background-click {
-  position: relative;
-  height: 100%;
-  width: 100%;
+  position: relative !important;
+  height: 100% !important;
+  width: 100% !important;
 }
 
 $modal-width: 96vw;
