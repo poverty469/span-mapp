@@ -31,7 +31,7 @@
         <button @click.prevent="handlePrev">Prev</button>
         <button @click.prevent="handleNext">Next</button>
         <button
-          v-for="i in tourSlides.length"
+          v-for="i in slideIndices"
           :key="i"
           @click.prevent="handleSlideIndicatorClick(i)"
         >
@@ -114,6 +114,9 @@ export default {
       } else {
         return [];
       }
+    },
+    slideIndices: function() {
+      return _.range(this.tourSlides.length);
     }
   }
 };
@@ -173,6 +176,10 @@ $tour__map-margin-left: 22px;
 
 .tour__sidebar {
   width: $tour__sidebar-width;
+}
+
+.hooper-list {
+  overflow: hidden;
 }
 
 .hooper-track {
