@@ -15,9 +15,28 @@
         :class="{ 'map-container--hidden': !mapVisible }"
         @mapLoaded="handleMapLoaded"
       ></mb-map>
-      <div class="tour__sidebar">
-        <the-tour-info></the-tour-info>
+      <div v-if="tourSlides && tourSlides.length" class="tour__sidebar">
+        <hooper ref="carousel" @slide="updateCarousel">
+          <slide
+            v-for="(slide, index) in tourSlides"
+            :key="`slide-${index}`"
+            :index="index"
+            class="tour__slide"
+          >
+            {{ slide.title }}
+            <!-- tour-info></tour-info-->
+          </slide>
+        </hooper>
         <the-tour-nav></the-tour-nav>
+        <button @click.prevent="handlePrev">Prev</button>
+        <button @click.prevent="handleNext">Next</button>
+        <button
+          v-for="i in tourSlides.length"
+          :key="i"
+          @click.prevent="handleSlideIndicatorClick(i)"
+        >
+          i
+        </button>
       </div>
     </div>
   </div>
@@ -26,8 +45,10 @@
 <script>
 import _ from "lodash";
 
+import { Hooper, Slide } from "hooper";
+
 import MbMap from "@/components/MbMap.vue";
-import TheTourInfo from "@/components/TheTourInfo.vue";
+import TourInfo from "@/components/TourInfo.vue";
 import TheTourNav from "@/components/TheTourNav.vue";
 
 import tourSlides from "@/assets/data/TourSlides.js";
@@ -36,8 +57,10 @@ export default {
   name: "TheTourDashboard",
   components: {
     MbMap,
-    TheTourInfo,
-    TheTourNav
+    TourInfo,
+    TheTourNav,
+    Hooper,
+    Slide
   },
   props: {},
   data: function() {
@@ -50,12 +73,27 @@ export default {
     };
   },
   methods: {
-    nextTourSlide() {
-      this.activeTourSlideIndex++;
-    },
     handleMapLoaded() {
       this.mapLoaded = true;
       _.delay(() => (this.mapVisible = true), 250);
+    },
+    handleNext() {
+      this.slideNext();
+    },
+    handlePrev() {
+      this.slidePrev();
+    },
+    handleSlideIndicatorClick(index) {
+      this.$refs.carousel.slideTo(index);
+    },
+    slidePrev() {
+      this.$refs.carousel.slidePrev();
+    },
+    slideNext() {
+      this.$refs.carousel.slideNext();
+    },
+    updateCarousel(payload) {
+      this.activeTourSlideIndex = payload.currentSlide;
     }
   },
   computed: {
@@ -128,12 +166,23 @@ $tour__map-margin-left: 22px;
   transition: 150ms;
 }
 
+.tour__body > .map-container--hidden {
+  opacity: 0;
+  transition: 150ms;
+}
+
 .tour__sidebar {
   width: $tour__sidebar-width;
 }
 
-.tour__body > .map-container--hidden {
-  opacity: 0;
-  transition: 150ms;
+.hooper-track {
+  width: fit-content;
+  display: flex;
+}
+
+.tour__slide {
+  display: inline-block;
+  width: 250px;
+  height: 500px;
 }
 </style>
