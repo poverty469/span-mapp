@@ -38,7 +38,7 @@ npm install
 
 If you want to test production builds and use your own mapbox basemaps...
 
-Create a file titled .env.local
+Create a file titled .env.development.local
 Paste these variable declarations into it
 
 ```
