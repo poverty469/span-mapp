@@ -49,7 +49,6 @@ export default {
   watch: {
     activeData: {
       handler: function(currentData) {
-        console.log(currentData);
         this.updateDrawnLayers(currentData);
       },
       immediate: true
