@@ -7,6 +7,7 @@ import TheStoriesView from "@/views/TheStoriesView";
 import TheTourView from "@/views/TheTourView";
 
 export default new VueRouter({
+  base: process.env.VUE_APP_PUBLIC_PATH,
   mode: "history",
   routes: [
     { name: "home", path: "/", redirect: "/tour" },

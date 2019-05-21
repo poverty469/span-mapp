@@ -1,5 +1,6 @@
 const path = require("path");
 module.exports = {
+  publicPath: process.env.VUE_APP_PUBLIC_PATH,
   pluginOptions: {
     "style-resources-loader": {
       preProcessor: "scss",
