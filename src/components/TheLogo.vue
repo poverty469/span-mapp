@@ -106,7 +106,7 @@ export default {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-  height: calc(#{$header-height} * 0.7);
+  height: calc(#{$header-height} * 0.9);
   left: 0.5rem;
 
   transition: opacity 250ms ease-in;
