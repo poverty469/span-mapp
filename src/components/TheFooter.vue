@@ -15,7 +15,7 @@
     </div>
     <action-button
       class="take-action-button"
-      text="take action"
+      text="get involved"
       urlLink="https://povertyaction.org/advocacy-actions/"
     ></action-button>
   </div>
