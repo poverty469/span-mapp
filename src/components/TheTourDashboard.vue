@@ -24,7 +24,7 @@
             class="tour__slide"
           >
             {{ slide.title }}
-            <!-- tour-info></tour-info-->
+            <tour-info></tour-info>
           </slide>
         </hooper>
         <the-tour-nav></the-tour-nav>
@@ -35,7 +35,6 @@
           :key="i"
           @click.prevent="handleSlideIndicatorClick(i)"
         >
-          i
         </button>
       </div>
     </div>
