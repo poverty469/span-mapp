@@ -6,7 +6,11 @@
         :key="`${mapId}-layer-${index}`"
       >
         <!-- <keep-alive> -->
-        <mb-layer v-bind="layer" :map="map"></mb-layer>
+        <mb-layer
+          v-bind="layer"
+          :map="map"
+          @featureHovered="handleFeatureHovered"
+        ></mb-layer>
         <!-- </keep-alive> -->
       </span>
     </div>
@@ -215,6 +219,9 @@ export default {
           "line-width": 3
         }
       });
+    },
+    handleFeatureHovered(feature) {
+      console.log("mbmap", feature);
     }
   }
 };

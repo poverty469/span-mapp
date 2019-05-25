@@ -1,6 +1,7 @@
 <template></template>
 
 <script>
+import _ from "lodash";
 import mb from "mapbox-gl";
 
 import { MapTypes, SequentialPalettes } from "@/util/enums.js";
@@ -171,15 +172,13 @@ export default {
         this.popUp.remove();
       });
     },
-    // TODO: figure out how to debounce hover emissions
-    // handleHoverOverFeature: _.debounce(
-    //   function(feature) {
-    //     console.log(feature, this);
-    //     this.$emit("featureHovered", feature);
-    //   }.bind(this),
-    //   150
-    // )
-    handleHoverOverFeature() {}
+    handleHoverOverFeature: _.debounce(
+      function(feature) {
+        this.$emit("featureHovered", feature);
+      },
+      50,
+      { context: this }
+    )
   },
   computed: {
     layerId: function() {
