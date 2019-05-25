@@ -1,4 +1,4 @@
-import { MapTypes } from "@/util/enums";
+import { MapTypes, SequentialPalettes } from "@/util/enums";
 import geographies from "@/assets/geographies";
 import povertyData from "@/assets/data/dataLayer";
 
@@ -6,6 +6,15 @@ const tourSlideData = [
   {
     title: "Test Slide Title",
     subtitle: "Test subtitle",
+    dataLayers: [
+      {
+        dataset: povertyData,
+        geographyId: geographies.counties.id,
+        attributeId: "HC03_VC161",
+        type: MapTypes.CHOROPLETH,
+        color: SequentialPalettes.GREEN
+      }
+    ],
     narrativeHtml: () => {
       return;
       ```
@@ -47,37 +56,45 @@ const tourSlideData = [
           Try this thing over there.
         </p>
       ```;
-    },
-    dataLayers: [
-      {
-        dataset: povertyData,
-        geographyId: geographies.counties.id,
-        attributeId: "HC03_VC161",
-        type: MapTypes.CHOROPLETH
-      }
-    ]
+    }
   },
   {
     title: "Living in Poverty",
     subtitle: "",
+    dataLayers: [
+      {
+        dataset: povertyData,
+        geographyId: geographies.counties.id,
+        attributeId: "HC03_VC163",
+        type: MapTypes.CHOROPLETH,
+        color: SequentialPalettes.PURPLE_BLUE
+      },
+      {
+        dataset: povertyData,
+        geographyId: geographies.counties.id,
+        attributeId: "HC03_VC162",
+        type: MapTypes.CHOROPLETH,
+        color: SequentialPalettes.ORANGE_RED
+      }
+    ],
     narrativeHtml: () => {
       return "Although poverty rates have been falling both in Washington state and nationwide, ";
     },
-    tutorialHtml: "Try out this thing",
-    dataLayers: []
+    tutorialHtml: "Try out this thing"
   },
   {
     title: "Median Incomes",
     subtitle: "by County",
+    dataLayers: [],
     narrativeHtml: () => {
       return "<p>Although certain sectors of our state’s economy are booming, wages have not risen for everyone.</p>";
     },
-    tutorialHtml: "<p>Try out that thing</p><p>Then try out that thing</p>",
-    dataLayers: []
+    tutorialHtml: "<p>Try out that thing</p><p>Then try out that thing</p>"
   },
   {
     title: "Median Cost of Monthly Rent",
     subtitle: "by County",
+    dataLayers: [],
     narrativeHtml: () => {
       return ```
         <p>
@@ -88,8 +105,7 @@ const tourSlideData = [
         </p>
         ```;
     },
-    tutorialHtml: "<p>Try out that thing</p><p>Then try out that thing</p>",
-    dataLayers: []
+    tutorialHtml: "<p>Try out that thing</p><p>Then try out that thing</p>"
   },
   {
     title: "Listening Sessions",

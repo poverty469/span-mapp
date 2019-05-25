@@ -3,7 +3,7 @@
 <script>
 import mb from "mapbox-gl";
 
-import { MapTypes } from "@/util/enums.js";
+import { MapTypes, SequentialPalettes } from "@/util/enums.js";
 import MapSupport from "@/util/mapSupport";
 
 export default {
@@ -15,6 +15,11 @@ export default {
     geographyId: { type: String, required: true },
     attributeId: { type: String, required: true },
     type: { type: String, required: true },
+    color: {
+      type: String,
+      required: false,
+      default: SequentialPalettes.PURPLE
+    },
     options: {
       type: Object,
       required: false,
@@ -187,7 +192,8 @@ export default {
       return this.type == MapTypes.CHOROPLETH
         ? MapSupport.getChoroplethExpression(
             this.dataset.geographies[this.geographyId],
-            this.attributeId
+            this.attributeId,
+            this.color
           )
         : this.options.fillColor;
     }

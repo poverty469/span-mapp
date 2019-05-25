@@ -23,8 +23,6 @@ import mapSupport from "@/util/mapSupport";
 
 import geographies from "@/assets/geographies";
 
-import povertyData from "@/assets/data/dataLayer";
-
 export default {
   name: "MbMap",
   components: { mbLayer },
@@ -75,13 +73,6 @@ export default {
     this.map.on("load", () => {
       this.initializeLayerSources();
       this.addBlackOutlineLayer(geographies.washington, "splash-page");
-      // Test layer geometry below
-      // this.addLayer({
-      //   dataset: povertyData,
-      //   geographyId: geographies.counties.id,
-      //   attributeId: "HC03_VC161"
-      // });
-
       this.$emit("mapLoaded");
     });
   },
@@ -224,44 +215,6 @@ export default {
           "line-width": 3
         }
       });
-    },
-    /**
-     * Adds the given geojson data as a layer to the map.
-     * @param {Object} geography A type of geography.
-     * @param {Geojson} layerId The id for the layer being added.
-     * @param {boolean} addHover Whether or not to add a hover effect.
-     * @param {boolean} addPopup Whether or not to add a popup on hover.
-     */
-    addPolygonDataLayer(geography, layerId, addHover = true, addPopup = true) {
-      // Add polygon layer
-      this.activeLayer = this.map.addLayer({
-        id: layerId, // TODO: make unique layer ids for multiple usages of same source
-        type: "fill",
-        source: geography.id,
-        paint: {
-          "fill-color": "rgb(220, 174, 96)",
-          "fill-opacity": [
-            "case", // A conditional that changes opacity when the feature-state changes
-            ["boolean", ["feature-state", "hover"], false],
-            1,
-            0.6
-          ]
-        }
-      });
-
-      // Add outline layer
-      this.map.addLayer({
-        id: layerId + "-outline",
-        type: "line",
-        source: geography.id,
-        paint: {
-          "line-color": "rgb(139, 103, 41)",
-          "line-width": 2
-        }
-      });
-
-      addHover ? this.addHoverPopUps(layerId) : null;
-      addPopup ? this.addHoverEffect(layerId) : null;
     }
   }
 };
