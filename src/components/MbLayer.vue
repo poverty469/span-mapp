@@ -178,7 +178,7 @@ export default {
   },
   computed: {
     layerId: function() {
-      return `${this.dataset.id}-${this.geographyId}`;
+      return `${this.dataset.id}_${this.geographyId}_${this.attributeId}`;
     },
     outlineId: function() {
       return this.layerId + "-outline";
