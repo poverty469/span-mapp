@@ -24,10 +24,15 @@
             class="tour__slide"
           >
             {{ slide.title }}
-            <tour-info></tour-info>
+          <tour-info 
+            v-for="object in arr"
+            :key="`tour-info-${object}`"
+            :narrative="object.Obj"
+            :tutorial="object.tut"
+          >
+          </tour-info>
           </slide>
         </hooper>
-        <the-tour-nav></the-tour-nav>
         <button @click.prevent="handlePrev">Prev</button>
         <button @click.prevent="handleNext">Next</button>
         <button
@@ -68,7 +73,8 @@ export default {
       tourSlides: tourSlides,
       activeTourSlideIndex: 0,
       mapLoaded: false,
-      mapVisible: false
+      mapVisible: false,
+      arr: [{Obj: 10, tut: 1}, {Obj: 12, tut: 2}]
     };
   },
   methods: {

@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="container">
-      <div class="story-content">hello</div>
+      <div class="story-content">{{narrative}}</div>
     </div>
-    <div class="tutorial-content">{{tutorial.description}}</div>
+    <div class="container">
+      <div class="tutorial-content">{{tutorial}}</div>
+    </div>
   </div>
 </template>
 
@@ -12,26 +14,17 @@ export default {
   name: "TheTourInfo",
   props: {
     narrative: {
-      default: function() {
-        return {
-          description: ""
-        };
-      },
-      type: String,
-      required: true
+        type: String,
+        required: true
     },
     tutorial: {
-      default: function() {
-        return {
-          description: ""
-        };
-      },
       type:String,
       required: true
     }
   },
   data: function() {
-    return {};
+    return {
+    };
   },
   components: {}
 };
@@ -44,7 +37,7 @@ export default {
 }
 
 .container {
-  padding-bottom: 7vh;
+  padding: 2rem;
   display:flex;
   justify-content: center;
 }
