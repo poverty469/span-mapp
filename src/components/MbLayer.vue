@@ -33,6 +33,11 @@ export default {
       }
     }
   },
+  data: function() {
+    return {
+      hoveredFeature: undefined
+    };
+  },
   methods: {
     addLayerToMap() {
       let layerId = this.layerId;
@@ -172,13 +177,17 @@ export default {
         this.popUp.remove();
       });
     },
-    handleHoverOverFeature: _.debounce(
-      function(feature) {
+    handleHoverOverFeature(feature) {
+      if (
+        _.isNil(this.hoveredFeature) ||
+        _.isNil(feature) ||
+        feature.id !== this.hoveredFeature.id
+      ) {
+        console.log(feature, this.hoveredFeature);
+        this.hoveredFeature = feature;
         this.$emit("featureHovered", feature);
-      },
-      50,
-      { context: this }
-    )
+      }
+    }
   },
   computed: {
     layerId: function() {

@@ -221,7 +221,7 @@ export default {
       });
     },
     handleFeatureHovered(feature) {
-      console.log("mbmap", feature);
+      this.$emit("featureHovered", feature);
     }
   }
 };

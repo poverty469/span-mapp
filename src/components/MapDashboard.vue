@@ -1,12 +1,19 @@
 <template>
   <div>
-    <mb-map :mapId="mapId" :activeData="activeData" @mapLoaded="handleMapLoaded"></mb-map>
+    <mb-map
+      :mapId="mapId"
+      :activeData="activeData"
+      @mapLoaded="handleMapLoaded"
+      @featureHovered="handleFeatureHovered"
+    ></mb-map>
     <map-legend></map-legend>
     <map-sidebar></map-sidebar>
   </div>
 </template>
 
 <script>
+import _ from "lodash";
+
 import MbMap from "@/components/MbMap";
 import MapLegend from "@/components/MapLegend";
 import MapSidebar from "@/components/MapSidebar";
@@ -57,8 +64,7 @@ export default {
   },
   data: function() {
     return {
-      // The currently active data layers on the map
-      // activeLayers: []
+      hoveredFeature: {}
     };
   },
   methods: {
@@ -66,6 +72,9 @@ export default {
       if (process.env.NODE_ENV == "production") {
         _.delay(() => this.$store.dispatch("mapLoaded"), 250);
       }
+    },
+    handleFeatureHovered(feature) {
+      this.hoveredFeature = feature;
     }
   },
   computed: {
@@ -88,6 +97,11 @@ export default {
           classColors
         }))(layer);
       });
+    },
+    hoveredFeatureName: function() {
+      return !_.isEmpty(this.hoveredFeature)
+        ? this.hoveredFeature.properties.NAME
+        : "";
     }
   },
   watch: {
