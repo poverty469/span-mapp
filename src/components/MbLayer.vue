@@ -183,7 +183,6 @@ export default {
         _.isNil(feature) ||
         feature.id !== this.hoveredFeature.id
       ) {
-        console.log(feature, this.hoveredFeature);
         this.hoveredFeature = feature;
         this.$emit("featureHovered", feature);
       }
