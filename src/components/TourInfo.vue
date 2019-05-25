@@ -3,14 +3,33 @@
     <div class="container">
       <div class="story-content">hello</div>
     </div>
-    <div class="tutorial-content">tester</div>
+    <div class="tutorial-content">{{tutorial.description}}</div>
   </div>
 </template>
 
 <script>
 export default {
   name: "TheTourInfo",
-  props: {},
+  props: {
+    narrative: {
+      default: function() {
+        return {
+          description: ""
+        };
+      },
+      type: String,
+      required: true
+    },
+    tutorial: {
+      default: function() {
+        return {
+          description: ""
+        };
+      },
+      type:String,
+      required: true
+    }
+  },
   data: function() {
     return {};
   },
