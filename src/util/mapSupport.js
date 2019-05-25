@@ -1,6 +1,7 @@
 import _ from "lodash";
 import jsonColumnArrayQuery from "./jsonColumnArrayQuery";
 import palette from "google-palette";
+import { SequentialPalettes } from "./enums";
 
 /**
  * Business logic for interacting with the Mapbox library.
@@ -75,7 +76,10 @@ class MapSupport {
       classBreaks = _.range(min + quantile, max, quantile);
     }
 
-    let fullColorPalette = palette("cb-Blues", classBreaks.length + 2);
+    let fullColorPalette = palette(
+      SequentialPalettes.BLUE,
+      classBreaks.length + 2
+    );
     let colorPalette = fullColorPalette.slice(2);
 
     let expression = ["match", ["get", foreignKeyName]]; // Init expression with foreign key information
