@@ -62,7 +62,7 @@ export default {
 </script>
 
 <style lang="scss">
-$legend-max-width: 10rem;
+$legend-max-width: 12rem;
 
 .map-legend {
   width: fit-content;
@@ -78,7 +78,8 @@ $legend-max-width: 10rem;
   position: relative;
   display: block;
   background: white;
-  max-width: 8vw;
+  width: fit-content;
+  max-width: calc(#{$legend-max-width} - 5rem);
   padding: 0.3rem;
   margin-block-end: 1rem;
   @include char-style($legend-title...);
@@ -88,6 +89,7 @@ $legend-max-width: 10rem;
 .map-legend__item-list {
   position: relative;
   display: block;
+  width: fit-content;
   padding: 1rem;
   background: white;
 }
