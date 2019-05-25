@@ -1,3 +1,23 @@
+Map Components:
+  Legend:
+    ✔ Implement legend @done(19-05-25 14:17)
+    ☐ Order multiple legends by draw order on map
+  
+    Layer Selection:
+      ☐ Connect possible layers
+      ☐ Connect currently active layers from map
+      ☐ Emit activate and deactivate
+
+  Map:
+    ☐ Add legend for each active layer
+    ☐ Inject pop up data from feature
+      ☐ Design schema for feature's data
+      ☐ Implement object schema in test data
+        ☐ Update json schema files in span-data repo
+    
+  Statistics Panel:
+
+  
 
 Explore mode:
 
