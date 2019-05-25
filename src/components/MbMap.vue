@@ -1,12 +1,23 @@
 <template>
   <div class="map-container">
-    <div :id="mapId" class="map"></div>
+    <div :id="mapId" class="map">
+      <span
+        v-for="(layer, index) in activeData"
+        :key="`${mapId}-layer-${index}`"
+      >
+        <!-- <keep-alive> -->
+        <mb-layer v-bind="layer" :map="map"></mb-layer>
+        <!-- </keep-alive> -->
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
 import mb from "mapbox-gl";
 import _ from "lodash";
+
+import mbLayer from "@/components/MbLayer";
 
 import mapSupport from "@/util/mapSupport";
 
@@ -16,7 +27,7 @@ import povertyData from "@/assets/data/dataLayer";
 
 export default {
   name: "MbMap",
-  components: {},
+  components: { mbLayer },
   props: {
     mapId: {
       // Unique id for instance of map
@@ -46,15 +57,14 @@ export default {
       return geographies.washington.bounds;
     }
   },
-  watch: {
-    activeData: {
-      handler: function(currentData) {
-        console.log(currentData);
-        this.updateDrawnLayers(currentData);
-      },
-      immediate: true
-    }
-  },
+  // watch: {
+  //   activeData: {
+  //     handler: function(currentData) {
+  //       this.updateDrawnLayers(currentData);
+  //     },
+  //     immediate: true
+  //   }
+  // },
   mounted: function() {
     this.createMap();
 
@@ -76,63 +86,6 @@ export default {
     });
   },
   methods: {
-    addChoroplethLayer(layer, addHover = true, addPopup = true) {
-      this.addLayer(
-        layer,
-        addHover,
-        addPopup,
-        mapSupport.getChoroplethExpression(
-          layer.dataset.geographies[layer.geographyId],
-          layer.attributeId
-        )
-      );
-    },
-    /**
-     * Adds the given geojson data as a layer to the map.
-     * @param {Object} layer A map layer.
-     * @param {boolean} addHover Whether or not to add a hover effect.
-     * @param {boolean} addPopup Whether or not to add a popup on hover.
-     */
-    addLayer(
-      layer,
-      addHover = true,
-      addPopup = true,
-      fillColor = "rgb(220, 174, 96)"
-    ) {
-      this.activeLayers.push(layer);
-
-      let layerId = this.getLayerId(layer);
-      // Add polygon layer
-      this.map.addLayer({
-        id: layerId, // TODO: make unique layer ids for multiple usages of same source
-        type: "fill",
-        source: layer.geographyId,
-        paint: {
-          "fill-color": fillColor,
-          // A conditional that changes opacity when the feature-state changes
-          "fill-opacity": [
-            "case",
-            ["boolean", ["feature-state", "hover"], false],
-            0.5,
-            1
-          ]
-        }
-      });
-
-      // Add outline layer
-      this.map.addLayer({
-        id: this.getOutlineId(layer),
-        type: "line",
-        source: layer.geographyId,
-        paint: {
-          "line-color": "rgb(139, 103, 41)",
-          "line-width": 2
-        }
-      });
-
-      addHover ? this.addHoverPopUps(layerId) : null;
-      addPopup ? this.addHoverEffect(layerId) : null;
-    },
     /**
      * Creates a map with an initial state.
      */
@@ -218,37 +171,6 @@ export default {
           this.removeLayer(layer);
         }
       }
-    },
-    /**
-     * Returns a unique layer id based off of the given layer.
-     * @param {Object} layer A map layer.
-     * @return {String} The layer id.
-     */
-    getLayerId(layer) {
-      return `${layer.dataset.id}-${layer.geographyId}`;
-    },
-    /**
-     * Returns a unique layer id for outlines based off of the given layer.
-     * @param {Object} layer A map layer.
-     * @return {String} The outline layer id.
-     */
-    getOutlineId(layer) {
-      return this.getLayerId(layer) + "-outline";
-    },
-    /**
-     * Removes the provided layer from the map.
-     * @param {Object} layer A map layer.
-     */
-    removeLayer(layer) {
-      this.activeLayers = this.activeLayers.filter(activeLayer => {
-        if (_.isEmpty(activeLayer)) {
-          return false;
-        }
-
-        return activeLayer.dataset.id !== layer.dataset.id;
-      });
-      this.map.removeLayer(this.getLayerId(layer));
-      this.map.removeLayer(this.getOutlineId(layer));
     },
     /**
      * Adds all essential geography geometries as map sources.
@@ -340,108 +262,6 @@ export default {
 
       addHover ? this.addHoverPopUps(layerId) : null;
       addPopup ? this.addHoverEffect(layerId) : null;
-    },
-
-    /**
-     * Adds a hover effect to the data layer associated with the given layer id.
-     * @param {String} layerId The id of a data layer.
-     */
-    addHoverEffect(layerId) {
-      let hoveredFeature = null;
-
-      this.map.on("mousemove", layerId, e => {
-        this.map.getCanvas().style.cursor = "crosshair";
-
-        // Turn off hover effect on former feature
-        if (hoveredFeature) {
-          this.map.setFeatureState(
-            {
-              id: hoveredFeature.id,
-              source: hoveredFeature.source
-            },
-            {
-              hover: false
-            }
-          );
-        }
-
-        hoveredFeature = e.features[0]; // Update hovered feature
-        this.handleHoverOverFeature(hoveredFeature);
-
-        // Turn on hover effect on former feature
-        this.map.setFeatureState(
-          {
-            id: hoveredFeature.id,
-            source: hoveredFeature.source
-          },
-          {
-            hover: true
-          }
-        );
-      });
-
-      // Turn off hover remaining effect when no longer hovering over layer
-      this.map.on("mouseleave", layerId, e => {
-        this.map.getCanvas().style.cursor = "";
-        if (hoveredFeature) {
-          this.map.setFeatureState(
-            {
-              source: hoveredFeature.source,
-              id: hoveredFeature.id
-            },
-            {
-              hover: false
-            }
-          );
-        }
-        hoveredFeature = null;
-      });
-    },
-
-    /**
-     * Adds a popup on hover for the data layer associated with the given layer id.
-     * @param {String} layerId The id of a data layer
-     */
-    // TODO: find better solution for popup html, don't use source layer plz?
-    addHoverPopUps(layerId) {
-      this.popUp = new mb.Popup({
-        closeButton: false,
-        closeOnClick: false,
-        offset: 10,
-        className: "mapboxgl-popup"
-      });
-
-      let hoveredFeature;
-
-      this.map.on("mousemove", layerId, e => {
-        hoveredFeature = e.features[0]; // Update hovered feature
-        this.map.getCanvas().style.cursor = "crosshair";
-
-        this.popUp
-          .setLngLat(e.lngLat)
-          .setHTML(
-            `
-            <h2 class="popup--race__title">
-              ${hoveredFeature.properties.NAMELSAD}
-            </h2>
-            <h3 class="popup--race__title">
-              ${hoveredFeature.properties.name}
-            </h3>
-            <p class="popup--race__text">
-              ${hoveredFeature.properties.subtitle}
-            </p>`
-          )
-          .addTo(this.map);
-      });
-
-      this.map.on("mouseleave", layerId, e => {
-        this.map.getCanvas().style.cursor = "";
-        this.popUp.remove();
-      });
-    },
-
-    handleHoverOverFeature(feature) {
-      this.$emit("hoverOverFeature", feature);
     }
   }
 };
