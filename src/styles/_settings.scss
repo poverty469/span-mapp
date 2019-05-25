@@ -18,6 +18,8 @@ $standard-body-font: 400, 1rem, $dark-grey; // 12px
 $tutorial-title: 900, 2rem, $bright-red; // 25px
 $menu-item: 700, 1.5rem, $dark-purple; // 14px
 $action-button: 700, 1.2rem, $bright-red;
+$legend-title: 700, 1rem, $dark-grey;
+$legend-item-label: 700, 1rem, $dark-grey;
 
 @mixin char-style($weight, $size, $color, $lh: false, $all-caps: false) {
   font-size: $size;
