@@ -34,7 +34,7 @@ import TheHeader from "@/components/TheHeader.vue";
 import TheLogo from "@/components/TheLogo.vue";
 import MapDashboard from "@/components/MapDashboard.vue";
 
-import { MapTypes } from "@/util/enums.js";
+import { MapTypes, SequentialPalettes } from "@/util/enums.js";
 import geographies from "@/assets/geographies";
 import povertyData from "@/assets/data/dataLayer";
 
@@ -76,7 +76,8 @@ export default {
             dataset: povertyData,
             geographyId: geographies.counties.id,
             attributeId: "HC03_VC161",
-            type: MapTypes.CHOROPLETH
+            type: MapTypes.CHOROPLETH,
+            color: SequentialPalettes.RED_PURPLE
           })
         : this.activeData.pop();
     }

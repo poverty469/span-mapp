@@ -4,11 +4,14 @@
       v-for="(layer, index) in layers"
       :key="`map-legend-${index}`"
       :title="getLayerTitle(layer)"
+      :legendItems="getLegendItems(layer)"
     ></map-legend>
   </section>
 </template>
 <script>
 import MapLegend from "@/components/MapLegend";
+import JsonQuery from "@/util/JsonColumnArrayQuery.js";
+import { CustomPalette } from "@/util/CustomPalette";
 
 export default {
   name: "MapLegendBar",
@@ -25,9 +28,53 @@ export default {
     }
   },
   methods: {
+    // TODO: move data logic outside, internal should be straight forward
     getLayerTitle(layer) {
-      return layer.dataset.geographies[layer.geographyId][layer.attributeId]
-        .title;
+      return this.getDataPackage(layer)[layer.attributeId].title;
+    },
+    // TODO: each layer should be a class isntance, with this as a method e.g.
+    getDataPackage(layer) {
+      return layer.dataset.geographies[layer.geographyId];
+    },
+    getLegendItems(layer) {
+      const layerQuery = new JsonQuery(this.getDataPackage(layer));
+      // bind results to mapSupport, if map uses different class breaks, this breaks b/c
+      // it will automatically get quantile class breaks
+      const { classBreaks, stats } = layerQuery.getColumnSummary(
+        layer.attributeId
+      );
+      const classLabels = this.getClassLabels(classBreaks, stats);
+      const colors = this.getLayerPalette(layer.color, classBreaks.length);
+      return classLabels.map((label, index) => {
+        return {
+          label,
+          swatch: `#${colors[index]}`
+        };
+      });
+    },
+    getLayerPalette(colorName, classBreakCount) {
+      return CustomPalette(colorName, classBreakCount);
+    },
+    getClassLabels(classBreaks, { MIN }) {
+      if (typeof MIN == String) {
+        MIN = parseFloat(MIN).toFixed(1);
+      }
+      const labelDelimiter = ";";
+
+      return classBreaks
+        .reduce((labels, breakPoint, index) => {
+          if (index !== classBreaks.length - 1) {
+            breakPoint = breakPoint.toFixed(1);
+            labels += (breakPoint - 0.1).toFixed(1);
+            labels += labelDelimiter;
+            labels += breakPoint + " - ";
+          } else {
+            labels += breakPoint.toFixed(1);
+          }
+
+          return labels;
+        }, `${MIN} - `)
+        .split(labelDelimiter);
     }
   }
 };

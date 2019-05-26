@@ -41,9 +41,9 @@ export default {
       required: true,
       default: function() {
         return [
-          { swatch: "pink", label: "0.01 - 5.10" },
-          { swatch: "blue", label: "6 - 10" },
-          { swatch: "green", label: "98 - 100" }
+          { swatch: "black", label: "0.01 - 5.10" },
+          { swatch: "black", label: "6 - 10" },
+          { swatch: "black", label: "98 - 100" }
         ];
       }
     },

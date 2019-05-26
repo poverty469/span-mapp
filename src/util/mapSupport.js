@@ -1,6 +1,6 @@
 import _ from "lodash";
-import jsonColumnArrayQuery from "./jsonColumnArrayQuery";
-import palette from "google-palette";
+import JsonColumnArrayQuery from "./JsonColumnArrayQuery";
+import { CustomPalette } from "@/util/CustomPalette.js";
 
 /**
  * Business logic for interacting with the Mapbox library.
@@ -52,7 +52,7 @@ class MapSupport {
     classified = true
   ) {
     // TODO: final id name should be "id", not "id2". Geometries should include the long "id"
-    const dataQuery = new jsonColumnArrayQuery(dataPackage, "id2");
+    const dataQuery = new JsonColumnArrayQuery(dataPackage, "id2");
     let attributeSummary = dataQuery.getColumnSummary(attributeId);
     if (_.isNil(attributeSummary)) {
       return undefined;
@@ -80,8 +80,7 @@ class MapSupport {
       classBreaks = _.range(min + quantile, max, quantile);
     }
 
-    let fullColorPalette = palette(colorPaletteName, classBreaks.length + 2);
-    let colorPalette = fullColorPalette.slice(2);
+    let colorPalette = CustomPalette(colorPaletteName, classBreaks.length);
 
     let expression = ["match", ["get", foreignKeyName]]; // Init expression with foreign key information
     data.forEach((value, rowIndex) => {

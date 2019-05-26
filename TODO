@@ -1,7 +1,7 @@
 Map Components:
   Legend:
     ✔ Implement legend @done(19-05-25 14:17)
-    ☐ Order multiple legends by draw order on map @started(19-05-25 16:23)
+    ☐ Order multiple legends by draw order on map 
   
     Layer Selection:
       ☐ Connect possible layers
@@ -9,7 +9,7 @@ Map Components:
       ☐ Emit activate and deactivate
 
   Map:
-    ☐ Add legend for each active layer
+    ✔ Add legend for each active layer @done(19-05-25 21:17)
     ☐ Inject pop up data from feature
       ☐ Design schema for feature's data
       ☐ Implement object schema in test data
@@ -35,5 +35,6 @@ Map functionality:
   
 
 Data Management:
-  ☐ Write required standard for geometry IDs, across all geographies @created(19-05-09 21:55)
-    ☐ Fix ids in percentBeloewPoverty_counties.json and in geographies/counties.js -> choropleth will work after @created(19-05-09 21:55)
+  ☐ STATISTICS TOOL IN QGIS EXPORTED WRONG MIN AND MAX AND AS STRINGS, CORRECT THIS!
+  ✔ Write required standard for geometry IDs, across all geographies @created(19-05-09 21:55) @done(19-05-25 20:11)
+    ✔ Fix ids in percentBeloewPoverty_counties.json and in geographies/counties.js -> choropleth will work after @created(19-05-09 21:55) @done(19-05-25 20:11)
