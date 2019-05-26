@@ -70,9 +70,9 @@ export default {
 }
 
 .the-tour-dashboard__modal {
-  position: relative;
-  height: 100%;
-  width: 100%;
+  position: relative !important; // Overrides modal styling
+  height: 100% !important;
+  width: 100% !important;
 }
 
 .the-tour-dashboard__modal > .v--modal-background-click {
