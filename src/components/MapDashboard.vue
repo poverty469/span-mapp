@@ -6,7 +6,7 @@
       @mapLoaded="handleMapLoaded"
       @featureHovered="handleFeatureHovered"
     ></mb-map>
-    <map-legend-bar></map-legend-bar>
+    <map-legend-bar :layers="activeData"></map-legend-bar>
     <map-sidebar></map-sidebar>
   </div>
 </template>

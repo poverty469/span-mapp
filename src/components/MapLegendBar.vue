@@ -1,7 +1,10 @@
 <template>
   <section class="map__legends-bar">
-    <map-legend></map-legend>
-    <map-legend></map-legend>
+    <map-legend
+      v-for="(layer, index) in layers"
+      :key="`map-legend-${index}`"
+      :title="getLayerTitle(layer)"
+    ></map-legend>
   </section>
 </template>
 <script>
@@ -11,6 +14,21 @@ export default {
   name: "MapLegendBar",
   components: {
     MapLegend
+  },
+  props: {
+    layers: {
+      type: Array,
+      required: false,
+      default: function() {
+        return [];
+      }
+    }
+  },
+  methods: {
+    getLayerTitle(layer) {
+      return layer.dataset.geographies[layer.geographyId][layer.attributeId]
+        .title;
+    }
   }
 };
 </script>

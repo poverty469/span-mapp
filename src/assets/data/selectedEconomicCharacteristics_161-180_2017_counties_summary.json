@@ -123,7 +123,7 @@
         "Yakima County, Washington"
     ],
     "HC03_VC161": {
-        "title": "Percent; PERCENTAGE OF FAMILIES AND PEOPLE WHOSE INCOME IN THE PAST 12 MONTHS IS BELOW THE POVERTY LEVEL - All families",
+        "title": "Families Below the Poverty Level (%)",
         "stats": {
             "COUNT": 39,
             "EMPTY": 0,
