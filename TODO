@@ -1,7 +1,7 @@
 Map Components:
   Legend:
     ✔ Implement legend @done(19-05-25 14:17)
-    ☐ Order multiple legends by draw order on map 
+    ✔ Order multiple legends by draw order on map @done(19-05-26 00:12)
   
     Layer Selection:
       ☐ Connect possible layers
@@ -22,6 +22,8 @@ Map Components:
 Explore mode:
 
 Tour mode:
+  ☐ Retain zoom bounds state of slide
+    ☐ Animate between zoom bounds
 
 Personalized experience:
 

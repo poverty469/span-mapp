@@ -85,18 +85,47 @@ $legends-bar-margin: 10px;
 .map__legends-bar {
   position: absolute;
   left: 0;
-  bottom: $mapbox-logo-height;
-  margin: $legends-bar-margin;
-  height: fit-content;
-  max-height: calc(100% - (#{$legends-bar-margin} * 2));
-  overflow: auto;
+  top: 0;
+  height: 100%;
+  margin: 0 $legends-bar-margin 0 0;
+  margin-left: 8px; // Add padding-left and width together
+  overflow-y: scroll;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-left: 8px;
+
+  direction: rtl;
+}
+
+/* width */
+.map__legends-bar::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.map__legends-bar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 0px; // 10
+}
+
+/* Handle */
+.map__legends-bar::-webkit-scrollbar-thumb {
+  background: $dark-grey;
+  border-radius: 0px; // 10
 }
 
 .map__legends-bar > * {
   margin-bottom: 0.8rem;
+  direction: ltr;
 }
 
-.map__legends-bar > *:last-child {
-  margin-bottom: 0;
+.map__legends-bar > *:first-of-type {
+  margin-top: 28px;
+}
+
+.map__legends-bar > *:last-of-type {
+  margin-bottom: 28px;
 }
 </style>

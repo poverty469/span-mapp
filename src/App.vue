@@ -71,15 +71,24 @@ export default {
       this.$store.dispatch("mapLoaded");
     },
     forceToggleMapData() {
-      this.activeData.length == 0
-        ? this.activeData.push({
-            dataset: povertyData,
-            geographyId: geographies.counties.id,
-            attributeId: "HC03_VC161",
-            type: MapTypes.CHOROPLETH,
-            color: SequentialPalettes.RED_PURPLE
-          })
-        : this.activeData.pop();
+      if (this.activeData.length == 0) {
+        this.activeData.push({
+          dataset: povertyData,
+          geographyId: geographies.counties.id,
+          attributeId: "HC03_VC161",
+          type: MapTypes.CHOROPLETH,
+          color: SequentialPalettes.RED_PURPLE
+        });
+        this.activeData.push({
+          dataset: povertyData,
+          geographyId: geographies.counties.id,
+          attributeId: "HC03_VC164",
+          type: MapTypes.CHOROPLETH,
+          color: SequentialPalettes.BLUE
+        });
+      } else {
+        this.activeData.pop();
+      }
     }
   },
   computed: {
