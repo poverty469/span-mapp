@@ -14,6 +14,7 @@
         <!-- </keep-alive> -->
       </span>
     </div>
+    <slot></slot>
   </div>
 </template>
 

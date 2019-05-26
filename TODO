@@ -1,7 +1,7 @@
 Map Components:
   Legend:
     ✔ Implement legend @done(19-05-25 14:17)
-    ☐ Order multiple legends by draw order on map
+    ☐ Order multiple legends by draw order on map @started(19-05-25 16:23)
   
     Layer Selection:
       ☐ Connect possible layers

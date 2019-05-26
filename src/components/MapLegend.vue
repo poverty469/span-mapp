@@ -65,13 +65,11 @@ export default {
 $legend-max-width: 12rem;
 
 .map-legend {
+  position: relative;
+  display: block;
   width: fit-content;
   height: fit-content;
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
   max-width: $legend-max-width;
-  padding: 5px;
 }
 
 .map-legend__title {
@@ -81,7 +79,7 @@ $legend-max-width: 12rem;
   width: fit-content;
   max-width: calc(#{$legend-max-width} - 5rem);
   padding: 0.3rem;
-  margin-block-end: 1rem;
+  margin-bottom: 0.5rem;
   @include char-style($legend-title...);
   text-transform: uppercase;
 }

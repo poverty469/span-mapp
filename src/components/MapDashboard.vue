@@ -6,7 +6,7 @@
       @mapLoaded="handleMapLoaded"
       @featureHovered="handleFeatureHovered"
     ></mb-map>
-    <map-legend></map-legend>
+    <map-legend-bar></map-legend-bar>
     <map-sidebar></map-sidebar>
   </div>
 </template>
@@ -15,7 +15,7 @@
 import _ from "lodash";
 
 import MbMap from "@/components/MbMap";
-import MapLegend from "@/components/MapLegend";
+import MapLegendBar from "@/components/MapLegendBar";
 import MapSidebar from "@/components/MapSidebar";
 
 import geographies from "@/assets/geographies";
@@ -23,7 +23,7 @@ import geographies from "@/assets/geographies";
 export default {
   name: "MapDashboard",
   components: {
-    MapLegend,
+    MapLegendBar,
     MbMap,
     MapSidebar
   },
