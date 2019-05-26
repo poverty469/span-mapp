@@ -106,7 +106,6 @@ $legends-bar-margin: 10px;
 
 /* Track */
 .map__legends-bar::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
   border-radius: 0px; // 10
 }
 

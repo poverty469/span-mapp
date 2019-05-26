@@ -17,7 +17,7 @@ export default new Vuex.Store({
       top: 100,
       right: 100,
       bottom: 100,
-      left: 100
+      left: 200
     },
     activeMainMenuItemIndex: 2
   },
