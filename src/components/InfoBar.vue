@@ -57,14 +57,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-$info-bar-width: 250px;
-
 .info-bar {
   position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
-  width: $info-bar-width;
+  //   width: $righter-width;
 
   display: flex;
   flex-direction: column;

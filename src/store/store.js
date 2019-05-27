@@ -15,7 +15,7 @@ export default new Vuex.Store({
     mapLoading: true,
     mapFocusPadding: {
       top: 50,
-      right: 300, // + 50 padding
+      right: 50, // + 50 padding
       bottom: 50,
       left: 200 // + <50 padding
     },

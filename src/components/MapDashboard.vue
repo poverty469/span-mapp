@@ -1,13 +1,15 @@
 <template>
-  <div>
+  <div class="map-dashboard">
     <mb-map
+      class="map-dashboard__map"
       :mapId="mapId"
       :activeData="activeData"
       @mapLoaded="handleMapLoaded"
       @featureHovered="handleFeatureHovered"
+    >
+      <map-legend-bar :layers="activeData"></map-legend-bar
     ></mb-map>
-    <map-legend-bar :layers="activeData"></map-legend-bar>
-    <info-bar></info-bar>
+    <info-bar class="map-dashboard__info-bar"></info-bar>
   </div>
 </template>
 
@@ -116,4 +118,11 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.map-dashboard__map {
+  width: calc(100vw - #{$righter-width});
+}
+.map-dashboard__info-bar {
+  width: $righter-width;
+}
+</style>
