@@ -7,7 +7,7 @@
       @featureHovered="handleFeatureHovered"
     ></mb-map>
     <map-legend-bar :layers="activeData"></map-legend-bar>
-    <map-sidebar></map-sidebar>
+    <info-bar></info-bar>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ import _ from "lodash";
 
 import MbMap from "@/components/MbMap";
 import MapLegendBar from "@/components/MapLegendBar";
-import MapSidebar from "@/components/MapSidebar";
+import InfoBar from "@/components/InfoBar";
 
 import geographies from "@/assets/geographies";
 
@@ -25,7 +25,7 @@ export default {
   components: {
     MapLegendBar,
     MbMap,
-    MapSidebar
+    InfoBar
   },
   props: {
     // Id of the mapbox map

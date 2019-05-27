@@ -14,10 +14,10 @@ export default new Vuex.Store({
   state: {
     mapLoading: true,
     mapFocusPadding: {
-      top: 100,
-      right: 100,
-      bottom: 100,
-      left: 200
+      top: 50,
+      right: 300, // + 50 padding
+      bottom: 50,
+      left: 200 // + <50 padding
     },
     activeMainMenuItemIndex: 2
   },
