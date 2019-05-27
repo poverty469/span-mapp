@@ -40,3 +40,6 @@ Data Management:
   ☐ STATISTICS TOOL IN QGIS EXPORTED WRONG MIN AND MAX AND AS STRINGS, CORRECT THIS!
   ✔ Write required standard for geometry IDs, across all geographies @created(19-05-09 21:55) @done(19-05-25 20:11)
     ✔ Fix ids in percentBeloewPoverty_counties.json and in geographies/counties.js -> choropleth will work after @created(19-05-09 21:55) @done(19-05-25 20:11)
+
+Bugs:
+  ☐ Width of splash page extends beyond 100vw -- add overflow hidden to body
