@@ -6,10 +6,12 @@
       :activeData="activeData"
       @mapLoaded="handleMapLoaded"
       @featureHovered="handleFeatureHovered"
+      :bare="bare"
+      :class="{ 'map-dashboard__map--expanded': bare }"
     >
-      <map-legend-bar :layers="activeData"></map-legend-bar
+      <map-legend-bar v-show="!bare" :layers="activeData"></map-legend-bar
     ></mb-map>
-    <info-bar class="map-dashboard__info-bar"></info-bar>
+    <info-bar v-show="!bare" class="map-dashboard__info-bar"></info-bar>
   </div>
 </template>
 
@@ -61,6 +63,13 @@ export default {
         });
 
         return !(geogIsDistricts && geogIsCounties);
+      }
+    },
+    bare: {
+      type: Boolean,
+      required: false,
+      default: function() {
+        return false;
       }
     }
   },
@@ -120,9 +129,17 @@ export default {
 
 <style lang="scss">
 .map-dashboard__map {
-  width: calc(100vw - #{$righter-width});
+  grid-column-end: 2;
+  grid-column-start: 1;
 }
+
+.map-dashboard__map--expanded {
+  grid-column-end: 3;
+}
+
 .map-dashboard__info-bar {
   width: $righter-width;
+  grid-column-start: 2;
+  grid-column-end: 3;
 }
 </style>

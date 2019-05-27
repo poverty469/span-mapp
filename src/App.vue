@@ -23,6 +23,7 @@
       class="main-map-dashboard"
       :dataLoaded="dataLoaded"
       :activeData="activeData"
+      :bare="!mapIsFocused"
     ></map-dashboard>
     <the-footer class="the-footer"></the-footer>
   </div>
@@ -92,7 +93,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["appLoading", "dataLoaded"])
+    ...mapGetters(["appLoading", "dataLoaded"]),
+    mapIsFocused: function() {
+      return this.$route.name === "map"; // TODO: make "map" a value pulled in from the router object
+    }
   }
 };
 </script>
@@ -142,6 +146,9 @@ body {
 
 .main-map-dashboard {
   position: absolute;
+  display: inline-grid;
+  grid-auto-flow: dense;
+  grid-template-columns: auto 250px;
   top: $header-height;
   bottom: $footer-height;
   left: 0;

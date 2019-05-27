@@ -5,6 +5,7 @@
       :key="`map-legend-${index}`"
       :title="getLayerTitle(layer)"
       :legendItems="getLegendItems(layer)"
+      :style="{ order: 2 - index }"
     ></map-legend>
   </section>
 </template>
@@ -24,6 +25,15 @@ export default {
       required: false,
       default: function() {
         return [];
+      }
+    }
+  },
+  watch: {
+    layers: {
+      handler: function() {
+        this.$nextTick(() => {
+          this.$el.scrollTop = this.$el.scrollHeight - this.$el.clientHeight;
+        });
       }
     }
   },
@@ -120,11 +130,17 @@ $legends-bar-margin: 10px;
   direction: ltr;
 }
 
-.map__legends-bar > *:first-of-type {
+.map__legends-bar > *:last-of-type {
+  // First and last are swapped because of reversed flex ordering
+  // margin-top: 28px;
   margin-top: 28px;
 }
 
-.map__legends-bar > *:last-of-type {
+.map__legends-bar > *:first-of-type {
   margin-bottom: 28px;
+}
+
+.map__legends-bar > *:first-of-type:last-of-type {
+  margin-top: auto;
 }
 </style>

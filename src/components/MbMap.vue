@@ -46,6 +46,13 @@ export default {
       default: function() {
         return [];
       }
+    },
+    bare: {
+      type: Boolean,
+      required: false,
+      default: function() {
+        return false;
+      }
     }
   },
   data: function() {
@@ -60,14 +67,19 @@ export default {
       return geographies.washington.bounds;
     }
   },
-  // watch: {
-  //   activeData: {
-  //     handler: function(currentData) {
-  //       this.updateDrawnLayers(currentData);
-  //     },
-  //     immediate: true
-  //   }
-  // },
+  watch: {
+    bare: {
+      handler: function(newVal) {
+        window.dispatchEvent(new Event("resize"));
+      }
+    }
+    // activeData: {
+    //   handler: function(currentData) {
+    //     this.updateDrawnLayers(currentData);
+    //   },
+    //   immediate: true
+    // }
+  },
   mounted: function() {
     this.createMap();
 
