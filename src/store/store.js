@@ -19,7 +19,8 @@ export default new Vuex.Store({
       bottom: 50,
       left: 200 // + <50 padding
     },
-    activeMainMenuItemIndex: 2
+    activeMainMenuItemIndex: 2,
+    tourInProgress: false
   },
   getters: {
     mapFocusPadding: state => {
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     },
     activeMainMenuItemIndex: state => {
       return state.activeMainMenuItemIndex;
+    },
+    tourInProgress: state => {
+      return state.tourInProgress;
     }
   },
   mutations: {
@@ -54,6 +58,9 @@ export default new Vuex.Store({
     },
     setActiveMainMenuItemIndex(state, index) {
       state.activeMainMenuItemIndex = index;
+    },
+    setTourInProgress(state, inProgress) {
+      state.tourInProgress = inProgress;
     }
   },
   actions: {
@@ -64,6 +71,9 @@ export default new Vuex.Store({
       if (index > -1) {
         context.commit("setActiveMainMenuItemIndex", index);
       }
+    },
+    startTour(context) {
+      context.commit("setTourInProgress", true);
     }
   }
 });

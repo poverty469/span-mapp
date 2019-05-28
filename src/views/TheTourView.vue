@@ -40,6 +40,7 @@ export default {
     handleStartTour() {
       this.tourInProgress = true;
       this.$modal.show("the-tour-dashboard");
+      this.$store.dispatch("startTour");
     },
     beforeModalOpen(e) {},
     beforeModalClose(e) {
