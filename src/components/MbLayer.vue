@@ -21,6 +21,13 @@ export default {
       required: false,
       default: SequentialPalettes.PURPLE
     },
+    outlineColor: {
+      type: String,
+      required: false,
+      default: function() {
+        return "rgb(255,255,255)";
+      }
+    },
     options: {
       type: Object,
       required: false,
@@ -64,7 +71,7 @@ export default {
         type: "line",
         source: this.geographyId,
         paint: {
-          "line-color": "rgb(139, 103, 41)",
+          "line-color": this.outlineColor,
           "line-width": 2
         }
       });
