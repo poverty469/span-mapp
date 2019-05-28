@@ -121,7 +121,7 @@ export default {
   top: 0;
   bottom: 0;
   right: 0;
-  //   width: $righter-width;
+  width: $righter-width;
 
   display: flex;
   flex-direction: column;

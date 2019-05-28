@@ -27,6 +27,7 @@ import mbLayer from "@/components/MbLayer";
 import mapSupport from "@/util/mapSupport";
 
 import geographies from "@/assets/geographies";
+import { clearInterval } from "timers";
 
 export default {
   name: "MbMap",
@@ -70,7 +71,12 @@ export default {
   watch: {
     bare: {
       handler: function(newVal) {
-        window.dispatchEvent(new Event("resize"));
+        _.delay(() => window.dispatchEvent(new Event("resize")), 250);
+
+        // const interval = setInterval(function() {
+        //   window.dispatchEvent(new Event("resize"));
+        // }, 25);
+        // _.delay(() => clearInterval(interval), 251);
       }
     }
     // activeData: {

@@ -13,6 +13,7 @@
         class="the-tour-dashboard__modal"
         @before-open="beforeModalOpen"
         @before-close="beforeModalClose"
+        @opened="afterModalOpen"
       >
         <the-tour-dashboard class="the-tour-dashboard"></the-tour-dashboard>
       </modal>
@@ -21,35 +22,33 @@
 </template>
 
 <script>
+import _ from "lodash";
+
 import TheTourSplash from "@/components/TheTourSplash.vue";
 import TheTourDashboard from "@/components/TheTourDashboard.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "TheTourView",
   props: {},
-  data: function() {
-    return {
-      tourInProgress: false
-    };
-  },
   components: {
     TheTourSplash,
     TheTourDashboard
   },
   methods: {
     handleStartTour() {
-      this.tourInProgress = true;
       this.$modal.show("the-tour-dashboard");
       this.$store.dispatch("startTour");
     },
-    beforeModalOpen(e) {},
+    beforeModalOpen() {},
     beforeModalClose(e) {
       this.$router.push("/map");
       e.stop();
-    }
+    },
+    afterModalOpen() {}
   },
-  mounted: function() {
-    // this.$modal.show("the-tour-dashboard");
+  computed: {
+    ...mapGetters(["tourInProgress"])
   }
 };
 </script>
