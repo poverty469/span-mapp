@@ -5,7 +5,7 @@
       :key="`map-legend-${index}`"
       :title="getLayerTitle(layer)"
       :legendItems="getLegendItems(layer)"
-      :style="{ order: 2 - index }"
+      :style="{ order: layers.length - index }"
     ></map-legend>
   </section>
 </template>
@@ -98,20 +98,20 @@ $legends-bar-margin: 10px;
   top: 0;
   height: 100%;
   margin: 0 $legends-bar-margin 0 0;
-  margin-left: 8px; // Add padding-left and width together
+  margin-left: 5px; // Add padding-left and width together
   overflow-y: scroll;
 
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  padding-left: 8px;
+  padding-left: 5px;
 
   direction: rtl;
 }
 
 /* width */
 .map__legends-bar::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
 }
 
 /* Track */

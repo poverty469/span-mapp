@@ -52,6 +52,7 @@ export default {
 
 .social-media__container {
   display: flex;
+  margin-left: 6px; // Aligns with legends
 }
 
 .social-media__icon {
