@@ -21,7 +21,7 @@ export default {
   methods: {},
   computed: {},
   mounted: function() {
-    this.renderChart(this.chartData);
+    this.renderChart(this.chartData, this.options);
   }
 };
 </script>
