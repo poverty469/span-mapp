@@ -7,6 +7,7 @@
       @mapLoaded="handleMapLoaded"
       @featureHovered="handleFeatureHovered"
       :bare="bare"
+      :mapPadding="mapPadding"
       :class="{ 'map-dashboard__map--expanded': bare }"
     >
       <map-legend-bar v-show="!bare" :layers="activeData"></map-legend-bar
@@ -77,8 +78,27 @@ export default {
   },
   data: function() {
     return {
-      hoveredFeature: {}
+      hoveredFeature: {},
+      mapPadding: {
+        top: 50,
+        right: 50, // + 50 padding
+        bottom: 50,
+        left: 50 // + <50 padding
+      }
     };
+  },
+  watch: {
+    activeData: {
+      handler: function() {
+        this.resizeMapForLegendBar();
+      },
+      deep: true
+    },
+    bare: {
+      handler: function() {
+        this.resizeMapForLegendBar();
+      }
+    }
   },
   methods: {
     handleMapLoaded: function() {
@@ -88,6 +108,18 @@ export default {
     },
     handleFeatureHovered(feature) {
       this.hoveredFeature = feature;
+    },
+    resizeMapForLegendBar() {
+      const prev = this.mapPadding.left;
+      if (this.bare || this.activeData.length === 0) {
+        this.mapPadding.left = 50;
+      } else {
+        this.mapPadding.left = 200;
+      }
+
+      prev != this.mapPadding.left
+        ? window.dispatchEvent(new Event("resize"))
+        : null;
     }
   },
   computed: {
@@ -115,15 +147,6 @@ export default {
       return !_.isEmpty(this.hoveredFeature)
         ? this.hoveredFeature.properties.NAME
         : "";
-    }
-  },
-  watch: {
-    activeGeographyId: {
-      handler: function(curr, prev) {
-        // change active data to be represented in current geography
-        // remove layers of old geography
-        // add layers of current geography with current data
-      }
     }
   }
 };

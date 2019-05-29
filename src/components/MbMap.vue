@@ -27,7 +27,6 @@ import mbLayer from "@/components/MbLayer";
 import mapSupport from "@/util/mapSupport";
 
 import geographies from "@/assets/geographies";
-import { clearInterval } from "timers";
 
 export default {
   name: "MbMap",
@@ -54,6 +53,10 @@ export default {
       default: function() {
         return false;
       }
+    },
+    mapPadding: {
+      type: Object,
+      required: true
     }
   },
   data: function() {
@@ -70,21 +73,11 @@ export default {
   },
   watch: {
     bare: {
-      handler: function(newVal) {
+      handler: function() {
+        // Make the map always reactive, e.g. slides when visiting /map
         _.delay(() => window.dispatchEvent(new Event("resize")), 250);
-
-        // const interval = setInterval(function() {
-        //   window.dispatchEvent(new Event("resize"));
-        // }, 25);
-        // _.delay(() => clearInterval(interval), 251);
       }
     }
-    // activeData: {
-    //   handler: function(currentData) {
-    //     this.updateDrawnLayers(currentData);
-    //   },
-    //   immediate: true
-    // }
   },
   mounted: function() {
     this.createMap();
@@ -111,7 +104,7 @@ export default {
         style: mapSupport.getBaseMap(),
         bounds: geographies.washington.bounds,
         fitBoundsOptions: {
-          padding: this.$store.getters.mapFocusPadding
+          padding: this.mapPadding
         },
         attributionControl: false,
         pitchWithRotate: false,
@@ -206,7 +199,7 @@ export default {
      */
     zoomToBounds(bounds) {
       this.map.fitBounds(bounds, {
-        padding: this.$store.getters.mapFocusPadding
+        padding: this.mapPadding
       });
     },
     /**

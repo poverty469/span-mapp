@@ -22,8 +22,6 @@
 </template>
 
 <script>
-import _ from "lodash";
-
 import TheTourSplash from "@/components/TheTourSplash.vue";
 import TheTourDashboard from "@/components/TheTourDashboard.vue";
 import { mapGetters } from "vuex";
