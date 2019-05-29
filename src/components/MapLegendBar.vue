@@ -133,7 +133,8 @@ $legends-bar-margin: 10px;
 .map__legends-bar > *:last-of-type {
   // First and last are swapped because of reversed flex ordering
   // margin-top: 28px;
-  margin-top: 28px;
+  margin-top: auto;
+  padding-top: 28px;
 }
 
 .map__legends-bar > *:first-of-type {

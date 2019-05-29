@@ -75,7 +75,7 @@ export default {
     bare: {
       handler: function() {
         // Make the map always reactive, e.g. slides when visiting /map
-        _.delay(() => window.dispatchEvent(new Event("resize")), 250);
+        _.delay(() => window.dispatchEvent(new Event("resize")), 50);
       }
     }
   },

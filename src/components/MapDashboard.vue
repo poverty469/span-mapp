@@ -118,7 +118,7 @@ export default {
       }
 
       prev != this.mapPadding.left
-        ? window.dispatchEvent(new Event("resize"))
+        ? _.delay(() => window.dispatchEvent(new Event("resize")), 50)
         : null;
     }
   },
