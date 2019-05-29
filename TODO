@@ -44,3 +44,5 @@ Data Management:
 
 Bugs:
   ☐ Width of splash page extends beyond 100vw -- add overflow hidden to body
+  ☐ Map doesn't resize after infobar has finished sliding into the viewport
+    - Part of focused area in map stays out of bounds

@@ -81,7 +81,7 @@ export default {
       hoveredFeature: {},
       mapPadding: {
         top: 50,
-        right: 50, // + 50 padding
+        right: 50 + 10, // + 50 padding + 10 px to accomodate right shift into info bar
         bottom: 50,
         left: 50 // + <50 padding
       }
@@ -153,16 +153,18 @@ export default {
 </script>
 
 <style lang="scss">
+$map-width: calc(100vw + #{$map-right-shift});
+
 .map-dashboard__map {
   transition: all 250ms ease-in;
-  width: calc(100vw - #{$righter-width});
+  width: calc(#{$map-width} - #{$righter-width});
   // grid-column-end: 2;
   // grid-column-start: 1;
 }
 
 .map-dashboard__map--expanded {
   transition: all 250ms ease-out;
-  width: 100vw;
+  width: calc(#{$map-width});
   // grid-column-end: 3;
 }
 

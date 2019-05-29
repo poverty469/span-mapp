@@ -1,6 +1,8 @@
 <template>
   <section class="info-bar">
-    <button @click="handleTestButton">test button</button>
+    <h1 class="info-bar__title">{{ activeFeature.title }}</h1>
+    <hr class="info-bar__title-divider" />
+    <button @click="handleTestButton">change data</button>
     <donut-chart
       class="donut-chart"
       :chart-data="{ labels, datasets }"
@@ -21,10 +23,20 @@ import BarChart from "@/components/BarChart";
 export default {
   name: "InfoBar",
   components: { DonutChart, BarChart },
-  props: {},
+  props: {
+    activeFeature: {
+      type: Object,
+      required: false,
+      default: function() {
+        return {
+          title: "Okanagan County"
+        };
+      }
+    }
+  },
   data: function() {
     return {
-      labels: ["one", "two"],
+      labels: ["One", "Two"],
       datasets: [
         {
           label: "Data One",
@@ -76,19 +88,6 @@ export default {
           titleSpacing: 2,
           xPadding: 10,
           yPadding: 10
-          // enabled: true,
-          // backgroundColor: "#faaf8f", // $dark-orange--shadow //	Color	'rgba(0, 0, 0, 0.8)'	Background color of the tooltip.
-          // titleFontFamily: "'Muli'", //	string	"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"	Title font.
-          // titleFontSize: "12px", // "0.6rem", //	number	12	Title font size.
-          // titleFontStyle: "bold", //	string	'bold'	Title font style.
-          // titleFontColor: "#e6432e", // $bright-red //	Color	'#fff'	Title font color.
-          // titleSpacing: "5px", //	number	2	Spacing to add to top and bottom of each title line.
-          // titleMarginBottom: "5px", //	number	6	Margin to add on bottom of title section.
-          // bodyFontFamily: '"Muli"', //	string	"'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"	Body line font.
-          // bodyFontSize: "12px", //	number	12	Body font size.
-          // bodyFontStyle: "normal", //	string	'normal'	Body font style.
-          // bodyFontColor: "#4b4b4b", // $dark-grey//	Color	'#fff'	Body font color.
-          // bodySpacing: "5px" //	number	2	Spacing to add to top and bottom of each tooltip item.
         }
       }
     };
@@ -127,9 +126,23 @@ export default {
   flex-direction: column;
   align-items: center;
 
+  padding: 12px 7px 28px 7px; // Keeps the info button in the infobar
+
   background: $light-tan;
   border-left: $thin-border solid $charcoal;
   box-shadow: $standard-box-shadow;
+}
+
+.info-bar__title {
+  @include char-style($info-bar-title...);
+  margin: 20px 10px;
+  padding: 10px;
+}
+
+.info-bar__title-divider {
+  width: 100%;
+  height: 2px;
+  margin-bottom: 20px;
 }
 
 .donut-chart,
