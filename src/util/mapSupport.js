@@ -18,20 +18,14 @@ class MapSupport {
     if (process.env.NODE_ENV == "development") {
       return {
         version: 8,
-        sources: {
-          "simple-tiles": {
-            type: "raster",
-            tiles: ["http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"],
-            tileSize: 256
-          }
-        },
+        sources: {},
         layers: [
           {
-            id: "simple-tiles",
-            type: "raster",
-            source: "simple-tiles",
-            minzoom: 0,
-            maxzoom: 22
+            id: "background",
+            type: "background",
+            paint: {
+              "background-color": "rgb(255, 246, 242)"
+            }
           }
         ]
       };
