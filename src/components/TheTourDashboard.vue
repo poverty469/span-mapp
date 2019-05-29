@@ -24,13 +24,13 @@
             class="tour__slide"
           >
             {{ slide.title }}
-          <tour-info 
-            v-for="object in arr"
-            :key="`tour-info-${object}`"
-            :narrative="object.Obj"
-            :tutorial="object.tut"
-          >
-          </tour-info>
+            <tour-info 
+              v-for="object in arr"
+              :key="`tour-info-${object}`"
+              :narrative="object.Obj"
+              :tutorial="object.tut"
+            >
+            </tour-info>
           </slide>
         </hooper>
         <button @click.prevent="handlePrev">Prev</button>
@@ -74,8 +74,7 @@ export default {
       activeTourSlideIndex: 0,
       mapLoaded: false,
       mapVisible: false,
-      arr: [{Obj: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", tut: 10},
-      {Obj: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", tut: "Loream sunt in culpa qui officia deserunt mollit anim id est laborum."}]
+      arr: [{Obj: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt", tut: "Helpful Guide Area"}]
     };
   },
   methods: {
