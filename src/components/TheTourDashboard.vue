@@ -14,7 +14,9 @@
         :activeData="activeData"
         :class="{ 'map-container--hidden': !mapVisible }"
         @mapLoaded="handleMapLoaded"
-      ></mb-map>
+      >
+        <map-legend-bar></map-legend-bar>
+      </mb-map>
       <div v-if="tourSlides && tourSlides.length" class="tour__sidebar">
         <hooper ref="carousel" @slide="updateCarousel">
           <slide
@@ -48,6 +50,7 @@ import _ from "lodash";
 import { Hooper, Slide } from "hooper";
 
 import MbMap from "@/components/MbMap.vue";
+import MapLegendBar from "@/components/MapLegendBar";
 import TourInfo from "@/components/TourInfo.vue";
 import TheTourNav from "@/components/TheTourNav.vue";
 
@@ -57,6 +60,7 @@ export default {
   name: "TheTourDashboard",
   components: {
     MbMap,
+    MapLegendBar,
     TourInfo,
     TheTourNav,
     Hooper,

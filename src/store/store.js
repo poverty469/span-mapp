@@ -14,12 +14,14 @@ export default new Vuex.Store({
   state: {
     mapLoading: true,
     mapFocusPadding: {
-      top: 100,
-      right: 100,
-      bottom: 100,
-      left: 100
+      top: 50,
+      right: 50 + 10, // + 50 padding + right shift accomodation (12px)
+      bottom: 50,
+      left: 200 // + <50 padding
     },
-    activeMainMenuItemIndex: 2
+    activeMainMenuItemIndex: 2,
+    tourInProgress: false,
+    mapVisited: false
   },
   getters: {
     mapFocusPadding: state => {
@@ -33,6 +35,12 @@ export default new Vuex.Store({
     },
     activeMainMenuItemIndex: state => {
       return state.activeMainMenuItemIndex;
+    },
+    tourInProgress: state => {
+      return state.tourInProgress;
+    },
+    mapVisited: state => {
+      return state.mapVisited;
     }
   },
   mutations: {
@@ -54,6 +62,12 @@ export default new Vuex.Store({
     },
     setActiveMainMenuItemIndex(state, index) {
       state.activeMainMenuItemIndex = index;
+    },
+    setTourInProgress(state, inProgress) {
+      state.tourInProgress = inProgress;
+    },
+    setMapVisited(state, mapVisited) {
+      state.mapVisited = mapVisited;
     }
   },
   actions: {
@@ -64,6 +78,14 @@ export default new Vuex.Store({
       if (index > -1) {
         context.commit("setActiveMainMenuItemIndex", index);
       }
+
+      if (index == 0) {
+        // if map is visited
+        context.commit("setMapVisited", true);
+      }
+    },
+    startTour(context) {
+      context.commit("setTourInProgress", true);
     }
   }
 });

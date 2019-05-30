@@ -13,11 +13,13 @@
         <facebook-logo class="social-media__icon facebook-icon"></facebook-logo>
       </a>
     </div>
-    <action-button
-      class="take-action-button"
-      text="get involved"
-      urlLink="https://povertyaction.org/advocacy-actions/"
-    ></action-button>
+    <div class="the-footer__righter">
+      <action-button
+        class="take-action-button"
+        text="get involved"
+        urlLink="https://povertyaction.org/advocacy-actions/"
+      ></action-button>
+    </div>
   </div>
 </template>
 
@@ -50,6 +52,7 @@ export default {
 
 .social-media__container {
   display: flex;
+  margin-left: 6px; // Aligns with legends
 }
 
 .social-media__icon {
@@ -82,11 +85,15 @@ export default {
   width: 1.8rem;
 }
 
+.the-footer__righter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $righter-width;
+}
+
 .take-action-button > .action-button__container {
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 1rem;
   width: fit-content;
   height: 60%;
 

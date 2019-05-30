@@ -1,7 +1,32 @@
+Map Components:
+  Legend:
+    ✔ Implement legend @done(19-05-25 14:17)
+    ✔ Order multiple legends by draw order on map @done(19-05-26 00:12)
+  
+    Layer Panel:
+      ☐ Straighten out border radius on top corners
+      ☐ Add get involved links to end of layer lists
+      ☐ Connect possible layers
+      ☐ Connect currently active layers from map
+      ☐ Emit activate and deactivate
+
+  Map:
+    ✔ Add legend for each active layer @done(19-05-25 21:17)
+    ☐ Inject pop up data from feature
+      ☐ Design schema for feature's data
+      ☐ Implement object schema in test data
+        ☐ Update json schema files in span-data repo
+    
+  Statistics Panel:
+
+Store:
+  ☐ Update main map padding to be centered when in tour mode
 
 Explore mode:
 
 Tour mode:
+  ☐ Retain zoom bounds state of slide
+    ☐ Animate between zoom bounds
 
 Personalized experience:
 
@@ -15,5 +40,11 @@ Map functionality:
   
 
 Data Management:
-  ☐ Write required standard for geometry IDs, across all geographies @created(19-05-09 21:55)
-    ☐ Fix ids in percentBeloewPoverty_counties.json and in geographies/counties.js -> choropleth will work after @created(19-05-09 21:55)
+  ☐ STATISTICS TOOL IN QGIS EXPORTED WRONG MIN AND MAX AND AS STRINGS, CORRECT THIS!
+  ✔ Write required standard for geometry IDs, across all geographies @created(19-05-09 21:55) @done(19-05-25 20:11)
+    ✔ Fix ids in percentBeloewPoverty_counties.json and in geographies/counties.js -> choropleth will work after @created(19-05-09 21:55) @done(19-05-25 20:11)
+
+Bugs:
+  ☐ Width of splash page extends beyond 100vw -- add overflow hidden to body
+  ☐ Map doesn't resize after infobar has finished sliding into the viewport
+    - Part of focused area in map stays out of bounds
