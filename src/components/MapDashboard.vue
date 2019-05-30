@@ -12,7 +12,10 @@
     >
       <map-legend-bar v-show="!bare" :layers="activeData"></map-legend-bar
     ></mb-map>
-    <the-layer-panel @toggleLayer="handleToggleLayer"></the-layer-panel>
+    <the-layer-panel
+      v-show="!bare"
+      @toggleLayer="handleToggleLayer"
+    ></the-layer-panel>
     <transition name="slide-left">
       <info-bar v-show="!bare" class="map-dashboard__info-bar"></info-bar>
     </transition>
@@ -85,7 +88,7 @@ export default {
       mapPadding: {
         top: 50,
         right: 50 + 10, // + 50 padding + 10 px to accomodate right shift into info bar
-        bottom: 50,
+        bottom: 25,
         left: 50 // + <50 padding
       }
     };
