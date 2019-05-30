@@ -45,10 +45,12 @@ export default {
 
 .layer-menu-item:hover {
   background: $dark-orange;
+  cursor: pointer;
 }
 
 .layer-menu-item--active {
-  box-shadow: 0px 0px 0px 0px $shadow;
+  // box-shadow: 0px 0px 0px 0px $shadow;
+  box-shadow: inset 2px 2px 5px #0000003e;
   transition: all 150ms ease-out;
   background: $dark-orange;
 }

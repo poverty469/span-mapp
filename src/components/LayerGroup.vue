@@ -7,9 +7,8 @@
   >
     <div class="action-button__container layer-group__title">
       <a
-        href="#"
         aria-haspopup="true"
-        aria-expanded="false"
+        :aria-expanded="expanded"
         @click="handleLayerGroupClick"
       >
         <div class="action-button__text">
