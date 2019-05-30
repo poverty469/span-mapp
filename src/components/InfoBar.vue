@@ -7,12 +7,12 @@
     <div class="info-bar__body">
       <button @click="handleTestButton">change data</button>
       <donut-chart
-        class="donut-chart"
+        class="chart donut-chart"
         :chart-data="{ labels, datasets }"
         :options="options"
       ></donut-chart>
       <bar-chart
-        class="bar-chart"
+        class="chart bar-chart"
         :chart-data="{ labels, datasets }"
         :options="options"
       ></bar-chart>
@@ -130,7 +130,7 @@ export default {
   flex-direction: column;
   align-items: center;
 
-  padding: 12px 7px 28px 7px; // Keeps the info button in the infobar
+  padding: 12px 7px 0 7px; // Keeps the info button in the infobar
 
   background: $light-tan;
   border-left: $thin-border solid $charcoal;
@@ -147,6 +147,10 @@ export default {
 
   flex-grow: 5;
   overflow: auto;
+}
+
+.chart:last-of-type {
+  padding-bottom: 28px;
 }
 
 .info-bar__title {
