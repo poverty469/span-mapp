@@ -1,5 +1,10 @@
 <template>
-  <li class="layer-group" :class="{ 'layer-group--expanded': expanded }">
+  <li
+    class="layer-group"
+    :class="{ 'layer-group--expanded': expanded }"
+    @mouseenter="handleLayerGroupHover"
+    @mouseleave="handleLayerGroupHover"
+  >
     <div class="action-button__container layer-group__title">
       <a
         href="#"
@@ -23,6 +28,8 @@
   </li>
 </template>
 <script>
+import _ from "lodash";
+
 import LayerMenuItem from "@/components/LayerMenuItem";
 
 export default {
@@ -47,10 +54,22 @@ export default {
   },
   data: function() {
     return {
-      expanded: false
+      expanded: false,
+      timeoutId: undefined
     };
   },
   methods: {
+    handleLayerGroupHover(e) {
+      if (e.type == "mouseenter") {
+        if (this.timeoutId !== undefined) {
+          window.clearTimeout(this.timeoutId);
+          this.timeoutId = undefined;
+        }
+        this.expanded = true;
+      } else if (e.type == "mouseleave") {
+        this.timeoutId = _.delay(() => (this.expanded = false), 2000);
+      }
+    },
     handleLayerGroupClick() {
       this.expanded = !this.expanded;
     },
@@ -69,6 +88,8 @@ export default {
 
   background: $light-orange;
   transition: height 1000ms ease-out;
+
+  pointer-events: auto;
 }
 
 .layer-group:first-of-type {
@@ -86,6 +107,8 @@ export default {
   overflow: hidden;
   height: 1.5rem;
   border-color: $dark-grey;
+  border-radius: 0 0 3px 3px;
+  border-top: 0;
 }
 .layer-group__title > * > .action-button__text {
   color: $dark-grey !important;

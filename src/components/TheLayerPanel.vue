@@ -50,5 +50,6 @@ export default {
   flex-wrap: nowrap;
   display: flex;
   align-items: flex-start;
+  pointer-events: none;
 }
 </style>

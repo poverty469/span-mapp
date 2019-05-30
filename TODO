@@ -3,7 +3,9 @@ Map Components:
     ✔ Implement legend @done(19-05-25 14:17)
     ✔ Order multiple legends by draw order on map @done(19-05-26 00:12)
   
-    Layer Selection:
+    Layer Panel:
+      ☐ Straighten out border radius on top corners
+      ☐ Add get involved links to end of layer lists
       ☐ Connect possible layers
       ☐ Connect currently active layers from map
       ☐ Emit activate and deactivate
