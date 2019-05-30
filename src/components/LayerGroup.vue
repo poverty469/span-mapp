@@ -83,32 +83,33 @@ export default {
 .layer-group {
   display: inline-block;
   height: fit-content;
+  max-height: 1.5rem;
   margin-right: 15px;
   overflow: hidden;
 
   background: $light-orange;
-  transition: height 1000ms ease-out;
+  transition: all 1000ms ease-out;
 
   pointer-events: auto;
+
+  border: 2px solid $dark-grey;
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
 }
 
 .layer-group:first-of-type {
   margin-left: 15px;
 }
 .layer-group--expanded {
-  overflow: visible;
+  max-height: 30rem;
+  transition: all 1000ms ease-out;
 }
 .layer-group--expanded > .layer-group__title {
-  height: 100%;
-  transition: height 1000ms ease-out;
+  // height: 100%;
 }
 
 .layer-group__title {
-  overflow: hidden;
-  height: 1.5rem;
-  border-color: $dark-grey;
-  border-radius: 0 0 3px 3px;
-  border-top: 0;
+  border: 0 solid $dark-grey;
 }
 .layer-group__title > * > .action-button__text {
   color: $dark-grey !important;
