@@ -28,7 +28,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .action-button__container {
   position: relative;
   width: fit-content;

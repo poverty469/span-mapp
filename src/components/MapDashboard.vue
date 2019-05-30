@@ -12,6 +12,10 @@
     >
       <map-legend-bar v-show="!bare" :layers="activeData"></map-legend-bar
     ></mb-map>
+    <the-layer-panel
+      v-show="!bare"
+      @toggleLayer="handleToggleLayer"
+    ></the-layer-panel>
     <transition name="slide-left">
       <info-bar v-show="!bare" class="map-dashboard__info-bar"></info-bar>
     </transition>
@@ -24,6 +28,7 @@ import _ from "lodash";
 import MbMap from "@/components/MbMap";
 import MapLegendBar from "@/components/MapLegendBar";
 import InfoBar from "@/components/InfoBar";
+import TheLayerPanel from "@/components/TheLayerPanel";
 
 import geographies from "@/assets/geographies";
 
@@ -32,7 +37,8 @@ export default {
   components: {
     MapLegendBar,
     MbMap,
-    InfoBar
+    InfoBar,
+    TheLayerPanel
   },
   props: {
     // Id of the mapbox map
@@ -82,7 +88,7 @@ export default {
       mapPadding: {
         top: 50,
         right: 50 + 10, // + 50 padding + 10 px to accomodate right shift into info bar
-        bottom: 50,
+        bottom: 25,
         left: 50 // + <50 padding
       }
     };
@@ -120,6 +126,9 @@ export default {
       prev != this.mapPadding.left
         ? _.delay(() => window.dispatchEvent(new Event("resize")), 50)
         : null;
+    },
+    handleToggleLayer(layerTitle) {
+      // TODO: add or remove the layer associated with the title from the active data list
     }
   },
   computed: {
