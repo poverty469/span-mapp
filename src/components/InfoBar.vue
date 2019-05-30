@@ -1,19 +1,23 @@
 <template>
   <section class="info-bar">
-    <h1 class="info-bar__title">{{ activeFeature.title }}</h1>
-    <hr class="info-bar__title-divider" />
-    <button @click="handleTestButton">change data</button>
-    <donut-chart
-      class="donut-chart"
-      :chart-data="{ labels, datasets }"
-      :options="options"
-    ></donut-chart>
-    <bar-chart
-      class="bar-chart"
-      :chart-data="{ labels, datasets }"
-      :options="options"
-    ></bar-chart>
-    <density-chart :classified="true"></density-chart>
+    <div class="info-bar__header">
+      <h1 class="info-bar__title">{{ activeFeature.title }}</h1>
+      <hr class="info-bar__title-divider" />
+    </div>
+    <div class="info-bar__body">
+      <button @click="handleTestButton">change data</button>
+      <donut-chart
+        class="donut-chart"
+        :chart-data="{ labels, datasets }"
+        :options="options"
+      ></donut-chart>
+      <bar-chart
+        class="bar-chart"
+        :chart-data="{ labels, datasets }"
+        :options="options"
+      ></bar-chart>
+      <density-chart :classified="true"></density-chart>
+    </div>
   </section>
 </template>
 <script>
@@ -133,6 +137,18 @@ export default {
   box-shadow: $standard-box-shadow;
 }
 
+.info-bar__body {
+  width: 100%;
+  padding-top: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  flex-grow: 5;
+  overflow: auto;
+}
+
 .info-bar__title {
   @include char-style($info-bar-title...);
   margin: 20px 10px;
@@ -141,8 +157,9 @@ export default {
 
 .info-bar__title-divider {
   width: 100%;
-  height: 2px;
-  margin-bottom: 20px;
+  height: 1px;
+  border-color: transparent;
+  background: $dark-grey;
 }
 
 .donut-chart,
