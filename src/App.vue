@@ -154,7 +154,7 @@ body {
   left: 0;
   width: $app-width;
 
-  z-index: z("main-map");
+  z-index: z("main-map-dashboard");
 }
 
 .the-footer {

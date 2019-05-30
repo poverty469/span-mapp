@@ -21,6 +21,7 @@ $action-button: 700, 1.2rem, $bright-red;
 $legend-title: 700, 1rem, $dark-grey;
 $legend-item-label: 700, 1rem, $dark-grey;
 $info-bar-title: 700, 1.5rem, $dark-grey;
+$layer-menu-item: 500, 1.3rem, $dark-grey;
 
 @mixin char-style($weight, $size, $color, $lh: false, $all-caps: false) {
   font-size: $size;
@@ -71,7 +72,7 @@ $z-indexes: (
   "router-view",
   "site-header",
   "site-footer",
-  "main-map"
+  "main-map-dashboard"
 );
 
 // Mapbox Static Sizes
