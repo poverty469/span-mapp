@@ -62,7 +62,8 @@ export default {
   data: function() {
     return {
       map: undefined, // The mapbox map
-      activeLayers: []
+      activeLayers: [],
+      mapControlsAdded: false
     };
   },
   computed: {
@@ -73,7 +74,11 @@ export default {
   },
   watch: {
     bare: {
-      handler: function() {
+      handler: function(bare) {
+        if (!this.mapControlsAdded && !bare) {
+          this.addControls();
+          this.mapControlsAdded = true;
+        }
         // Make the map always reactive, e.g. slides when visiting /map
         _.delay(() => window.dispatchEvent(new Event("resize")), 50);
       }
@@ -117,29 +122,31 @@ export default {
           [-107.721240134848074, 53.181822152409069]
         ]
       });
-
+    },
+    /**
+     * Adds the interaction controls to the map.
+     */
+    addControls() {
       // Add attribution button
       this.map.addControl(
         new mb.AttributionControl({
           compact: true
         })
       );
-    },
-    /**
-     * Adds the interaction controls to the map.
-     */
-    addControls() {
+
       this.map.addControl(
         new mb.ScaleControl({
           maxWidth: 80,
           unit: "imperial"
-        })
+        }),
+        "bottom-right"
       );
 
       this.map.addControl(
         new mb.NavigationControl({
           showCompass: false
-        })
+        }),
+        "top-right"
       );
     },
     /**

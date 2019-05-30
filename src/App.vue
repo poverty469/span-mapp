@@ -220,28 +220,4 @@ body {
   transform: translateX(#{$righter-width});
   opacity: 0;
 }
-
-/* Mapbox styling */
-.mapboxgl-ctrl-attrib.mapboxgl-compact {
-  margin: 0 !important;
-}
-
-.mapboxgl-ctrl-scale {
-  border-width: 2px;
-  border-style: solid;
-}
-
-.mapboxgl-ctrl-group:not(:empty) {
-  box-shadow: 0 0 0 2px $dark-grey !important;
-  border-radius: 0;
-}
-
-.mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-out {
-  transform: translateY(2px);
-}
-
-.mapboxgl-ctrl-group > button + button {
-  outline: 2px solid $dark-grey;
-  border-top: 0 !important;
-}
 </style>

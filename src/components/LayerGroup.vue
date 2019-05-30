@@ -71,7 +71,9 @@ export default {
       }
     },
     handleLayerGroupClick() {
-      this.expanded = !this.expanded;
+      // this.expanded = !this.expanded;
+      // Do nothing, common user interaction is click to open.
+      // But if immediately started opening on hover, click closes
     },
     handleLayerMenuItemClick(layerTitle) {
       this.$emit("toggleLayer", layerTitle);
