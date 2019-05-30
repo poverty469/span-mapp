@@ -95,8 +95,8 @@ $legends-bar-margin: 10px;
 .map__legends-bar {
   position: absolute;
   left: 0;
-  top: 0;
-  height: 100%;
+  bottom: 0;
+  height: calc(100% - 28px); // Minus height of layer panel
   margin: 0 $legends-bar-margin 0 0;
   margin-left: 5px; // Add padding-left and width together
   overflow-y: scroll;
@@ -117,6 +117,7 @@ $legends-bar-margin: 10px;
 /* Track */
 .map__legends-bar::-webkit-scrollbar-track {
   border-radius: 0px; // 10
+  margin: 28px 0;
 }
 
 /* Handle */
