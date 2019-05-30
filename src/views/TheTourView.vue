@@ -13,6 +13,7 @@
         class="the-tour-dashboard__modal"
         @before-open="beforeModalOpen"
         @before-close="beforeModalClose"
+        @opened="afterModalOpen"
       >
         <the-tour-dashboard class="the-tour-dashboard"></the-tour-dashboard>
       </modal>
@@ -23,32 +24,29 @@
 <script>
 import TheTourSplash from "@/components/TheTourSplash.vue";
 import TheTourDashboard from "@/components/TheTourDashboard.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "TheTourView",
   props: {},
-  data: function() {
-    return {
-      tourInProgress: false
-    };
-  },
   components: {
     TheTourSplash,
     TheTourDashboard
   },
   methods: {
     handleStartTour() {
-      this.tourInProgress = true;
       this.$modal.show("the-tour-dashboard");
+      this.$store.dispatch("startTour");
     },
-    beforeModalOpen(e) {},
+    beforeModalOpen() {},
     beforeModalClose(e) {
       this.$router.push("/map");
       e.stop();
-    }
+    },
+    afterModalOpen() {}
   },
-  mounted: function() {
-    // this.$modal.show("the-tour-dashboard");
+  computed: {
+    ...mapGetters(["tourInProgress"])
   }
 };
 </script>
@@ -73,6 +71,7 @@ export default {
   position: relative !important; // Overrides modal styling
   height: 100% !important;
   width: 100% !important;
+  background: rgba(255, 255, 255, 0.75);
 }
 
 .the-tour-dashboard__modal > .v--modal-background-click {
@@ -95,6 +94,6 @@ $modal-width-padding: calc((100vw - #{$modal-width}));
   bottom: calc(#{$modal-width-padding} / 2) !important;
 
   background: $light-orange;
-  box-shadow: 0 0px 21px 2px rgba(27, 33, 58, 0.4) !important;
+  box-shadow: 5px 5px 8px 1px rgba(27, 33, 58, 0.4) !important;
 }
 </style>

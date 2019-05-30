@@ -49,8 +49,6 @@ export default {
 
 .action-button__text {
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
 
   padding: 0 0.5rem;
   @include char-style($action-button...);

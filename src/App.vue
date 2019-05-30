@@ -23,6 +23,7 @@
       class="main-map-dashboard"
       :dataLoaded="dataLoaded"
       :activeData="activeData"
+      :bare="!mapIsFocused && !mapVisited"
     ></map-dashboard>
     <the-footer class="the-footer"></the-footer>
   </div>
@@ -92,7 +93,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["appLoading", "dataLoaded"])
+    ...mapGetters(["appLoading", "dataLoaded", "mapVisited"]),
+    mapIsFocused: function() {
+      return this.$route.name === "map"; // TODO: make "map" a value pulled in from the router object
+    }
   }
 };
 </script>
@@ -142,6 +146,9 @@ body {
 
 .main-map-dashboard {
   position: absolute;
+  display: inline-grid;
+  grid-auto-flow: dense;
+  grid-template-columns: auto 250px;
   top: $header-height;
   bottom: $footer-height;
   left: 0;
@@ -199,6 +206,18 @@ body {
   transition: opacity 250ms;
 }
 .fade-quick-enter, .fade-quick-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 250ms ease-in;
+  transform: translateX(0);
+  opacity: 1;
+}
+.slide-left-enter, .slide-left-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  transition: all 250ms ease-out;
+  transform: translateX(#{$righter-width});
   opacity: 0;
 }
 

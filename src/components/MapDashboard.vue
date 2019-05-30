@@ -1,13 +1,20 @@
 <template>
-  <div>
+  <div class="map-dashboard">
     <mb-map
+      class="map-dashboard__map"
       :mapId="mapId"
       :activeData="activeData"
       @mapLoaded="handleMapLoaded"
       @featureHovered="handleFeatureHovered"
+      :bare="bare"
+      :mapPadding="mapPadding"
+      :class="{ 'map-dashboard__map--expanded': bare }"
+    >
+      <map-legend-bar v-show="!bare" :layers="activeData"></map-legend-bar
     ></mb-map>
-    <map-legend-bar :layers="activeData"></map-legend-bar>
-    <map-sidebar></map-sidebar>
+    <transition name="slide-left">
+      <info-bar v-show="!bare" class="map-dashboard__info-bar"></info-bar>
+    </transition>
   </div>
 </template>
 
@@ -16,7 +23,7 @@ import _ from "lodash";
 
 import MbMap from "@/components/MbMap";
 import MapLegendBar from "@/components/MapLegendBar";
-import MapSidebar from "@/components/MapSidebar";
+import InfoBar from "@/components/InfoBar";
 
 import geographies from "@/assets/geographies";
 
@@ -25,7 +32,7 @@ export default {
   components: {
     MapLegendBar,
     MbMap,
-    MapSidebar
+    InfoBar
   },
   props: {
     // Id of the mapbox map
@@ -60,12 +67,38 @@ export default {
 
         return !(geogIsDistricts && geogIsCounties);
       }
+    },
+    bare: {
+      type: Boolean,
+      required: false,
+      default: function() {
+        return false;
+      }
     }
   },
   data: function() {
     return {
-      hoveredFeature: {}
+      hoveredFeature: {},
+      mapPadding: {
+        top: 50,
+        right: 50 + 10, // + 50 padding + 10 px to accomodate right shift into info bar
+        bottom: 50,
+        left: 50 // + <50 padding
+      }
     };
+  },
+  watch: {
+    activeData: {
+      handler: function() {
+        this.resizeMapForLegendBar();
+      },
+      deep: true
+    },
+    bare: {
+      handler: function() {
+        this.resizeMapForLegendBar();
+      }
+    }
   },
   methods: {
     handleMapLoaded: function() {
@@ -75,6 +108,18 @@ export default {
     },
     handleFeatureHovered(feature) {
       this.hoveredFeature = feature;
+    },
+    resizeMapForLegendBar() {
+      const prev = this.mapPadding.left;
+      if (this.bare || this.activeData.length === 0) {
+        this.mapPadding.left = 50;
+      } else {
+        this.mapPadding.left = 200;
+      }
+
+      prev != this.mapPadding.left
+        ? _.delay(() => window.dispatchEvent(new Event("resize")), 50)
+        : null;
     }
   },
   computed: {
@@ -103,17 +148,29 @@ export default {
         ? this.hoveredFeature.properties.NAME
         : "";
     }
-  },
-  watch: {
-    activeGeographyId: {
-      handler: function(curr, prev) {
-        // change active data to be represented in current geography
-        // remove layers of old geography
-        // add layers of current geography with current data
-      }
-    }
   }
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+$map-width: calc(100vw + #{$map-right-shift});
+
+.map-dashboard__map {
+  transition: all 250ms ease-in;
+  width: calc(#{$map-width} - #{$righter-width});
+  // grid-column-end: 2;
+  // grid-column-start: 1;
+}
+
+.map-dashboard__map--expanded {
+  transition: all 250ms ease-out;
+  width: calc(#{$map-width});
+  // grid-column-end: 3;
+}
+
+.map-dashboard__info-bar {
+  width: $righter-width;
+  // grid-column-start: 2;
+  // grid-column-end: 3;
+}
+</style>

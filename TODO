@@ -17,7 +17,8 @@ Map Components:
     
   Statistics Panel:
 
-  
+Store:
+  ☐ Update main map padding to be centered when in tour mode
 
 Explore mode:
 
@@ -40,3 +41,8 @@ Data Management:
   ☐ STATISTICS TOOL IN QGIS EXPORTED WRONG MIN AND MAX AND AS STRINGS, CORRECT THIS!
   ✔ Write required standard for geometry IDs, across all geographies @created(19-05-09 21:55) @done(19-05-25 20:11)
     ✔ Fix ids in percentBeloewPoverty_counties.json and in geographies/counties.js -> choropleth will work after @created(19-05-09 21:55) @done(19-05-25 20:11)
+
+Bugs:
+  ☐ Width of splash page extends beyond 100vw -- add overflow hidden to body
+  ☐ Map doesn't resize after infobar has finished sliding into the viewport
+    - Part of focused area in map stays out of bounds

@@ -46,6 +46,17 @@ export default {
       default: function() {
         return [];
       }
+    },
+    bare: {
+      type: Boolean,
+      required: false,
+      default: function() {
+        return false;
+      }
+    },
+    mapPadding: {
+      type: Object,
+      required: true
     }
   },
   data: function() {
@@ -60,14 +71,14 @@ export default {
       return geographies.washington.bounds;
     }
   },
-  // watch: {
-  //   activeData: {
-  //     handler: function(currentData) {
-  //       this.updateDrawnLayers(currentData);
-  //     },
-  //     immediate: true
-  //   }
-  // },
+  watch: {
+    bare: {
+      handler: function() {
+        // Make the map always reactive, e.g. slides when visiting /map
+        _.delay(() => window.dispatchEvent(new Event("resize")), 50);
+      }
+    }
+  },
   mounted: function() {
     this.createMap();
 
@@ -93,7 +104,7 @@ export default {
         style: mapSupport.getBaseMap(),
         bounds: geographies.washington.bounds,
         fitBoundsOptions: {
-          padding: this.$store.getters.mapFocusPadding
+          padding: this.mapPadding
         },
         attributionControl: false,
         pitchWithRotate: false,
@@ -188,7 +199,7 @@ export default {
      */
     zoomToBounds(bounds) {
       this.map.fitBounds(bounds, {
-        padding: this.$store.getters.mapFocusPadding
+        padding: this.mapPadding
       });
     },
     /**
