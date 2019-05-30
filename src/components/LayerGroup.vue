@@ -7,7 +7,6 @@
   >
     <div class="action-button__container layer-group__title">
       <a
-        href="#"
         aria-haspopup="true"
         aria-expanded="false"
         @click="handleLayerGroupClick"
@@ -102,10 +101,12 @@ export default {
 .layer-group:first-of-type {
   margin-left: 15px;
 }
+
 .layer-group--expanded {
   max-height: 30rem;
   transition: all 1000ms ease-out;
 }
+
 .layer-group--expanded > .layer-group__title {
   // height: 100%;
 }
@@ -113,6 +114,11 @@ export default {
 .layer-group__title {
   border: 0 solid $dark-grey;
 }
+
+.layer-group__title {
+  cursor: default;
+}
+
 .layer-group__title > * > .action-button__text {
   color: $dark-grey !important;
 }

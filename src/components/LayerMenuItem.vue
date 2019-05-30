@@ -41,6 +41,7 @@ export default {
 
   @include char-style($layer-menu-item...);
   text-transform: capitalize;
+  cursor: pointer;
 }
 
 .layer-menu-item:hover {
@@ -48,7 +49,7 @@ export default {
 }
 
 .layer-menu-item--active {
-  box-shadow: 0px 0px 0px 0px $shadow;
+  box-shadow: inset 2px 2px 5px $shadow;
   transition: all 150ms ease-out;
   background: $dark-orange;
 }
