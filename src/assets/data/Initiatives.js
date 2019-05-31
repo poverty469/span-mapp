@@ -24,5 +24,3 @@ export const INITIATIVES = [
     layers: []
   }
 ];
-
-console.log(INITIATIVES);

@@ -109,15 +109,11 @@ export default {
       this.activeData.push(layer);
     },
     handleHideLayer(layer) {
-      const indexOfLayer = this.activeData.indexOf(
-        activeLayer => activeLayer.title === layer.title
+      this.activeData = this.activeData.filter(
+        activeLayer =>
+          activeLayer.title !== layer.title &&
+          activeLayer.attributeId !== layer.attributeId
       );
-
-      if (indexOfLayer < 0 || indexOfLayer > this.activeData.length - 1) {
-        throw new Error("IndexOutOfBounds", indexOfLayer);
-      }
-
-      this.activeData = this.activeData.splice(indexOfLayer, 1);
     },
     handleToggleLayer(toggledLayer) {
       let indexOfToggledLayer = this.activeData.indexOf(

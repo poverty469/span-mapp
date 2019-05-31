@@ -77,8 +77,6 @@ export default {
     handleLayerMenuItemClick(active, index) {
       const layer = this.layers[index];
 
-      console.log(active, index, layer, this.layers);
-
       if (active) {
         this.$emit("showLayer", layer);
       } else {

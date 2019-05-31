@@ -1,5 +1,5 @@
 <template>
-  <ul :v-if="layerGroups > 0" class="the-layer-panel">
+  <ul :v-if="INITIATIVES.length > 0" class="the-layer-panel">
     <layer-group
       v-for="(layerGroup, index) in INITIATIVES"
       :key="`layer-group-${layerGroup.title}-${index}`"
