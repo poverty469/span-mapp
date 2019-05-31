@@ -31,14 +31,20 @@
             </tour-info>
           </slide>
         </hooper>
-        <button @click.prevent="handlePrev">Prev</button>
-        <button @click.prevent="handleNext">Next</button>
-        <button
-          v-for="i in slideIndices"
-          :key="i"
-          @click.prevent="handleSlideIndicatorClick(i)"
-        >
-        </button>
+        <div class="nav__container">
+          <button class= "nav__buttons" @click.prevent="handlePrev">Prev</button>
+          <button class= "nav__buttons" @click.prevent="handleNext">Next</button>
+        </div>
+        <div class="progress__container">
+          <button
+            v-for="i in slideIndices"
+            class="nav__progress"
+            :class="{'activeSlide': i == activeTourSlideIndex}"
+            :key="i"
+            @click.prevent="handleSlideIndicatorClick(i)"
+          >
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -195,5 +201,45 @@ $tour__map-margin-left: 22px;
   display: inline-block;
   width: 250px;
   height: 500px;
+}
+
+.nav__buttons {
+  background-color: $dark-orange;
+  text-transform: uppercase;
+  padding: 1em;
+  font-size: 16px;
+  width: 8vh;
+  border-radius: 5px;
+  margin: 3vw;
+}
+
+.nav__buttons:hover {
+  background-color: $dark-orange--shadow;
+  color: white;
+}
+
+.nav__container {
+  position: relative;
+  text-align: center;
+  top: 8vh; 
+}
+
+.progress__container {
+  position: relative;
+  text-align: center;
+  top: 4vh;
+}
+
+.nav__progress {
+  background: inherit;
+  border-color: $dark-grey;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  margin: 6px;
+}
+
+.activeSlide {
+  background: white;
 }
 </style>
