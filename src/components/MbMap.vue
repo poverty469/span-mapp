@@ -45,6 +45,23 @@ export default {
       required: true,
       default: function() {
         return [];
+      },
+      validator: function(datasets) {
+        // Validate whether or not there is only one geography type in the datasets
+        let geogIsDistricts = false;
+        let geogIsCounties = false;
+
+        // If a type if not found, check to see if it exists
+        datasets.forEach(data => {
+          !geogIsDistricts
+            ? (geogIsDistricts = data.geographyId === geographies.districts.id)
+            : null;
+          !geogIsCounties
+            ? (geogIsCounties = data.geographyId === geographies.counties.id)
+            : null;
+        });
+
+        return !(geogIsDistricts && geogIsCounties);
       }
     },
     bare: {

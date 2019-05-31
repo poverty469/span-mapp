@@ -24,7 +24,7 @@ export default {
   methods: {
     handleMenuItemClick() {
       this.active = !this.active;
-      this.$emit("layerMenuItemClick", this.title);
+      this.$emit("layerMenuItemClick", this.active);
     }
   }
 };

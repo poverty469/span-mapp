@@ -14,7 +14,8 @@
     ></mb-map>
     <the-layer-panel
       v-show="!bare"
-      @toggleLayer="handleToggleLayer"
+      @showLayer="handleShowLayer"
+      @hideLayer="handleHideLayer"
     ></the-layer-panel>
     <transition name="slide-left">
       <info-bar v-show="!bare" class="map-dashboard__info-bar"></info-bar>
@@ -29,6 +30,8 @@ import MbMap from "@/components/MbMap";
 import MapLegendBar from "@/components/MapLegendBar";
 import InfoBar from "@/components/InfoBar";
 import TheLayerPanel from "@/components/TheLayerPanel";
+
+import { Layers, LayersList } from "@/assets/data/Layers";
 
 import geographies from "@/assets/geographies";
 
@@ -50,30 +53,6 @@ export default {
       type: Boolean,
       required: true
     },
-    activeData: {
-      type: Array,
-      required: true,
-      default: function() {
-        return [];
-      },
-      validator: function(datasets) {
-        // Validate whether or not there is only one geography type in the datasets
-        let geogIsDistricts = false;
-        let geogIsCounties = false;
-
-        // If a type if not found, check to see if it exists
-        datasets.forEach(data => {
-          !geogIsDistricts
-            ? (geogIsDistricts = data.geographyId === geographies.districts.id)
-            : null;
-          !geogIsCounties
-            ? (geogIsCounties = data.geographyId === geographies.counties.id)
-            : null;
-        });
-
-        return !(geogIsDistricts && geogIsCounties);
-      }
-    },
     bare: {
       type: Boolean,
       required: false,
@@ -84,6 +63,7 @@ export default {
   },
   data: function() {
     return {
+      activeData: [],
       hoveredFeature: {},
       mapPadding: {
         top: 50,
@@ -127,7 +107,31 @@ export default {
         ? _.delay(() => window.dispatchEvent(new Event("resize")), 50)
         : null;
     },
-    handleToggleLayer(layerTitle) {
+    handleShowLayer(layer) {
+      this.activeData.push(layer);
+    },
+    handleHideLayer(layer) {
+      const indexOfLayer = this.activeData.indexOf(
+        activeLayer => activeLayer.title === layer.title
+      );
+
+      if (indexOfLayer < 0 || indexOfLayer > this.activeData.length - 1) {
+        throw new Error("IndexOutOfBoudnds", indexOfLayer);
+      }
+
+      this.activeData = this.activeData.splice(indexOfLayer, 1);
+    },
+    handleToggleLayer(toggledLayer) {
+      let indexOfToggledLayer = this.activeData.indexOf(
+        layer => layer.title === toggledLayer.title
+      );
+
+      if (indexOfToggledLayer > -1) {
+        // If not an active layer
+        this.activeData.push(Layers[indexOfToggledLayer]);
+      } else {
+        this.activeData.splice(indexOfToggledLayer, 1); // Removes from list
+      }
       // TODO: add or remove the layer associated with the title from the active data list
     }
   },

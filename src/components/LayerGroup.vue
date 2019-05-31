@@ -20,7 +20,7 @@
           v-for="(layer, index) in layers"
           :key="`${title}-menu-item-${index}`"
           v-bind="layer"
-          @layerMenuItemClick="handleLayerMenuItemClick"
+          @layerMenuItemClick="handleLayerMenuItemClick(arguments[0], index)"
         ></layer-menu-item>
       </ul>
     </div>
@@ -74,8 +74,16 @@ export default {
       // Do nothing, common user interaction is click to open.
       // But if immediately started opening on hover, click closes
     },
-    handleLayerMenuItemClick(layerTitle) {
-      this.$emit("toggleLayer", layerTitle);
+    handleLayerMenuItemClick(active, index) {
+      const layer = this.layers[index];
+
+      console.log(active, index, layer, this.layers);
+
+      if (active) {
+        this.$emit("showLayer", layer);
+      } else {
+        this.$emit("hideLayer", layer);
+      }
     }
   }
 };

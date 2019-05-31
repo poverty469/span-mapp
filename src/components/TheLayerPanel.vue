@@ -3,8 +3,10 @@
     <layer-group
       v-for="(layerGroup, index) in layerGroups"
       :key="`layer-group-${index}`"
-      v-bind="layerGroup"
-      @toggleLayer="handleToggleLayer"
+      :title="layerGroup.title"
+      :layers="layerGroup.layers"
+      @showLayer="handleShowLayer"
+      @hideLayer="handleHideLayer"
     >
     </layer-group>
   </ul>
@@ -12,32 +14,28 @@
 <script>
 import LayerGroup from "@/components/LayerGroup";
 
+import INITITIATIVES from "@/assets/data/Initiatives";
+
 export default {
   name: "TheLayerPanel",
   components: { LayerGroup },
   data: function() {
     return {
-      layerGroups: [
-        { title: "basic needs", layers: [{ title: "bn One" }] },
-        {
-          title: "criminal justice",
-          layers: [
-            { title: "cj One" },
-            { title: "cj One" },
-            { title: "cj One" }
-          ]
-        },
-        {
-          title: "state revenue",
-          layers: [{ title: "bn One" }, { title: "cj One" }]
-        },
-        { title: "consumer protection", layers: [{ title: "bn One" }] }
-      ]
+      layerGroups: []
     };
+  },
+  created: function() {
+    this.layerGroups = INITITIATIVES;
   },
   methods: {
     handleToggleLayer(layerTitle) {
       this.$emit("toggleLayer", layerTitle);
+    },
+    handleShowLayer(layer) {
+      this.$emit("showLayer", layer);
+    },
+    handleHideLayer(layer) {
+      this.$emit("hideLayer", layer);
     }
   }
 };
