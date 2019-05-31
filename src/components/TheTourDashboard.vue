@@ -25,10 +25,8 @@
           >
             {{ slide.title }}
             <tour-info 
-              v-for="object in arr"
-              :key="`tour-info-${object}`"
-              :narrative="object.Obj"
-              :tutorial="object.tut"
+              :narrative="activeSlide.narrativeHtml"
+              :tutorial="activeSlide.tutorialHtml"
             >
             </tour-info>
           </slide>
@@ -73,8 +71,7 @@ export default {
       tourSlides: tourSlides,
       activeTourSlideIndex: 0,
       mapLoaded: false,
-      mapVisible: false,
-      arr: [{Obj: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt", tut: "Helpful Guide Area"}]
+      mapVisible: false
     };
   },
   methods: {
@@ -99,6 +96,7 @@ export default {
     },
     updateCarousel(payload) {
       this.activeTourSlideIndex = payload.currentSlide;
+      console.log(payload.currentSlide)
     }
   },
   computed: {
@@ -122,7 +120,8 @@ export default {
     },
     slideIndices: function() {
       return _.range(this.tourSlides.length);
-    }
+    },
+
   }
 };
 </script>
