@@ -2,7 +2,7 @@ import LayersDb from "@/assets/data/Layers";
 
 const Layers = LayersDb.Layers;
 
-const INITIATIVES = [
+export const INITIATIVES = [
   {
     id: 0,
     title: "basic needs",
@@ -26,6 +26,3 @@ const INITIATIVES = [
 ];
 
 console.log(INITIATIVES);
-
-// debugger;
-export default { INITIATIVES };

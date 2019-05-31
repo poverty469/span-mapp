@@ -44,9 +44,9 @@ export default {
       required: true,
       default: function() {
         return [
-          { title: "Test One" },
-          { title: "Test Two" },
-          { title: "Test Three" }
+          { title: "FAILED IMPORT" },
+          { title: "PLEASE REFRESH" },
+          { title: "THE PAGE" }
         ];
       }
     }
@@ -135,6 +135,8 @@ export default {
 }
 
 .layer-group__menu {
-  margin: 10px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

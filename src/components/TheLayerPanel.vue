@@ -1,8 +1,8 @@
 <template>
-  <ul class="the-layer-panel">
+  <ul :v-if="layerGroups > 0" class="the-layer-panel">
     <layer-group
-      v-for="(layerGroup, index) in layerGroups"
-      :key="`layer-group-${index}`"
+      v-for="(layerGroup, index) in INITIATIVES"
+      :key="`layer-group-${layerGroup.title}-${index}`"
       :title="layerGroup.title"
       :layers="layerGroup.layers"
       @showLayer="handleShowLayer"
@@ -13,19 +13,15 @@
 </template>
 <script>
 import LayerGroup from "@/components/LayerGroup";
-
-import INITITIATIVES from "@/assets/data/Initiatives";
+import { INITIATIVES } from "@/assets/data/initiatives.js";
 
 export default {
   name: "TheLayerPanel",
   components: { LayerGroup },
   data: function() {
     return {
-      layerGroups: []
+      INITIATIVES: INITIATIVES
     };
-  },
-  created: function() {
-    this.layerGroups = INITITIATIVES;
   },
   methods: {
     handleToggleLayer(layerTitle) {

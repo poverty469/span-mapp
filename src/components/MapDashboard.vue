@@ -31,9 +31,7 @@ import MapLegendBar from "@/components/MapLegendBar";
 import InfoBar from "@/components/InfoBar";
 import TheLayerPanel from "@/components/TheLayerPanel";
 
-import { Layers, LayersList } from "@/assets/data/Layers";
-
-import geographies from "@/assets/geographies";
+import { Layers } from "@/assets/data/Layers";
 
 export default {
   name: "MapDashboard",
@@ -116,7 +114,7 @@ export default {
       );
 
       if (indexOfLayer < 0 || indexOfLayer > this.activeData.length - 1) {
-        throw new Error("IndexOutOfBoudnds", indexOfLayer);
+        throw new Error("IndexOutOfBounds", indexOfLayer);
       }
 
       this.activeData = this.activeData.splice(indexOfLayer, 1);
@@ -171,20 +169,15 @@ $map-width: calc(100vw + #{$map-right-shift});
 .map-dashboard__map {
   transition: all 250ms ease-in;
   width: calc(#{$map-width} - #{$righter-width});
-  // grid-column-end: 2;
-  // grid-column-start: 1;
 }
 
 .map-dashboard__map--expanded {
   transition: all 250ms ease-out;
   width: calc(#{$map-width});
-  // grid-column-end: 3;
 }
 
 .map-dashboard__info-bar {
   width: $righter-width;
-  // grid-column-start: 2;
-  // grid-column-end: 3;
 }
 
 .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl {

@@ -31,6 +31,7 @@ export default {
 </script>
 <style lang="scss">
 .layer-menu-item {
+  width: 75%;
   margin: 10px 0px;
   padding: 5px;
 
