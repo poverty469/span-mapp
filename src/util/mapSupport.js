@@ -1,5 +1,5 @@
 import _ from "lodash";
-import JsonColumnArrayQuery from "./JsonColumnArrayQuery";
+import JsonColumnArrayQuery from "@/util/JsonColumnArrayQuery.js";
 import { CustomPalette } from "@/util/CustomPalette.js";
 
 /**
@@ -20,7 +20,7 @@ class MapSupport {
         version: 8,
         sources: {},
         layers: [
-          {
+            {
             id: "background",
             type: "background",
             paint: {
