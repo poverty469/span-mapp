@@ -2,13 +2,6 @@
   <div id="app">
     <!-- temp tag to test loading states -->
     <div class="test-button-container">
-      <button
-        v-show="!appLoading"
-        class="test-button"
-        @click="forceToggleMapData()"
-      >
-        Toggle Map Data (don't click until washington outline loads)
-      </button>
       <button class="test-button" @click="forceLoad()">'Force load'</button>
     </div>
     <the-logo class="the-logo" rel="preload"></the-logo>
