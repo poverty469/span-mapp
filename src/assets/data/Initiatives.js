@@ -1,6 +1,6 @@
-import LayersDb from "@/assets/data/Layers";
+import LAYER_OBJECT from "@/assets/data/Layers";
 
-const Layers = LayersDb.Layers;
+const Layers = LAYER_OBJECT.LAYERS;
 
 export const INITIATIVES = [
   {

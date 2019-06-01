@@ -1,14 +1,13 @@
 <template>
   <div class="map-container">
     <div :id="mapId" class="map">
-      <span
-        v-for="(layer, index) in activeData"
-        :key="`${mapId}-layer-${index}`"
-      >
+      <span v-for="(layer, index) in layers" :key="`${mapId}-layer-${index}`">
         <!-- <keep-alive> -->
         <mb-layer
           v-bind="layer"
+          :active="isActive(layer)"
           :map="map"
+          :mapLoaded="mapLoaded"
           @featureHovered="handleFeatureHovered"
         ></mb-layer>
         <!-- </keep-alive> -->
@@ -26,11 +25,22 @@ import mbLayer from "@/components/MbLayer";
 
 import mapSupport from "@/util/mapSupport";
 
+import LAYER_OBJECT from "@/assets/data/Layers.js";
+
 import geographies from "@/assets/geographies";
 
 export default {
   name: "MbMap",
   components: { mbLayer },
+  data: function() {
+    return {
+      map: {}, // The mapbox map
+      activeLayers: [],
+      layers: LAYER_OBJECT.LAYERLIST,
+      mapControlsAdded: false,
+      mapLoaded: false
+    };
+  },
   props: {
     mapId: {
       // Unique id for instance of map
@@ -76,13 +86,6 @@ export default {
       required: true
     }
   },
-  data: function() {
-    return {
-      map: undefined, // The mapbox map
-      activeLayers: [],
-      mapControlsAdded: false
-    };
-  },
   computed: {
     boundsOfAllLayers() {
       // TODO: FIND THE MIN AND MAX COORDINATES OF ALL ACTIVE LAYERS
@@ -112,9 +115,23 @@ export default {
       this.initializeLayerSources();
       this.addBlackOutlineLayer(geographies.washington, "splash-page");
       this.$emit("mapLoaded");
+      this.mapLoaded = true;
     });
   },
   methods: {
+    isActive(layer) {
+      if (
+        this.activeData.find(
+          activeLayer =>
+            activeLayer.title === layer.title &&
+            activeLayer.attributeId === layer.attributeId
+        ) === undefined
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    },
     /**
      * Creates a map with an initial state.
      */

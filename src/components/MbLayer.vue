@@ -11,6 +11,14 @@ export default {
   name: "MbLayer",
   components: {},
   props: {
+    mapLoaded: {
+      type: Boolean,
+      required: true,
+      default: function() {
+        return false;
+      }
+    },
+    active: { type: Boolean, required: true },
     map: { type: Object, required: true },
     dataset: { type: Object, required: true },
     geographyId: { type: String, required: true },
@@ -45,6 +53,24 @@ export default {
       hoveredFeature: undefined
     };
   },
+  watch: {
+    active: {
+      handler: function(active) {
+        if (active) {
+          this.showLayer();
+        } else {
+          this.hideLayer();
+        }
+      }
+    },
+    mapLoaded: {
+      handler: function(mapLoaded) {
+        if (mapLoaded) {
+          this.addLayerToMap();
+        }
+      }
+    }
+  },
   methods: {
     addLayerToMap() {
       let layerId = this.layerId;
@@ -53,6 +79,9 @@ export default {
         id: layerId, // TODO: make unique layer ids for multiple usages of same source
         type: "fill",
         source: this.geographyId,
+        layout: {
+          visibility: "none"
+        },
         paint: {
           "fill-color": this.fillColor,
           // A conditional that changes opacity when the feature-state changes
@@ -70,6 +99,9 @@ export default {
         id: this.outlineId,
         type: "line",
         source: this.geographyId,
+        layout: {
+          visibility: "none"
+        },
         paint: {
           "line-color": this.outlineColor,
           "line-width": 2
@@ -78,6 +110,14 @@ export default {
 
       this.options.hoverEffect ? this.addHoverPopUps(layerId) : null;
       this.options.popUp ? this.addHoverEffect(layerId) : null;
+    },
+    showLayer() {
+      this.map.setLayoutProperty(this.layerId, "visibility", "visible");
+      this.map.setLayoutProperty(this.outlineId, "visibility", "visible");
+    },
+    hideLayer() {
+      this.map.setLayoutProperty(this.outlineId, "visibility", "none");
+      this.map.setLayoutProperty(this.layerId, "visibility", "none");
     },
     /**
      * Removes the provided layer from the map.
@@ -211,12 +251,6 @@ export default {
           )
         : this.options.fillColor;
     }
-  },
-  mounted: function() {
-    this.addLayerToMap();
-  },
-  beforeDestroy: function() {
-    this.removeLayerFromMap();
   }
 };
 </script>

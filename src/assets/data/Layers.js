@@ -2,7 +2,7 @@ import { MapTypes, SequentialPalettes } from "@/util/enums.js";
 import geographies from "@/assets/geographies";
 import povertyData from "@/assets/data/dataLayer";
 
-const Layers = {
+const layers = {
   percentFamiliesBelowPovertyLevel: {
     title: "below poverty",
     dataset: povertyData,
@@ -21,6 +21,6 @@ const Layers = {
   }
 };
 
-const LayerList = Object.values(Layers);
+const layerList = Object.values(layers);
 
-export default { Layers, LayerList };
+export default { LAYERS: layers, LAYERLIST: layerList };
