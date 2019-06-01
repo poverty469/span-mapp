@@ -2,13 +2,6 @@
   <div id="app">
     <!-- temp tag to test loading states -->
     <div class="test-button-container">
-      <button
-        v-show="!appLoading"
-        class="test-button"
-        @click="forceToggleMapData()"
-      >
-        Toggle Map Data (don't click until washington outline loads)
-      </button>
       <button class="test-button" @click="forceLoad()">'Force load'</button>
     </div>
     <the-logo class="the-logo" rel="preload"></the-logo>
@@ -22,7 +15,6 @@
       mapId="main-map"
       class="main-map-dashboard"
       :dataLoaded="dataLoaded"
-      :activeData="activeData"
       :bare="!mapIsFocused && !mapVisited"
     ></map-dashboard>
     <the-footer class="the-footer"></the-footer>
@@ -35,9 +27,7 @@ import TheHeader from "@/components/TheHeader.vue";
 import TheLogo from "@/components/TheLogo.vue";
 import MapDashboard from "@/components/MapDashboard.vue";
 
-import { MapTypes, SequentialPalettes } from "@/util/enums.js";
-import geographies from "@/assets/geographies";
-import povertyData from "@/assets/data/dataLayer";
+import Layers from "@/assets/data/Layers";
 
 import { mapGetters } from "vuex";
 
@@ -54,13 +44,7 @@ export default {
   },
   data: function() {
     return {
-      // Object with data layer and geography to be selected
-      activeData: [
-        // {
-        //   dataset: undefined,
-        //   geographyId: undefined
-        // }
-      ]
+      activeData: []
     };
   },
   methods: {
@@ -73,20 +57,8 @@ export default {
     },
     forceToggleMapData() {
       if (this.activeData.length == 0) {
-        this.activeData.push({
-          dataset: povertyData,
-          geographyId: geographies.counties.id,
-          attributeId: "HC03_VC161",
-          type: MapTypes.CHOROPLETH,
-          color: SequentialPalettes.RED_PURPLE
-        });
-        this.activeData.push({
-          dataset: povertyData,
-          geographyId: geographies.counties.id,
-          attributeId: "HC03_VC164",
-          type: MapTypes.CHOROPLETH,
-          color: SequentialPalettes.BLUE
-        });
+        this.activeData.push(Layers.percentFamiliesBelowPovertyLevel);
+        this.activeData.push(Layers.percentFamiliesBelowPovertyLevel);
       } else {
         this.activeData.pop();
       }

@@ -20,7 +20,7 @@
           v-for="(layer, index) in layers"
           :key="`${title}-menu-item-${index}`"
           v-bind="layer"
-          @layerMenuItemClick="handleLayerMenuItemClick"
+          @layerMenuItemClick="handleLayerMenuItemClick(arguments[0], index)"
         ></layer-menu-item>
       </ul>
     </div>
@@ -44,9 +44,9 @@ export default {
       required: true,
       default: function() {
         return [
-          { title: "Test One" },
-          { title: "Test Two" },
-          { title: "Test Three" }
+          { title: "FAILED IMPORT" },
+          { title: "PLEASE REFRESH" },
+          { title: "THE PAGE" }
         ];
       }
     }
@@ -74,8 +74,14 @@ export default {
       // Do nothing, common user interaction is click to open.
       // But if immediately started opening on hover, click closes
     },
-    handleLayerMenuItemClick(layerTitle) {
-      this.$emit("toggleLayer", layerTitle);
+    handleLayerMenuItemClick(active, index) {
+      const layer = this.layers[index];
+
+      if (active) {
+        this.$emit("showLayer", layer);
+      } else {
+        this.$emit("hideLayer", layer);
+      }
     }
   }
 };
@@ -89,7 +95,7 @@ export default {
   overflow: hidden;
 
   background: $light-orange;
-  transition: all 1000ms ease-out;
+  transition: all 750ms ease-out;
 
   pointer-events: auto;
 
@@ -101,18 +107,27 @@ export default {
 .layer-group:first-of-type {
   margin-left: 15px;
 }
+
 .layer-group--expanded {
   max-height: 30rem;
-  transition: all 1000ms ease-out;
+  transition: all 300ms ease-out;
 }
+
 .layer-group--expanded > .layer-group__title {
   // height: 100%;
 }
 
 .layer-group__title {
+  width: min-content !important;
   border: 0 solid $dark-grey;
 }
+
+.layer-group__title {
+  cursor: default;
+}
+
 .layer-group__title > * > .action-button__text {
+  white-space: nowrap;
   color: $dark-grey !important;
 }
 .layer-group--expanded > .layer-group__title:hover {
@@ -120,6 +135,8 @@ export default {
 }
 
 .layer-group__menu {
-  margin: 10px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

@@ -1,14 +1,13 @@
 <template>
   <div class="map-container">
     <div :id="mapId" class="map">
-      <span
-        v-for="(layer, index) in activeData"
-        :key="`${mapId}-layer-${index}`"
-      >
+      <span v-for="(layer, index) in layers" :key="`${mapId}-layer-${index}`">
         <!-- <keep-alive> -->
         <mb-layer
           v-bind="layer"
+          :active="isActive(layer)"
           :map="map"
+          :mapLoaded="mapLoaded"
           @featureHovered="handleFeatureHovered"
         ></mb-layer>
         <!-- </keep-alive> -->
@@ -26,11 +25,22 @@ import mbLayer from "@/components/MbLayer";
 
 import mapSupport from "@/util/mapSupport";
 
+import LAYER_OBJECT from "@/assets/data/Layers.js";
+
 import geographies from "@/assets/geographies";
 
 export default {
   name: "MbMap",
   components: { mbLayer },
+  data: function() {
+    return {
+      map: {}, // The mapbox map
+      activeLayers: [],
+      layers: LAYER_OBJECT.LAYERLIST,
+      mapControlsAdded: false,
+      mapLoaded: false
+    };
+  },
   props: {
     mapId: {
       // Unique id for instance of map
@@ -45,6 +55,23 @@ export default {
       required: true,
       default: function() {
         return [];
+      },
+      validator: function(datasets) {
+        // Validate whether or not there is only one geography type in the datasets
+        let geogIsDistricts = false;
+        let geogIsCounties = false;
+
+        // If a type if not found, check to see if it exists
+        datasets.forEach(data => {
+          !geogIsDistricts
+            ? (geogIsDistricts = data.geographyId === geographies.districts.id)
+            : null;
+          !geogIsCounties
+            ? (geogIsCounties = data.geographyId === geographies.counties.id)
+            : null;
+        });
+
+        return !(geogIsDistricts && geogIsCounties);
       }
     },
     bare: {
@@ -58,13 +85,6 @@ export default {
       type: Object,
       required: true
     }
-  },
-  data: function() {
-    return {
-      map: undefined, // The mapbox map
-      activeLayers: [],
-      mapControlsAdded: false
-    };
   },
   computed: {
     boundsOfAllLayers() {
@@ -95,9 +115,23 @@ export default {
       this.initializeLayerSources();
       this.addBlackOutlineLayer(geographies.washington, "splash-page");
       this.$emit("mapLoaded");
+      this.mapLoaded = true;
     });
   },
   methods: {
+    isActive(layer) {
+      if (
+        this.activeData.find(
+          activeLayer =>
+            activeLayer.title === layer.title &&
+            activeLayer.attributeId === layer.attributeId
+        ) === undefined
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    },
     /**
      * Creates a map with an initial state.
      */
