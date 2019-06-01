@@ -6,12 +6,15 @@ export const INITIATIVES = [
   {
     id: 0,
     title: "basic needs",
-    layers: [Layers.percentFamiliesBelowPovertyLevel]
+    layers: [
+      Layers.percentFamiliesBelowPovertyLevel,
+      Layers.percentPopulationBelowPovertyLevel
+    ]
   },
   {
     id: 1,
     title: "criminal justice",
-    layers: [Layers.secondLayer]
+    layers: []
   },
   {
     id: 2,

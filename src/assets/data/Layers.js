@@ -4,18 +4,18 @@ import povertyData from "@/assets/data/dataLayer";
 
 const layers = {
   percentFamiliesBelowPovertyLevel: {
-    title: "below poverty",
+    title: "families below poverty",
     dataset: povertyData,
     geographyId: geographies.counties.id,
     attributeId: "HC03_VC161",
     type: MapTypes.CHOROPLETH,
     color: SequentialPalettes.RED_PURPLE
   },
-  secondLayer: {
-    title: "second layer",
+  percentPopulationBelowPovertyLevel: {
+    title: "population below poverty",
     dataset: povertyData,
     geographyId: geographies.counties.id,
-    attributeId: "HC03_VC163",
+    attributeId: "HC03_VC176",
     type: MapTypes.CHOROPLETH,
     color: SequentialPalettes.GREEN
   }

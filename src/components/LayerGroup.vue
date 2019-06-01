@@ -118,6 +118,7 @@ export default {
 }
 
 .layer-group__title {
+  width: min-content !important;
   border: 0 solid $dark-grey;
 }
 
@@ -126,6 +127,7 @@ export default {
 }
 
 .layer-group__title > * > .action-button__text {
+  white-space: nowrap;
   color: $dark-grey !important;
 }
 .layer-group--expanded > .layer-group__title:hover {

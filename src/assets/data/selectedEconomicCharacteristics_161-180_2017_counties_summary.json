@@ -2335,7 +2335,7 @@
         ]
     },
     "HC03_VC176": {
-        "title": "Percent; PERCENTAGE OF FAMILIES AND PEOPLE WHOSE INCOME IN THE PAST 12 MONTHS IS BELOW THE POVERTY LEVEL - All people - 18 years and over",
+        "title": "Population below poverty level (%)",
         "stats": {
             "COUNT": 39,
             "EMPTY": 0,
