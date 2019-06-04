@@ -5,7 +5,7 @@
       <h2 v-show="activeSlide.subtitle" class="tour__subtitle">
         {{ activeSlide.subtitle }}
       </h2>
-      <router-link :to="'/'" >
+      <router-link :to="'/map'" >
         <div class="tour__close-button"></div>
       </router-link>
     </div>
