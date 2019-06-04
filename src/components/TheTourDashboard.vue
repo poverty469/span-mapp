@@ -5,7 +5,9 @@
       <h2 v-show="activeSlide.subtitle" class="tour__subtitle">
         {{ activeSlide.subtitle }}
       </h2>
-      <div class="tour__close-button"></div>
+      <router-link :to="'/'" >
+        <div class="tour__close-button"></div>
+      </router-link>
     </div>
     <div class="tour__body">
       <mb-map
@@ -58,7 +60,6 @@ import { Hooper, Slide } from "hooper";
 import MbMap from "@/components/MbMap.vue";
 import TourInfo from "@/components/TourInfo.vue";
 import TheTourNav from "@/components/TheTourNav.vue";
-
 import tourSlides from "@/assets/data/TourSlides.js";
 
 export default {
@@ -245,10 +246,10 @@ $tour__map-margin-left: 22px;
 .tour__close-button {
     display: block;
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     right: 20px;
-    top: 2px;
+    top: 4px;
     transition: transform .25s ease-in-out;
 }
 
@@ -256,7 +257,7 @@ $tour__map-margin-left: 22px;
     transform: rotate(180deg);
 }
 
-.tour__close-button::before {
+.tour__close-button:before {
     content: "";
     position: absolute;
     display: block;
@@ -265,14 +266,14 @@ $tour__map-margin-left: 22px;
     right: 0;
     top: 0;
     bottom: 0;
-    width: 20px;
+    width: 40px;
     height: 0;
     border-top: 4px solid rgba(0,0,0,0.5);
     transform: rotate(45deg);
     transform-origin: center;
 }
 
-.tour__close-button::after {
+.tour__close-button:after {
     content: "";
     position: absolute;
     display: block;
@@ -281,7 +282,7 @@ $tour__map-margin-left: 22px;
     right: 0;
     top: 0;
     bottom: 0;
-    width: 20px;
+    width: 40px;
     height: 0;
     border-top: 4px solid rgba(0,0,0,0.5);
     transform: rotate(-45deg);
