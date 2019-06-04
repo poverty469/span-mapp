@@ -19,7 +19,7 @@
         <hooper ref="carousel" @slide="updateCarousel">
           <slide
             v-for="(slide, index) in tourSlides"
-            :key="`slide-${index}`"
+            :key="slide"
             :index="index"
             class="tour__slide"
           >
@@ -208,9 +208,9 @@ $tour__map-margin-left: 22px;
   text-transform: uppercase;
   padding: 1em;
   font-size: 16px;
-  width: 8vh;
+  width: 6rem;
   border-radius: 5px;
-  margin: 3vw;
+  margin: 4vw;
 }
 
 .nav__buttons:hover {
@@ -219,15 +219,14 @@ $tour__map-margin-left: 22px;
 }
 
 .nav__container {
-  position: relative;
   text-align: center;
-  top: 8vh; 
+  position: relative;
+  top: 6vh;
 }
 
 .progress__container {
-  position: relative;
   text-align: center;
-  top: 4vh;
+  top: 2vh;
 }
 
 .nav__progress {
@@ -241,5 +240,67 @@ $tour__map-margin-left: 22px;
 
 .activeSlide {
   background: white;
+}
+
+.tour__close-button {
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 20px;
+    top: 2px;
+    transition: transform .25s ease-in-out;
+}
+
+.tour__close-button:hover {
+    transform: rotate(180deg);
+}
+
+.tour__close-button::before {
+    content: "";
+    position: absolute;
+    display: block;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    height: 0;
+    border-top: 4px solid rgba(0,0,0,0.5);
+    transform: rotate(45deg);
+    transform-origin: center;
+}
+
+.tour__close-button::after {
+    content: "";
+    position: absolute;
+    display: block;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    height: 0;
+    border-top: 4px solid rgba(0,0,0,0.5);
+    transform: rotate(-45deg);
+    transform-origin: center;
+}
+
+.tour__title {
+  color: #F6330C;
+  font-family: Muli, sans-serif;
+  font-weight: 750;
+  font-size: 27px;
+  padding-left: 30px;
+  letter-spacing: 0.5px;
+}
+
+.tour__subtitle {
+  color: #4B4B4B;
+  font-family: Muli, sans-serif;
+  font-size: 14px;
+  padding-left: 60px;
 }
 </style>
