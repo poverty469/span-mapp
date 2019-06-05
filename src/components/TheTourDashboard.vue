@@ -223,12 +223,12 @@ $tour__map-margin-left: 22px;
 .nav__container {
   text-align: center;
   position: relative;
-  top: 6vh;
+  top: 2vh;
 }
 
 .progress__container {
   text-align: center;
-  top: 2vh;
+  margin: -2em;
 }
 
 .nav__progress {

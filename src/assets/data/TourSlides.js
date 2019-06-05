@@ -51,7 +51,8 @@ const tourSlideData = [
     title: 'Statewide Poverty Action Network Four Focuses',
     subtitle: '',
     dataLayers: [],
-    narrativeHtml: 'In our <a href="https://povertyaction.org/listening-sessions/">conversations with people across the state</a>, it we have heard from community members that they' +
+    narrativeHtml: 'In our <a href="https://povertyaction.org/listening-sessions/">conversations with people across the state</a>,' +
+      ' it we have heard from community members that they' +
       ' struggle to meet their <a href="https://povertyaction.org/basic-needs/">basic needs</a>, <a href="https://povertyaction.org/consumer-protections/">pay off debt</a>,' +
       ' and, if they have criminal convictions, <a href="https://povertyaction.org/criminal-justice/">rebuild their lives</a> after leaving prison. Additionally, Washington’s' + 
       ' regressive <a href="https://povertyaction.org/revenue/">state tax structure</a> further exacerbates poverty. <br/> <br/>Poverty Action works to advocate for and advance progressive policy solutions that fix our state tax code, strengthen state basic needs programs, create robust consumer protections, and offer people with criminal convictions a second chance.'
