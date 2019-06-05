@@ -8982,7 +8982,11 @@
                 "COUNTYNS": "01513275",
                 "NAME": "Wahkiakum",
                 "NAMELSAD": "Wahkiakum County",
-                "id2": "53069"
+                "id2": "53069",
+                "a1": "$17,980",
+                "a1p1": "$36,128",
+                "a1p1s1": "$48,436",
+                "a2p1s1": "$56,870"
             },
             "geometry": {
                 "type": "Polygon",
@@ -12034,7 +12038,11 @@
                 "COUNTYNS": "01531936",
                 "NAME": "Jefferson",
                 "NAMELSAD": "Jefferson County",
-                "id2": "53031"
+                "id2": "53031",
+                "a1": "$27,241",
+                "a1p1": "$40,067",
+                "a1p1s1": "$48,590",
+                "a2p1s1": "$60,859"
             },
             "geometry": {
                 "type": "Polygon",
@@ -12944,7 +12952,11 @@
                 "COUNTYNS": "01513273",
                 "NAME": "Columbia",
                 "NAMELSAD": "Columbia County",
-                "id2": "53013"
+                "id2": "53013",
+                "a1": "$17,238",
+                "a1p1": "$35,098",
+                "a1p1s1": "$46,987",
+                "a2p1s1": "$55,744"
             },
             "geometry": {
                 "type": "Polygon",
@@ -13602,7 +13614,11 @@
                 "COUNTYNS": "01531926",
                 "NAME": "Kittitas",
                 "NAMELSAD": "Kittitas County",
-                "id2": "53037"
+                "id2": "53037",
+                "a1": "$20,194",
+                "a1p1": "$40,208",
+                "a1p1s1": "$51,886",
+                "a2p1s1": "$60,181"
             },
             "geometry": {
                 "type": "Polygon",
@@ -23144,7 +23160,11 @@
                 "COUNTYNS": "01531928",
                 "NAME": "Okanogan",
                 "NAMELSAD": "Okanogan County",
-                "id2": "53047"
+                "id2": "53047",
+                "a1": "$18,516",
+                "a1p1": "$35,480",
+                "a1p1s1": "$46,307",
+                "a2p1s1": "$54,134"
             },
             "geometry": {
                 "type": "Polygon",
@@ -27748,7 +27768,11 @@
                 "COUNTYNS": "01531930",
                 "NAME": "Stevens",
                 "NAMELSAD": "Stevens County",
-                "id2": "53065"
+                "id2": "53065",
+                "a1": "$17,466",
+                "a1p1": "$35,532",
+                "a1p1s1": "$44,577",
+                "a2p1s1": "$52,886"
             },
             "geometry": {
                 "type": "Polygon",
@@ -33206,7 +33230,11 @@
                 "COUNTYNS": "01531932",
                 "NAME": "Chelan",
                 "NAMELSAD": "Chelan County",
-                "id2": "53007"
+                "id2": "53007",
+                "a1": "$18,771",
+                "a1p1": "$36,201",
+                "a1p1s1": "$48,001",
+                "a2p1s1": "$56,007"
             },
             "geometry": {
                 "type": "Polygon",
@@ -40712,7 +40740,11 @@
                 "COUNTYNS": "01533502",
                 "NAME": "Asotin",
                 "NAMELSAD": "Asotin County",
-                "id2": "53003"
+                "id2": "53003",
+                "a1": "$17,177",
+                "a1p1": "$32,981",
+                "a1p1s1": "$41,467",
+                "a2p1s1": "$52,432"
             },
             "geometry": {
                 "type": "Polygon",
@@ -41490,7 +41522,11 @@
                 "COUNTYNS": "01531821",
                 "NAME": "Ferry",
                 "NAMELSAD": "Ferry County",
-                "id2": "53019"
+                "id2": "53019",
+                "a1": "$18,002",
+                "a1p1": "$37,974",
+                "a1p1s1": "$47,984",
+                "a2p1s1": "$56,358"
             },
             "geometry": {
                 "type": "Polygon",
@@ -43228,7 +43264,11 @@
                 "COUNTYNS": "01531818",
                 "NAME": "Douglas",
                 "NAMELSAD": "Douglas County",
-                "id2": "53017"
+                "id2": "53017",
+                "a1": "$17,974",
+                "a1p1": "$34,389",
+                "a1p1s1": "$44,925",
+                "a2p1s1": "$53,291"
             },
             "geometry": {
                 "type": "Polygon",
@@ -46348,7 +46388,11 @@
                 "COUNTYNS": "01533500",
                 "NAME": "Garfield",
                 "NAMELSAD": "Garfield County",
-                "id2": "53023"
+                "id2": "53023",
+                "a1": "$18,067",
+                "a1p1": "$35,790",
+                "a1p1s1": "$47,313",
+                "a2p1s1": "$56,586"
             },
             "geometry": {
                 "type": "Polygon",
@@ -48952,7 +48996,11 @@
                 "COUNTYNS": "01513274",
                 "NAME": "Pacific",
                 "NAMELSAD": "Pacific County",
-                "id2": "53049"
+                "id2": "53049",
+                "a1": "$19,378",
+                "a1p1": "$38,427",
+                "a1p1s1": "$49,645",
+                "a2p1s1": "$56,475"
             },
             "geometry": {
                 "type": "Polygon",
@@ -49794,7 +49842,11 @@
                 "COUNTYNS": "01529219",
                 "NAME": "Klickitat",
                 "NAMELSAD": "Klickitat County",
-                "id2": "53039"
+                "id2": "53039",
+                "a1": "$19,441",
+                "a1p1": "$39,062",
+                "a1p1s1": "$50,814",
+                "a2p1s1": "$58,891"
             },
             "geometry": {
                 "type": "Polygon",
@@ -50444,7 +50496,11 @@
                 "COUNTYNS": "01531931",
                 "NAME": "San Juan",
                 "NAMELSAD": "San Juan County",
-                "id2": "53055"
+                "id2": "53055",
+                "a1": "$22,314",
+                "a1p1": "$46,119",
+                "a1p1s1": "$58,566",
+                "a2p1s1": "$70,435"
             },
             "geometry": {
                 "type": "Polygon",
@@ -51200,7 +51256,11 @@
                 "COUNTYNS": "01531341",
                 "NAME": "Clallam",
                 "NAMELSAD": "Clallam County",
-                "id2": "53009"
+                "id2": "53009",
+                "a1": "$20,013",
+                "a1p1": "$43,182",
+                "a1p1s1": "$52,945",
+                "a2p1s1": "$65,777"
             },
             "geometry": {
                 "type": "Polygon",
@@ -51730,7 +51790,11 @@
                 "COUNTYNS": "01531823",
                 "NAME": "Grays Harbor",
                 "NAMELSAD": "Grays Harbor County",
-                "id2": "53027"
+                "id2": "53027",
+                "a1": "$18,561",
+                "a1p1": "$35,848",
+                "a1p1s1": "$44,317",
+                "a2p1s1": "$55,138"
             },
             "geometry": {
                 "type": "Polygon",
@@ -52396,7 +52460,11 @@
                 "COUNTYNS": "01529156",
                 "NAME": "Cowlitz",
                 "NAMELSAD": "Cowlitz County",
-                "id2": "53015"
+                "id2": "53015",
+                "a1": "$18,564",
+                "a1p1": "$36,843",
+                "a1p1s1": "$49,554",
+                "a2p1s1": "$56,751"
             },
             "geometry": {
                 "type": "Polygon",
@@ -53498,7 +53566,11 @@
                 "COUNTYNS": "01531819",
                 "NAME": "Walla Walla",
                 "NAMELSAD": "Walla Walla County",
-                "id2": "53071"
+                "id2": "53071",
+                "a1": "$18,114",
+                "a1p1": "$37,251",
+                "a1p1s1": "$50,283",
+                "a2p1s1": "$58,844"
             },
             "geometry": {
                 "type": "Polygon",
@@ -54524,7 +54596,11 @@
                 "COUNTYNS": "01531924",
                 "NAME": "Grant",
                 "NAMELSAD": "Grant County",
-                "id2": "53025"
+                "id2": "53025",
+                "a1": "$18,367",
+                "a1p1": "$34,369",
+                "a1p1s1": "$43,318",
+                "a2p1s1": "$54,198"
             },
             "geometry": {
                 "type": "Polygon",
@@ -57048,7 +57124,11 @@
                 "COUNTYNS": "01514052",
                 "NAME": "Lincoln",
                 "NAMELSAD": "Lincoln County",
-                "id2": "53043"
+                "id2": "53043",
+                "a1": "$16,569",
+                "a1p1": "$33,188",
+                "a1p1s1": "$45,626",
+                "a2p1s1": "$54,474"
             },
             "geometry": {
                 "type": "Polygon",
@@ -58890,7 +58970,11 @@
                 "COUNTYNS": "01531601",
                 "NAME": "Adams",
                 "NAMELSAD": "Adams County",
-                "id2": "53001"
+                "id2": "53001",
+                "a1": "$17,826",
+                "a1p1": "$31,870",
+                "a1p1s1": "$43,561",
+                "a2p1s1": "$51,427"
             },
             "geometry": {
                 "type": "Polygon",
@@ -61126,7 +61210,11 @@
                 "COUNTYNS": "01533501",
                 "NAME": "Whitman",
                 "NAMELSAD": "Whitman County",
-                "id2": "53075"
+                "id2": "53075",
+                "a1": "$18,956",
+                "a1p1": "$40,723",
+                "a1p1s1": "$50,811",
+                "a2p1s1": "$63,358"
             },
             "geometry": {
                 "type": "Polygon",
@@ -63840,7 +63928,11 @@
                 "COUNTYNS": "01529221",
                 "NAME": "Mason",
                 "NAMELSAD": "Mason County",
-                "id2": "53045"
+                "id2": "53045",
+                "a1": "$20,675",
+                "a1p1": "$39,695",
+                "a1p1s1": "$48,063",
+                "a2p1s1": "$58,522"
             },
             "geometry": {
                 "type": "Polygon",
@@ -64654,7 +64746,11 @@
                 "COUNTYNS": "01531402",
                 "NAME": "Skagit",
                 "NAMELSAD": "Skagit County",
-                "id2": "53057"
+                "id2": "53057",
+                "a1": "$20,448",
+                "a1p1": "$42,199",
+                "a1p1s1": "$55,229",
+                "a2p1s1": "$64,232"
             },
             "geometry": {
                 "type": "Polygon",
@@ -73116,7 +73212,11 @@
                 "COUNTYNS": "01531822",
                 "NAME": "Franklin",
                 "NAMELSAD": "Franklin County",
-                "id2": "53021"
+                "id2": "53021",
+                "a1": "$18,616",
+                "a1p1": "$34,937",
+                "a1p1s1": "$47,750",
+                "a2p1s1": "$56,057"
             },
             "geometry": {
                 "type": "Polygon",
@@ -74550,7 +74650,11 @@
                 "COUNTYNS": "01529220",
                 "NAME": "Skamania",
                 "NAMELSAD": "Skamania County",
-                "id2": "53059"
+                "id2": "53059",
+                "a1": "$24,007",
+                "a1p1": "$43,863",
+                "a1p1s1": "$54,488",
+                "a2p1s1": "$64,221"
             },
             "geometry": {
                 "type": "Polygon",
