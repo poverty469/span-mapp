@@ -425,11 +425,19 @@ export default {
               ${hoveredFeature.properties.NAMELSAD}
             </h2>
             <h3 class="popup--race__title">
-              ${hoveredFeature.properties.name}
+              Self Sufficiency Standard
             </h3>
             <p class="popup--race__text">
-              ${hoveredFeature.properties.subtitle}
-            </p>`
+              <span class="popup--p__title">1 Adult:</span>
+              ${hoveredFeature.properties.a1}<br>
+              <span class="popup--p__title">1 Adult, 1 Kid:</span>
+              ${hoveredFeature.properties.a1p1}<br>
+              <span class="popup--p__title">1 Adult, 2 Kids:</span>
+              ${hoveredFeature.properties.a1p1s1}<br>
+              <span class="popup--p__title">2 Adults, 2 Kids:</span>
+              ${hoveredFeature.properties.a2p1s1}
+            </p>
+            `
           )
           .addTo(this.map);
       });
@@ -460,5 +468,13 @@ export default {
 
 .popup--race {
   font-size: 2rem;
+}
+
+.popup--race__title {
+  font-weight: bold;
+}
+
+.popup--p__title {
+  font-weight: bold;
 }
 </style>

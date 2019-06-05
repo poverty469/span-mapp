@@ -10,7 +10,11 @@
                 "COUNTYNS": "01531929",
                 "NAME": "Yakima",
                 "NAMELSAD": "Yakima County",
-                "id2": "53077"
+                "id2": "53077",
+                "a1": "$18,466",
+                "a1p1": "$34,269",
+                "a1p1s1": "$44,638",
+                "a2p1s1": "$51,321"
             },
             "geometry": {
                 "type": "Polygon",
@@ -2256,7 +2260,11 @@
                 "COUNTYNS": "01531933",
                 "NAME": "King",
                 "NAMELSAD": "King County",
-                "id2": "53033"
+                "id2": "53033",
+                "a1": "$27,241",
+                "a1p1": "$56,964",
+                "a1p1s1": "$70,468",
+                "a2p1s1": "$75,616"
             },
             "geometry": {
                 "type": "Polygon",
@@ -9528,7 +9536,11 @@
                 "COUNTYNS": "01531927",
                 "NAME": "Lewis",
                 "NAMELSAD": "Lewis County",
-                "id2": "53041"
+                "id2": "53041",
+                "a1": "$18,399",
+                "a1p1": "$34,496",
+                "a1p1s1": "$47,164",
+                "a2p1s1": "$54,187"
             },
             "geometry": {
                 "type": "Polygon",
@@ -25938,7 +25950,11 @@
                 "COUNTYNS": "01529225",
                 "NAME": "Spokane",
                 "NAMELSAD": "Spokane County",
-                "id2": "53063"
+                "id2": "53063",
+                "a1": "$18,972",
+                "a1p1": "$38,103",
+                "a1p1s1": "$49,205",
+                "a2p1s1": "$56,010"
             },
             "geometry": {
                 "type": "Polygon",
@@ -30682,7 +30698,11 @@
                 "COUNTYNS": "01529157",
                 "NAME": "Pend Oreille",
                 "NAMELSAD": "Pend Oreille County",
-                "id2": "53051"
+                "id2": "53051",
+                "a1": "$17,852",
+                "a1p1": "$39,446",
+                "a1p1s1": "$50,138",
+                "a2p1s1": "$56,831"
             },
             "geometry": {
                 "type": "Polygon",
@@ -32044,7 +32064,11 @@
                 "COUNTYNS": "01529224",
                 "NAME": "Whatcom",
                 "NAMELSAD": "Whatcom County",
-                "id2": "53073"
+                "id2": "53073",
+                "a1": "$20,718",
+                "a1p1": "$43,496",
+                "a1p1s1": "$56,685",
+                "a2p1s1": "$63,631"
             },
             "geometry": {
                 "type": "Polygon",
@@ -45150,7 +45174,11 @@
                 "COUNTYNS": "01513302",
                 "NAME": "Benton",
                 "NAMELSAD": "Benton County",
-                "id2": "53005"
+                "id2": "53005",
+                "a1": "$19,716",
+                "a1p1": "$39,390",
+                "a1p1s1": "$51,361",
+                "a2p1s1": "$57,884"
             },
             "geometry": {
                 "type": "Polygon",
@@ -47282,7 +47310,11 @@
                 "COUNTYNS": "01529222",
                 "NAME": "Snohomish",
                 "NAMELSAD": "Snohomish County",
-                "id2": "53061"
+                "id2": "53061",
+                "a1": "$29,689",
+                "a1p1": "$56,065",
+                "a1p1s1": "$71,957",
+                "a2p1s1": "$79,934"
             },
             "geometry": {
                 "type": "Polygon",
@@ -50694,7 +50726,11 @@
                 "COUNTYNS": "01513272",
                 "NAME": "Island",
                 "NAMELSAD": "Island County",
-                "id2": "53029"
+                "id2": "53029",
+                "a1": "$22,417",
+                "a1p1": "$43,623",
+                "a1p1s1": "$56,259",
+                "a2p1s1": "$63,526"
             },
             "geometry": {
                 "type": "Polygon",
@@ -56130,7 +56166,11 @@
                 "COUNTYNS": "01531820",
                 "NAME": "Clark",
                 "NAMELSAD": "Clark County",
-                "id2": "53011"
+                "id2": "53011",
+                "a1": "$27,020",
+                "a1p1": "$49,644",
+                "a1p1s1": "$62,009",
+                "a2p1s1": "$69,172"
             },
             "geometry": {
                 "type": "Polygon",
@@ -66288,7 +66328,11 @@
                 "COUNTYNS": "01529159",
                 "NAME": "Pierce",
                 "NAMELSAD": "Pierce County",
-                "id2": "53053"
+                "id2": "53053",
+                "a1": "$22,932",
+                "a1p1": "$45,116",
+                "a1p1s1": "$56,192",
+                "a2p1s1": "$63,634"
             },
             "geometry": {
                 "type": "Polygon",
@@ -70946,7 +70990,11 @@
                 "COUNTYNS": "01529226",
                 "NAME": "Thurston",
                 "NAMELSAD": "Thurston County",
-                "id2": "53067"
+                "id2": "53067",
+                "a1": "$22,816",
+                "a1p1": "$43,477",
+                "a1p1s1": "$53,543",
+                "a2p1s1": "$60,518"
             },
             "geometry": {
                 "type": "Polygon",
