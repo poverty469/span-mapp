@@ -23,6 +23,7 @@
       class="main-map-dashboard"
       :dataLoaded="dataLoaded"
       :activeData="activeData"
+      :bare="!mapIsFocused && !mapVisited"
     ></map-dashboard>
     <the-footer class="the-footer"></the-footer>
   </div>
@@ -34,6 +35,7 @@ import TheHeader from "@/components/TheHeader.vue";
 import TheLogo from "@/components/TheLogo.vue";
 import MapDashboard from "@/components/MapDashboard.vue";
 
+import { MapTypes, SequentialPalettes } from "@/util/enums.js";
 import geographies from "@/assets/geographies";
 import povertyData from "@/assets/data/dataLayer";
 
@@ -70,18 +72,31 @@ export default {
       this.$store.dispatch("mapLoaded");
     },
     forceToggleMapData() {
-      this.activeData.length == 0
-        ? this.activeData.push({
-            dataset: povertyData,
-            geographyId: geographies.counties.id,
-            attributeId: "HC03_VC161",
-            style: "choropleth"
-          })
-        : this.activeData.pop();
+      if (this.activeData.length == 0) {
+        this.activeData.push({
+          dataset: povertyData,
+          geographyId: geographies.counties.id,
+          attributeId: "HC03_VC161",
+          type: MapTypes.CHOROPLETH,
+          color: SequentialPalettes.RED_PURPLE
+        });
+        this.activeData.push({
+          dataset: povertyData,
+          geographyId: geographies.counties.id,
+          attributeId: "HC03_VC164",
+          type: MapTypes.CHOROPLETH,
+          color: SequentialPalettes.BLUE
+        });
+      } else {
+        this.activeData.pop();
+      }
     }
   },
   computed: {
-    ...mapGetters(["appLoading", "dataLoaded"])
+    ...mapGetters(["appLoading", "dataLoaded", "mapVisited"]),
+    mapIsFocused: function() {
+      return this.$route.name === "map"; // TODO: make "map" a value pulled in from the router object
+    }
   }
 };
 </script>
@@ -131,12 +146,15 @@ body {
 
 .main-map-dashboard {
   position: absolute;
+  display: inline-grid;
+  grid-auto-flow: dense;
+  grid-template-columns: auto 250px;
   top: $header-height;
   bottom: $footer-height;
   left: 0;
   width: $app-width;
 
-  z-index: z("main-map");
+  z-index: z("main-map-dashboard");
 }
 
 .the-footer {
@@ -191,27 +209,15 @@ body {
   opacity: 0;
 }
 
-/* Mapbox styling */
-.mapboxgl-ctrl-attrib.mapboxgl-compact {
-  margin: 0 !important;
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 250ms ease-in;
+  transform: translateX(0);
+  opacity: 1;
 }
-
-.mapboxgl-ctrl-scale {
-  border-width: 2px;
-  border-style: solid;
-}
-
-.mapboxgl-ctrl-group:not(:empty) {
-  box-shadow: 0 0 0 2px $dark-grey !important;
-  border-radius: 0;
-}
-
-.mapboxgl-ctrl-icon.mapboxgl-ctrl-zoom-out {
-  transform: translateY(2px);
-}
-
-.mapboxgl-ctrl-group > button + button {
-  outline: 2px solid $dark-grey;
-  border-top: 0 !important;
+.slide-left-enter, .slide-left-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  transition: all 250ms ease-out;
+  transform: translateX(#{$righter-width});
+  opacity: 0;
 }
 </style>

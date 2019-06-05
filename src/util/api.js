@@ -16,12 +16,6 @@ class Api {
       responseType: "json"
     });
 
-    // this.datasets = this.axios
-    //   .get(`${this.datasetPath}/${this.datasetOwner}`)
-    //   .then(response => {
-    //     console.log(response);
-    //     return response.data;
-    //   });
     this.datasets = {
       LegislativeDistricts: "cjuetvkuw0did2xrrkbdmf0na"
     };

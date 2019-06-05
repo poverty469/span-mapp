@@ -28,7 +28,7 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .action-button__container {
   position: relative;
   width: fit-content;
@@ -49,8 +49,6 @@ export default {
 
 .action-button__text {
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
 
   padding: 0 0.5rem;
   @include char-style($action-button...);

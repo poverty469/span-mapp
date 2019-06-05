@@ -5,7 +5,7 @@ import _ from "lodash";
  * it were a conventional relational database table.
  * Takes JSON data formatted as a column arrays. (http://www.convertcsv.com/csv-to-json.htm)
  */
-export default class jsonColumnArrayQuery {
+export default class JsonColumnArrayQuery {
   constructor(table, idName) {
     // TODO: verify table is in column array format
     this.table = table;
