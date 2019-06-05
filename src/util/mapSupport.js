@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { JsonColumnArrayQuery } from "./JsonColumnArrayQuery.js";
+import { JsonArrayQuery } from "./JsonArrayQuery.js";
 import { CustomPalette } from "./CustomPalette.js";
 
 /**
@@ -46,7 +46,7 @@ class MapSupport {
     classified = true
   ) {
     // TODO: final id name should be "id", not "id2". Geometries should include the long "id"
-    const dataQuery = new JsonColumnArrayQuery(dataPackage, "id2");
+    const dataQuery = new JsonArrayQuery(dataPackage, "id2");
     let attributeSummary = dataQuery.getColumnSummary(attributeId);
     if (_.isNil(attributeSummary)) {
       return undefined;
