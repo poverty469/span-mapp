@@ -161,22 +161,6 @@ export default {
       this.map.on("mousemove", layerId, e => {
         hoveredFeature = e.features[0]; // Update hovered feature
         this.map.getCanvas().style.cursor = "crosshair";
-
-        this.popUp
-          .setLngLat(e.lngLat)
-          .setHTML(
-            `
-            <h2 class="popup--race__title">
-              ${hoveredFeature.properties.NAMELSAD}
-            </h2>
-            <h3 class="popup--race__title">
-              ${hoveredFeature.properties.name}
-            </h3>
-            <p class="popup--race__text">
-              ${hoveredFeature.properties.subtitle}
-            </p>`
-          )
-          .addTo(this.map);
       });
 
       this.map.on("mouseleave", layerId, e => {
