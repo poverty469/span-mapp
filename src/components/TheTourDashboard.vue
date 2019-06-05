@@ -5,7 +5,9 @@
       <h2 v-show="activeSlide.subtitle" class="tour__subtitle">
         {{ activeSlide.subtitle }}
       </h2>
-      <div class="tour__close-button"></div>
+      <router-link :to="'/map'" >
+        <div class="tour__close-button"></div>
+      </router-link>
     </div>
     <div class="tour__body">
       <mb-map
@@ -20,25 +22,30 @@
       <div v-if="tourSlides && tourSlides.length" class="tour__sidebar">
         <hooper ref="carousel" @slide="updateCarousel">
           <slide
-            v-for="(slide, index) in tourSlides"
-            :key="`slide-${index}`"
-            :index="index"
+            v-for="slide in tourSlides"
+            :key="slide"
             class="tour__slide"
           >
-            {{ slide.title }}
-            <!-- tour-info></tour-info-->
+          <tour-info 
+            :narrative="activeSlide.narrativeHtml"
+            :tutorial="activeSlide.tutorialHtml"
+          />
           </slide>
         </hooper>
-        <the-tour-nav></the-tour-nav>
-        <button @click.prevent="handlePrev">Prev</button>
-        <button @click.prevent="handleNext">Next</button>
-        <button
-          v-for="i in slideIndices"
-          :key="i"
-          @click.prevent="handleSlideIndicatorClick(i)"
-        >
-          i
-        </button>
+        <div class="nav__container">
+          <button class= "nav__buttons" @click.prevent="handlePrev">Prev</button>
+          <button class= "nav__buttons" @click.prevent="handleNext">Next</button>
+        </div>
+        <div class="progress__container">
+          <button
+            v-for="i in slideIndices"
+            class="nav__progress"
+            :class="{'activeSlide': i == activeTourSlideIndex}"
+            :key="i"
+            @click.prevent="handleSlideIndicatorClick(i)"
+          >
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -53,7 +60,6 @@ import MbMap from "@/components/MbMap.vue";
 import MapLegendBar from "@/components/MapLegendBar";
 import TourInfo from "@/components/TourInfo.vue";
 import TheTourNav from "@/components/TheTourNav.vue";
-
 import tourSlides from "@/assets/data/TourSlides.js";
 
 export default {
@@ -98,6 +104,7 @@ export default {
     },
     updateCarousel(payload) {
       this.activeTourSlideIndex = payload.currentSlide;
+      console.log(payload.currentSlide)
     }
   },
   computed: {
@@ -121,7 +128,8 @@ export default {
     },
     slideIndices: function() {
       return _.range(this.tourSlides.length);
-    }
+    },
+
   }
 };
 </script>
@@ -195,5 +203,110 @@ $tour__map-margin-left: 22px;
   display: inline-block;
   width: 250px;
   height: 500px;
+}
+
+.nav__buttons {
+  background-color: $dark-orange;
+  text-transform: uppercase;
+  padding: 1em;
+  font-size: 16px;
+  width: 6rem;
+  border-radius: 5px;
+  margin: 4vw;
+}
+
+.nav__buttons:hover {
+  background-color: $dark-orange--shadow;
+  color: white;
+}
+
+.nav__container {
+  text-align: center;
+  position: relative;
+  top: 6vh;
+}
+
+.progress__container {
+  text-align: center;
+  top: 2vh;
+}
+
+.nav__progress {
+  background: inherit;
+  border-color: $dark-grey;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  margin: 6px;
+}
+
+.activeSlide {
+  background: white;
+}
+
+.tour__close-button {
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: 20px;
+    top: 4px;
+    transition: transform .25s ease-in-out;
+}
+
+.tour__close-button:hover {
+    transform: rotate(180deg);
+}
+
+.tour__close-button:before {
+    content: "";
+    position: absolute;
+    display: block;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    height: 0;
+    border-top: 4px solid rgba(0,0,0,0.5);
+    transform: rotate(45deg);
+    transform-origin: center;
+}
+
+.tour__close-button:after {
+    content: "";
+    position: absolute;
+    display: block;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    height: 0;
+    border-top: 4px solid rgba(0,0,0,0.5);
+    transform: rotate(-45deg);
+    transform-origin: center;
+}
+
+.tour__title {
+  color: #F6330C;
+  font-family: Muli, sans-serif;
+  font-weight: 750;
+  font-size: 27px;
+  padding-left: 30px;
+  letter-spacing: 0.5px;
+}
+
+.tour__subtitle {
+  color: #4B4B4B;
+  font-family: Muli, sans-serif;
+  font-size: 14px;
+  padding-left: 60px;
+}
+
+.hooper-liveregion {
+  visibility: hidden;
 }
 </style>

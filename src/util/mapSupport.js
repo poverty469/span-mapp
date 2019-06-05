@@ -1,6 +1,6 @@
 import _ from "lodash";
-import JsonColumnArrayQuery from "@/util/JsonColumnArrayQuery.js";
-import { CustomPalette } from "@/util/CustomPalette.js";
+import { JsonColumnArrayQuery } from "./JsonColumnArrayQuery.js";
+import { CustomPalette } from "./CustomPalette.js";
 
 /**
  * Business logic for interacting with the Mapbox library.
