@@ -9,7 +9,7 @@ const tourSlideData = [
     dataLayers: [
       {
         dataset: povertyData,
-        geographyId: geographies.counties.id,
+        geographyId: geographies.counties.properties,
         attributeId: 'HC03_VC161',
         type: MapTypes.CHOROPLETH,
         color: SequentialPalettes.GREEN

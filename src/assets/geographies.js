@@ -26,7 +26,6 @@ export default {
         "https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2018&layergroup=Counties+%28and+equivalent%29"
     },
     geometry: countiesGeom.default,
-    properties: countiesGeom.properties,
     bounds: [[-124.848974, 45.543541], [-116.916071, 49.002432]]
   },
   washington: {
