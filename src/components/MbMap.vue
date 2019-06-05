@@ -93,7 +93,7 @@ export default {
     // Add/ show initial layer
     this.map.on("load", () => {
       this.initializeLayerSources();
-      this.addPolygonDataLayer(geographies.counties, "properties.a1");
+      this.addPolygonDataLayer(geographies.counties, "properties");
       this.addBlackOutlineLayer(geographies.washington, "splash-page");
       this.$emit("mapLoaded");
     });
