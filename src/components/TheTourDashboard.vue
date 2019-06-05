@@ -22,17 +22,14 @@
       <div v-if="tourSlides && tourSlides.length" class="tour__sidebar">
         <hooper ref="carousel" @slide="updateCarousel">
           <slide
-            v-for="(slide, index) in tourSlides"
+            v-for="slide in tourSlides"
             :key="slide"
-            :index="index"
             class="tour__slide"
           >
-            {{ slide.title }}
-            <tour-info 
-              :narrative="activeSlide.narrativeHtml"
-              :tutorial="activeSlide.tutorialHtml"
-            >
-            </tour-info>
+          <tour-info 
+            :narrative="activeSlide.narrativeHtml"
+            :tutorial="activeSlide.tutorialHtml"
+          />
           </slide>
         </hooper>
         <div class="nav__container">
@@ -307,5 +304,9 @@ $tour__map-margin-left: 22px;
   font-family: Muli, sans-serif;
   font-size: 14px;
   padding-left: 60px;
+}
+
+.hooper-liveregion {
+  visibility: hidden;
 }
 </style>

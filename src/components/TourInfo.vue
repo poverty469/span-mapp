@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="container">
-      <div class="story-content">{{narrative}}</div>
+      <p class="story-content" v-html="narrative"></p>
     </div>
     <div class="container">
-      <div class="tutorial-content">{{tutorial}}</div>
+      <p class="tutorial-content" v-html="tutorial"></p>
     </div>
   </div>
 </template>
@@ -33,7 +33,7 @@ export default {
 <style lang="scss">
 .story-content, .tutorial-content {
   position: relative;
-  text-align: center;
+  text-align: left;
 }
 
 .container {
@@ -47,5 +47,15 @@ export default {
   border-radius: 20px;
   border: 2px solid $dark-orange;
   padding:1em;
+}
+
+.container a {
+  text-decoration: underline !important;
+  color: $dark-purple;
+}
+
+.container h3 {
+  text-align: center !important;
+  font-weight: bold;
 }
 </style>

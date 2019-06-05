@@ -93,6 +93,7 @@ export default {
     // Add/ show initial layer
     this.map.on("load", () => {
       this.initializeLayerSources();
+      this.addPolygonDataLayer(geographies.washington, "county");
       this.addBlackOutlineLayer(geographies.washington, "splash-page");
       this.$emit("mapLoaded");
     });
@@ -317,7 +318,7 @@ export default {
       });
 
       // Turn off hover remaining effect when no longer hovering over layer
-      this.map.on("mouseleave", layerId, e => {
+      this.map.on("mouseleave", layerId, () => {
         this.map.getCanvas().style.cursor = "";
         if (hoveredFeature) {
           this.map.setFeatureState(
@@ -378,7 +379,7 @@ export default {
           .addTo(this.map);
       });
 
-      this.map.on("mouseleave", layerId, e => {
+      this.map.on("mouseleave", layerId, () => {
         this.map.getCanvas().style.cursor = "";
         this.popUp.remove();
       });
