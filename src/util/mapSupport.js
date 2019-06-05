@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { JsonColumnArrayQuery } from "@/util/JsonColumnArrayQuery.js";
+import { JsonColumnArrayQuery } from "./JsonColumnArrayQuery.js";
 import { CustomPalette } from "./CustomPalette.js";
 
 /**
