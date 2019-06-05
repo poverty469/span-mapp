@@ -14,7 +14,7 @@
         v-show="activeData"
         :mapId="mapId"
         :activeData="activeData"
-        :class="{ 'map-container--hidden': !mapVisible }"
+        :class="{ 'map-container--hidden': mapVisible }"
         @mapLoaded="handleMapLoaded"
       >
         <map-legend-bar></map-legend-bar>
@@ -22,7 +22,8 @@
       <div v-if="tourSlides && tourSlides.length" class="tour__sidebar">
         <hooper ref="carousel" @slide="updateCarousel">
           <slide
-            v-for="slide in tourSlides"
+            v-for="(slide,index) in tourSlides"
+            :index="index"
             :key="slide"
             class="tour__slide"
           >
