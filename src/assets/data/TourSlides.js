@@ -1,22 +1,22 @@
-import { MapTypes, SequentialPalettes } from '@/util/enums';
-import geographies from '@/assets/geographies';
-import povertyData from '@/assets/data/dataLayer';
+import { MapTypes, SequentialPalettes } from "@/util/enums";
+import geographies from "@/assets/geographies";
+import povertyData from "@/assets/data/dataLayer";
 
 const tourSlideData = [
   {
-    title: 'Living in Poverty',
-    subtitle: '',
+    title: "Living in Poverty",
+    subtitle: "",
     dataLayers: [
       {
         dataset: povertyData,
         geographyId: geographies.counties.properties,
-        attributeId: 'HC03_VC161',
+        attributeId: "HC03_VC161",
         type: MapTypes.CHOROPLETH,
         color: SequentialPalettes.GREEN
       }
     ],
     narrativeHtml: 'Although poverty rates have been falling both in Washington state and nationwide, <a href="https://www.kuow.org/stories/census-poverty-has-deepened">people living in poverty are getting poorer</a>. The rate of Washingtonians living below 50 percent of the Federal Poverty Line(defined by the US Census Bureau as “Deep Poverty”) has grown over the past x years.',
-    tutorialHtml: 'Guide coming soon!'
+    tutorialHtml: "Guide coming soon!"
   },
   {
     title: 'Median Incomes',
@@ -37,7 +37,7 @@ const tourSlideData = [
         color: SequentialPalettes.ORANGE_RED
       }
     ],
-    narrativeHtml: 'Although certain sectors of our state’s economy are booming, wages have not risen for everyone.',
+    narrativeHtml: 'Although certain sectors of our state’s economy are booming, <a href="http://www.opportunityinstitute.org/research/post/growing-jobs-stagnant-wages-increasing-inequality-rising-prices/wages">have not risen for everyone</a>. By many measures, Washington’s economy has soared since the Great Recession. The state has added over 400,000 jobs since 2008 – more than making up for previous losses – and average hourly wages have climbed 13 percent after adjusting for inflation. However, those rosy numbers mask the fact that sluggish wage growth, increasing inequality and rising prices are leaving many Washington residents struggling.',
     tutorialHtml: 'Guide coming soon!'
   },
   {
