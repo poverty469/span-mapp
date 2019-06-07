@@ -4,7 +4,7 @@
       <p class="story-content" v-html="narrative"></p>
     </div>
     <div class="container">
-      <p class="tutorial-content" v-html="tutorial"></p>
+      <div class="tutorial-content" v-html="tutorial"></div>
     </div>
   </div>
 </template>
@@ -33,13 +33,18 @@ export default {
 <style lang="scss">
 .story-content, .tutorial-content {
   position: relative;
-  text-align: left;
+  width: 450px;
 }
 
 .container {
-  padding: 2rem;
   display:flex;
   justify-content: center;
+}
+
+.container .tutorial-content {
+  top: 28px;
+  padding-top: 2em;
+  text-align: center;
 }
 
 .container .story-content {
@@ -47,6 +52,7 @@ export default {
   border-radius: 20px;
   border: 2px solid $dark-orange;
   padding:1em;
+  text-align: left;
 }
 
 .container a {

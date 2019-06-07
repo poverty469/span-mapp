@@ -10,7 +10,7 @@
       </router-link>
     </div>
     <div class="tour__body">
-      <mb-map
+      <!-- <mb-map
         v-show="activeData"
         :mapId="mapId"
         :activeData="activeData"
@@ -18,7 +18,10 @@
         @mapLoaded="handleMapLoaded"
       >
         <map-legend-bar></map-legend-bar>
-      </mb-map>
+      </mb-map>  -->
+      <display-maps 
+        :image="activeImages"
+      />
       <div v-if="tourSlides && tourSlides.length" class="tour__sidebar">
         <hooper ref="carousel" @slide="updateCarousel">
           <slide
@@ -28,8 +31,8 @@
             class="tour__slide"
           >
           <tour-info 
-            :narrative="activeSlide.narrativeHtml"
-            :tutorial="activeSlide.tutorialHtml"
+            :narrative="activeNarrative"
+            :tutorial="activeTutorial"
           />
           </slide>
         </hooper>
@@ -56,20 +59,19 @@
 import _ from "lodash";
 
 import { Hooper, Slide } from "hooper";
-
+import DisplayMaps from "@/components/DisplayMaps.vue";
 import MbMap from "@/components/MbMap.vue";
 import MapLegendBar from "@/components/MapLegendBar";
 import TourInfo from "@/components/TourInfo.vue";
-import TheTourNav from "@/components/TheTourNav.vue";
 import tourSlides from "@/assets/data/TourSlides.js";
 
 export default {
   name: "TheTourDashboard",
   components: {
+    DisplayMaps,
     MbMap,
     MapLegendBar,
     TourInfo,
-    TheTourNav,
     Hooper,
     Slide
   },
@@ -130,7 +132,34 @@ export default {
     slideIndices: function() {
       return _.range(this.tourSlides.length);
     },
-
+    activeNarrative: function() {
+      if (
+        this.activeSlide &&
+        this.activeSlide.hasOwnProperty("narrativeHtml") 
+      ) {
+        return this.activeSlide.narrativeHtml;
+      }
+      return null;
+    },
+    activeImages: function() {
+      if(
+        this.activeSlide &&
+        this.activeSlide.hasOwnProperty("imageHtml")
+      ) {
+        console.log(this.activeSlide.imageHtml)
+        return this.activeSlide.imageHtml;
+      }
+      return null;
+    },
+    activeTutorial: function() {
+      if(
+        this.activeSlide &&
+        this.activeSlide.hasOwnProperty("tutorialHtml") 
+      ) {
+        return this.activeSlide.tutorialHtml;
+      }
+      return null;
+    }
   }
 };
 </script>
@@ -201,6 +230,8 @@ $tour__map-margin-left: 22px;
 }
 
 .tour__slide {
+  position:relative;
+  top: 40px;
   display: inline-block;
   width: 250px;
   height: 500px;
@@ -214,6 +245,8 @@ $tour__map-margin-left: 22px;
   width: 6rem;
   border-radius: 5px;
   margin: 4vw;
+  position: relative;
+  left: 30px;
 }
 
 .nav__buttons:hover {
@@ -224,12 +257,13 @@ $tour__map-margin-left: 22px;
 .nav__container {
   text-align: center;
   position: relative;
-  top: -3vh;
+  top: -2vh;
 }
 
 .progress__container {
   text-align: center;
-  margin: -5em;
+  margin-top: -3em;
+  margin-left:4em;
 }
 
 .nav__progress {
