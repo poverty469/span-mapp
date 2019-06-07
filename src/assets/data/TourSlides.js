@@ -40,7 +40,7 @@ const tourSlideData = [
     ],
     narrativeHtml: 'Although certain sectors of our state’s economy are booming, <a href="http://www.opportunityinstitute.org/research/post/growing-jobs-stagnant-wages-increasing-inequality-rising-prices/wages">have not risen for everyone</a>. By many measures, Washington’s economy has soared since the Great Recession. The state has added over 400,000 jobs since 2008 – more than making up for previous losses – and average hourly wages have climbed 13 percent after adjusting for inflation. However, those rosy numbers mask the fact that sluggish wage growth, increasing inequality and rising prices are leaving many Washington residents struggling.',
     tutorialHtml: 'Guide coming soon!',
-    imageHtml: 'medianGross2.png'
+    imageHtml: './medianGross2.png'
   },
   {
     title: 'Median Cost of Monthly Rent',
@@ -48,7 +48,7 @@ const tourSlideData = [
     dataLayers: [],
     narrativeHtml: '<a href="https://seattle.curbed.com/2018/6/14/17464900/seattle-washington-minimum-wage-housing-costs">Wages have not kept pace with rapidly rising costs of living throughout the state</a>. <p>For many Washingtonians living on low or moderate wages, monthly rent costs take an unsustainable portion of their take-home pay.</p>',
     tutorialHtml: 'Guide coming soon!',
-    imageHtml: 'medianGross2.png'
+    imageHtml: './medianRent.png'
   },
   {
     title: 'Statewide Poverty Action Network Four Focuses',
