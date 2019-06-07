@@ -33,7 +33,7 @@ export default {
 
 .display-maps img {
     position: relative;
-    width: 1180px;
+    width: 1190px;
     height: 760px;
     bottom: 5px;
     border-radius: 20px;
