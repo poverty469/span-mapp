@@ -134,7 +134,7 @@ body {
 }
 
 .router-view {
-  position: absolute;
+  position: fixed;
   top: $header-height;
   bottom: $footer-height;
   left: 0;
@@ -158,7 +158,7 @@ body {
 }
 
 .the-footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: $app-width;

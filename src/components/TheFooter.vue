@@ -46,7 +46,6 @@ export default {
   background: $light-tan;
   border-top: $thin-border solid $charcoal;
   box-shadow: $standard-box-shadow;
-
   overflow: hidden;
 }
 
