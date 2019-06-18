@@ -1,6 +1,6 @@
 <template>
   <div class="story-container">
-    <h1>{{name}}, {{city}}</h1>
+    <h1>{{name}} - {{city}}</h1>
     <div class="bio-container">
       <img :src="image" alt="Bio Image">
       <p v-html="bio"></p>

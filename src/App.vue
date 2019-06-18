@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-bind="forceLoad()">
     <!-- temp tag to test loading states -->
     <div class="test-button-container">
       <button
@@ -9,7 +9,6 @@
       >
         Toggle Map Data (don't click until washington outline loads)
       </button>
-      <button class="test-button" @click="forceLoad()">'Force load'</button>
     </div>
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
@@ -40,6 +39,7 @@ import geographies from "@/assets/geographies";
 import povertyData from "@/assets/data/dataLayer";
 
 import { mapGetters } from "vuex";
+import { setTimeout } from 'timers';
 
 export default {
   name: "app",
@@ -69,7 +69,7 @@ export default {
      * Forces the state of the app from loading to loaded
      */
     forceLoad() {
-      this.$store.dispatch("mapLoaded");
+      setTimeout(() => this.$store.dispatch("mapLoaded"), 3000);
     },
     forceToggleMapData() {
       if (this.activeData.length == 0) {
