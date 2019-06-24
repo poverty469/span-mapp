@@ -42,7 +42,8 @@ export default {
   },
   data: function() {
     return {
-      hoveredFeature: undefined
+      hoveredFeature: undefined,
+      map: this.mapData
     };
   },
   methods: {
@@ -199,7 +200,7 @@ export default {
   mounted: function() {
     this.addLayerToMap();
   },
-  beforeDestroy: function() {
+  beforeDestroy:function() {
     this.removeLayerFromMap();
   }
 };

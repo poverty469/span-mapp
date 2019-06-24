@@ -1,17 +1,17 @@
 <template>
   <li
     class="layer-menu-item"
-    :class="{ 'layer-menu-item--active': active }"
+    :class="{ 'layer-menu-item--active': this.active == true }"
     @click="handleMenuItemClick"
   >
-    {{ title }}
+    {{ name }}
   </li>
 </template>
 <script>
 export default {
   name: "LayerMenuItem",
   props: {
-    title: {
+    name: {
       type: String,
       required: true
     }
@@ -24,7 +24,7 @@ export default {
   methods: {
     handleMenuItemClick() {
       this.active = !this.active;
-      this.$emit("layerMenuItemClick", this.title);
+      this.$emit("layerMenuItemClick", this.name);
     }
   }
 };
