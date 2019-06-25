@@ -1,15 +1,5 @@
 <template>
   <div id="app" v-bind="forceLoad()">
-    <!-- temp tag to test loading states -->
-    <div class="test-button-container">
-      <button
-        v-show="!appLoading"
-        class="test-button"
-        @click="forceToggleMapData()"
-      >
-        Toggle Map Data (don't click until washington outline loads)
-      </button>
-    </div>
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
     <transition name="fade-quick">
@@ -70,26 +60,6 @@ export default {
      */
     forceLoad() {
       setTimeout(() => this.$store.dispatch("mapLoaded"), 3000);
-    },
-    forceToggleMapData() {
-      if (this.activeData.length == 0) {
-        this.activeData.push({
-          dataset: povertyData,
-          geographyId: geographies.counties.id,
-          attributeId: "HC03_VC161",
-          type: MapTypes.CHOROPLETH,
-          color: SequentialPalettes.RED_PURPLE
-        });
-        this.activeData.push({
-          dataset: povertyData,
-          geographyId: geographies.counties.id,
-          attributeId: "HC03_VC164",
-          type: MapTypes.CHOROPLETH,
-          color: SequentialPalettes.BLUE
-        });
-      } else {
-        this.activeData.pop();
-      }
     }
   },
   computed: {

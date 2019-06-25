@@ -31,7 +31,7 @@ export default {
 
 <style lang="scss">
   .the-stories-view {
-    background: rgba(0, 0, 0, 0.842);
+    background: rgb(0, 0, 0);
     position: relative;
     margin-bottom: $footer-height; 
   }

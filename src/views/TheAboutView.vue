@@ -20,6 +20,6 @@ export default {
 
 <style lang="scss">
 .the-about-view {
-  background: rgba(0, 0, 0, 0.842);
+  background: rgb(0, 0, 0);
 }
 </style>
