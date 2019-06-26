@@ -30,6 +30,7 @@ import povertyData from "@/assets/data/dataLayer";
 
 import { mapGetters } from "vuex";
 import { setTimeout } from 'timers';
+import InstagramLogo from '@/assets/svg/instagram_icon.svg';
 
 export default {
   name: "app",
@@ -190,4 +191,35 @@ body {
   transform: translateX(#{$righter-width});
   opacity: 0;
 }
+
+  .shadow {
+    box-shadow: 0 0 6em 4em $dark-orange--shadow;
+    border-radius: 50%/25%;
+    z-index: -2;
+  }
+
+  .contact button {
+    background: inherit;
+    border: $medium-border $dark-orange--border solid;
+    font-size: 24px !important;
+    color: $dark-orange--border;
+    text-transform: uppercase;
+  }
+
+  .contact button:hover {
+    background: $dark-orange--shadow;
+    color: $light-orange;
+  }
+
+  .address h3 {
+    margin: 2em 0em 0em 1em;
+    padding: 0.5em;
+    font-size: 24px !important;
+    color: $dark-orange;
+  }
+
+  .contact-container h1 {
+    color: $light-orange !important;
+    font-size: 32px !important;
+  }
 </style>

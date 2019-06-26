@@ -55,6 +55,7 @@ h3 {
 
 .a-line .answer {
     color: $charcoal;
+    font-weight: bold;
 }
 
 .q-line {
@@ -66,6 +67,7 @@ h3 {
 
 .q-line .question {
     color: $light-purple;
+    font-weight: bold;
 }
 
 .flex-container {
@@ -75,7 +77,7 @@ h3 {
 
 .flex-container p {
     position: relative;
-    top: 2.6vh;
+    top: 3vh;
     left: 5vw;
     font-size: 28px;
 }

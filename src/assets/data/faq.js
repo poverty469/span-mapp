@@ -1,6 +1,6 @@
 const Faq = [
     {
-        title: 'General Questions',
+        title: 'General',
         data: [
             {
                 question: 'Who can I contact to share my story?',

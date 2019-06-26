@@ -8,6 +8,19 @@
       :bio="story.bio"
     >
     </the-stories>
+    <div class="shadow">
+      <div class="contact-container">
+          <div class="contact">
+            <h1>Want To Share Your Story?</h1>
+            <button onclick="window.open('mailto:adriana@povertyaction.org?subject=Share My Story');">message us</button>
+          </div>
+          <div class="address">
+            <h1>Statewide Poverty Action Network</h1>
+            <h3>1501 North 45th Street <br/><br/>
+                Seattle, WA 98103</h3>
+          </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -34,6 +47,33 @@ export default {
     background: rgb(255, 254, 254);
     position: relative;
     margin-top: 1px;
-    margin-bottom: $footer-height + 10px;
+    margin-bottom: $footer-height + 1px;
+  }
+
+  .the-stories-view .contact {
+    position: relative;
+    left: 3vw;
+  }
+
+  .the-stories-view .contact-container {
+    background: #192930;
+    padding: 5em;
+    margin-top: 10vh;
+    display:flex;
+    justify-content: space-between;
+  }
+
+  .the-stories-view .contact button {
+    margin: 6vh 0em 0em 5vw;
+    padding: 0.5em;
+  }
+
+  .the-stories-view .address h3 {
+    margin: 3vh 0em 0em 7vw;
+  }
+
+  .the-stories-view .address {
+    position: relative;
+    right: 3vw;
   }
 </style>
