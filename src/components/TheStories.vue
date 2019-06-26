@@ -3,7 +3,9 @@
     <h1>{{name}} - {{city}}</h1>
     <div class="bio-container">
       <img :src="image" alt="Bio Image">
-      <p v-html="bio"></p>
+      <div class="paragraph-container">
+        <p v-html="bio"></p>
+      </div>
     </div>
   </div>
 </template>
@@ -38,13 +40,14 @@ export default {
 
 <style lang="scss">
   .story-container {
-    margin: auto;
-    width: 70%;
-    padding: 2vw;
+    margin: 3em;
+    padding: 1.5em;
   }
 
   h1 {
-    color: $light-purple;
+    font-weight: bold;
+    color: $dark-purple;
+    text-emphasis: 1em;
   }
 
   .bio-container {
@@ -54,18 +57,25 @@ export default {
   }
 
   .bio-container img {
-    border-radius: 40px;
+    border-radius: 100%;
+    width: 320px;
+    height: 300px;
+    box-shadow: 0px 10px 10px 2px rgba(34, 34, 33, 0.418);
   }
   
+  .paragraph-container {
+    padding-left: 3em;
+  }
+
   .bio-container p a {
     text-decoration: underline !important;
-    color: $dark-purple;
+    color: $dark-orange--border;
   }
 
   .bio-container p {
-    color: $light-orange;
+    position: relative;
+    top: 3vh;
+    color: $dark-grey;
     font-size: 24px;
-    margin: auto;
-    width: 50%;
   }
 </style>

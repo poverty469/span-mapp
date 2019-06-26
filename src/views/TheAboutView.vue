@@ -1,6 +1,8 @@
 <template>
   <div class="the-about-view">
-    <the-about></the-about>
+    <div>
+      <the-about></the-about>
+    </div>
   </div>
 </template>
 
@@ -20,6 +22,8 @@ export default {
 
 <style lang="scss">
 .the-about-view {
-  background: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
+  margin-bottom: 1px;
+  margin-top: 1px;
 }
 </style>

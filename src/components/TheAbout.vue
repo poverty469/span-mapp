@@ -39,7 +39,7 @@ export default {
 }
 
 .about-paragraph {
-    color: $dark-orange;
+    color: $dark-grey;
     font-size: 24px;
     padding: 4em;
 }
