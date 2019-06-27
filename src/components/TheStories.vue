@@ -78,4 +78,11 @@ export default {
     color: $dark-grey;
     font-size: 24px;
   }
+
+  @media only screen and (max-width: 1100px) {
+    .bio-container img {
+      width: 220px;
+      height: 200px;
+    }
+  }
 </style>

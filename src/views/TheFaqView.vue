@@ -81,4 +81,31 @@ export default {
     position: relative;
     right: 3vw;
   }
+
+  @media only screen and (max-width: 1100px) {
+    .the-faq-view .contact {
+      position: relative;
+      left: 0vw;
+    }
+
+    .the-faq-view .address {
+      position: relative;
+      right: 0vw;
+      left: 6vw;
+    }
+    
+    .the-faq-view .contact h1 {
+      position: relative;
+      right: 5vw;
+    }
+
+    .the-faq-view .contact button {
+      margin: 1.5vh 0em 0em 3.5vw;
+      padding: 0.5em;
+    }
+    
+    .the-faq-view .address h3 {
+      margin: 5vh 0em 0em 12vw;
+    }
+  }
 </style>

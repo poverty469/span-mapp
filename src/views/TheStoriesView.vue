@@ -76,4 +76,32 @@ export default {
     position: relative;
     right: 3vw;
   }
+
+  @media only screen and (max-width: 1100px) {
+    
+    .the-stories-view .contact {
+      position: relative;
+      left: 0vw;
+    }
+
+    .the-stories-view .address {
+      position: relative;
+      right: 0vw;
+      left: 8vw;
+    }
+    
+    .the-stories-view .contact h1 {
+      position: relative;
+      right: 2vw;
+    }
+
+    .the-stories-view .contact button {
+      margin: 6vh 0em 0em 3vw;
+      padding: 0.5em;
+    }
+    
+    .the-stories-view .address h3 {
+      margin: 5vh 0em 0em 5vw;
+    }
+  }
 </style>

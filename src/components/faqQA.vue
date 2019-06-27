@@ -91,4 +91,16 @@ h3 {
 .flex-container a {
     color: $dark-purple;
 }
+
+  @media only screen and (max-width: 1100px) {
+    .a-line {
+      padding: 0.1px 0px 0.1px 0px;
+      left: 2em;
+    }
+
+    .q-line {
+      padding: 0.1px 0px 0.1px 0px;
+      left: 2em;
+    }
+  }
 </style>
