@@ -46,6 +46,15 @@ export default {
       map: this.mapData
     };
   },
+  watch: {
+    attributeId: {
+      immediate: true,
+      handler () {
+        this.removeLayerFromMap();
+        this.addLayerToMap();
+      }
+    }
+  },
   methods: {
     addLayerToMap() {
       let layerId = this.layerId;

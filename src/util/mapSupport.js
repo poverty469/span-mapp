@@ -15,7 +15,7 @@ class MapSupport {
    * @return {String} Mapbox style URL.
    */
   getBaseMap() {
-    /*if (process.env.NODE_ENV == "development") {
+    if (process.env.NODE_ENV == "development") {
       return {
         version: 8,
         sources: {},
@@ -29,9 +29,9 @@ class MapSupport {
           }
         ]
       };
-    } else {*/
+    } else {
       return process.env.VUE_APP_MAPBOX_STYLE_URL;
-    //}
+    }
   }
 
   /**
