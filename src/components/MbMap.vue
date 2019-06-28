@@ -398,7 +398,7 @@ export default {
   position: relative;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   color: rgb(220, 174, 96);
 }
