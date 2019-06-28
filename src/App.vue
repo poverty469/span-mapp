@@ -60,7 +60,7 @@ export default {
      * Forces the state of the app from loading to loaded
      */
     forceLoad() {
-      setTimeout(() => this.$store.dispatch("mapLoaded"), 3000);
+      setTimeout(() => this.$store.dispatch("mapLoaded"), 1000);
     }
   },
   computed: {
