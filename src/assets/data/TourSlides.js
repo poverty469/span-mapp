@@ -1,20 +1,8 @@
-import { MapTypes, SequentialPalettes } from "@/util/enums";
-import geographies from "@/assets/geographies";
-import povertyData from "@/assets/data/dataLayer";
 
 const tourSlideData = [
   {
     title: "Living in Poverty",
     subtitle: "By Census Tract",
-    dataLayers: [
-      {
-        dataset: povertyData,
-        geographyId: geographies.counties.properties,
-        attributeId: '"HC03_VC161"',
-        type: MapTypes.CHOROPLETH,
-        color: SequentialPalettes.GREEN
-      }
-    ],
     narrativeHtml: 'Although poverty rates have been falling both in Washington state and nationwide, <a target="blank_" href="https://www.kuow.org/stories/census-poverty-has-deepened">people living in poverty are getting poorer</a>. The rate of Washingtonians living below 50 percent of the Federal Poverty Line(defined by the US Census Bureau as “Deep Poverty”) has grown over the past x years.',
     tutorialHtml: "",
     imageHtml: './images/belowpov.jpg'
@@ -42,7 +30,7 @@ const tourSlideData = [
       ' and, if they have criminal convictions, <a target="blank_" href="https://povertyaction.org/criminal-justice/">rebuild their lives</a> after leaving prison. Additionally, Washington’s' + 
       ' regressive <a target="blank_" href="https://povertyaction.org/revenue/">state tax structure</a> further exacerbates poverty. <br/> <br/>Poverty Action works to advocate for and advance progressive policy solutions that fix our state tax code, strengthen state basic needs programs, create robust consumer protections, and offer people with criminal convictions a second chance.</p>'
     ,
-    tutorialHtml: '<img src="./takeAction.png" alt="Take action in Washington" width="210px" height="100px"/>',
+    tutorialHtml: '<a href="https://povertyaction.org/advocacy-actions/" target="_blank"><img src="./images/getInvolved.png" alt="Get Involved" width="200px" height="80px"/></a>',
     imageHtml: './images/fourFocuses.png'
   },
   {

@@ -281,7 +281,7 @@
         ]
     },
     "HC03_VC162": {
-        "title": "Percent; PERCENTAGE OF FAMILIES AND PEOPLE WHOSE INCOME IN THE PAST 12 MONTHS IS BELOW THE POVERTY LEVEL - All families - With related children of the householder under 18 years",
+        "title": "PERCENTAGE OF FAMILIES AND PEOPLE WHOSE INCOME IN THE PAST 12 MONTHS IS BELOW THE POVERTY LEVEL - All families - With related children of the householder under 18 years",
         "stats": {
             "COUNT": 39,
             "EMPTY": 0,
@@ -439,7 +439,7 @@
         ]
     },
     "HC03_VC163": {
-        "title": "Percent; PERCENTAGE OF FAMILIES AND PEOPLE WHOSE INCOME IN THE PAST 12 MONTHS IS BELOW THE POVERTY LEVEL - All families - With related children of the householder under 18 years - With related children of the householder under 5 years only",
+        "title": "PERCENTAGE OF FAMILIES AND PEOPLE WHOSE INCOME IN THE PAST 12 MONTHS IS BELOW THE POVERTY LEVEL - All families - With related children of the householder under 18 years - With related children of the householder under 5 years only",
         "stats": {
             "COUNT": 39,
             "EMPTY": 0,

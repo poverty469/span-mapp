@@ -21,16 +21,16 @@ export default {
   .display-maps {
     position: relative;
     left: 20px;
-    padding: 1em 1em 1em 1em;
+    padding: 10px;
+    height: 66vh;
     border-radius: 20px;
     border: 3px $dark-orange--border solid;
   }
 
   .display-maps img {
     position: relative;
-    width: 1190px;
-    height: 760px;
-    bottom: 5px;
+    width: 60vw;
+    height: 66vh;
     border-radius: 20px;
   }
 </style>

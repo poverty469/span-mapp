@@ -56,7 +56,7 @@ export default {
             name: "Median Income", 
             dataset: povertyData,
             geographyId: geographies.counties.id,
-            attributeId: "HC03_VC163",
+            attributeId: "HC03_VC178",
             type: MapTypes.CHOROPLETH,
             color: SequentialPalettes.ORANGE_RED
           },
