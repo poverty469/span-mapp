@@ -58,8 +58,6 @@ export default {
 
   .bio-container img {
     border-radius: 100%;
-    width: 320px;
-    height: 300px;
     box-shadow: 0px 10px 10px 2px rgba(34, 34, 33, 0.418);
   }
   

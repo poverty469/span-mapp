@@ -4,7 +4,7 @@ const Faq = [
         data: [
             {
                 question: 'Who can I contact to share my story?',
-                answer: 'You can email your story to Statewide Poverty Action Network via this <a href="adriana@povertyaction.org">email</a>'
+                answer: 'You can email your story to Statewide Poverty Action Network through this email: <a href="adriana@povertyaction.org">adriana@povertyaction.org</a>'
             },
             {
                 question: 'Question',
