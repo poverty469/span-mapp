@@ -22,22 +22,6 @@ const tourSlideData = [
   {
     title: 'Median Incomes',
     subtitle: 'by County',
-    dataLayers: [
-      {
-        dataset: povertyData,
-        geographyId: geographies.counties.id,
-        attributeId: '"HC03_VC163"',
-        type: MapTypes.CHOROPLETH,
-        color: SequentialPalettes.PURPLE_BLUE
-      },
-      {
-        dataset: povertyData,
-        geographyId: geographies.counties.id,
-        attributeId: '"HC03_VC162"',
-        type: MapTypes.CHOROPLETH,
-        color: SequentialPalettes.ORANGE_RED
-      }
-    ],
     narrativeHtml: 'Although certain sectors of our state’s economy are booming, <a target="blank_" href="http://www.opportunityinstitute.org/research/post/growing-jobs-stagnant-wages-increasing-inequality-rising-prices/wages">have not risen for everyone</a>. By many measures, Washington’s economy has soared since the Great Recession. The state has added over 400,000 jobs since 2008 – more than making up for previous losses – and average hourly wages have climbed 13 percent after adjusting for inflation. However, those rosy numbers mask the fact that sluggish wage growth, increasing inequality and rising prices are leaving many Washington residents struggling.',
     tutorialHtml: '',
     imageHtml: './images/medIncome.jpg'
