@@ -24,13 +24,8 @@ import TheHeader from "@/components/TheHeader.vue";
 import TheLogo from "@/components/TheLogo.vue";
 import MapDashboard from "@/components/MapDashboard.vue";
 
-import { MapTypes, SequentialPalettes } from "@/util/enums.js";
-import geographies from "@/assets/geographies";
-import povertyData from "@/assets/data/dataLayer";
-
 import { mapGetters } from "vuex";
 import { setTimeout } from 'timers';
-import InstagramLogo from '@/assets/svg/instagram_icon.svg';
 
 export default {
   name: "app",
