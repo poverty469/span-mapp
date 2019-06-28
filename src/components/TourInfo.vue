@@ -35,6 +35,7 @@ export default {
   position: relative;
   width: 30vw;
   height: auto;
+  left: 1vw;
 }
 
 .tour-info .story-content, .tour-info .tutorial-content {

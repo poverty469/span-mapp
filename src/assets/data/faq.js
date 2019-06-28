@@ -9,7 +9,7 @@ const Faq = [
             {
                 question: 'Question',
                 answer: 'Answer'
-            },
+            }
         ]
     },
     {
@@ -22,7 +22,7 @@ const Faq = [
             {
                 question: 'Question',
                 answer: 'Answer'
-            },
+            }
         ]
     },
     {
@@ -35,7 +35,7 @@ const Faq = [
             {
                 question: 'Question',
                 answer: 'Answer'
-            },
+            }
         ]
     }
 ];
