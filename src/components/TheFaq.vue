@@ -40,6 +40,7 @@ export default {
 .faq-container {
     display: relative;
     justify-content: left;
+    width: 80%;
 }
 
 .faq-container h2 {

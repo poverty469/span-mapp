@@ -16,8 +16,8 @@ const Faq = [
         title: 'Data',
         data: [
             {
-                question: 'Question',
-                answer: 'Answer'
+                question: 'What are the Data Sources?',
+                answer: 'Data about general poverty, income, rent and unemployment were obtained from the U.S. Census Bureau. Jail data was obtained from the Washington Association of Sheriffs and Police Chiefs. Data about the homeless population was obtained from the Washington State Department of Commerce'
             },
             {
                 question: 'Question',
