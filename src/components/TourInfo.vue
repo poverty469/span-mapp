@@ -66,8 +66,9 @@ export default {
   color: $dark-purple;
 }
 
-.tour-info  .container h3 {
+.tour-info .container h3 {
   text-align: center !important;
   font-weight: bold;
+  font-size: 24px;
 }
 </style>

@@ -51,7 +51,16 @@ export default {
           title: "state revenue",
           layers: [{ name: "bn One" }, { name: "cj One" }]
         },
-        { title: "consumer protection", layers: [{ name: "bn One" }] }
+        { title: "consumer protection", layers: [
+          { 
+            name: "Median Income", 
+            dataset: povertyData,
+            geographyId: geographies.counties.id,
+            attributeId: "HC03_VC163",
+            type: MapTypes.CHOROPLETH,
+            color: SequentialPalettes.ORANGE_RED
+         }]
+        }
       ]
     };
   },

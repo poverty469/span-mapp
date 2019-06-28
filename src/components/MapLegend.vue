@@ -73,6 +73,7 @@ $legend-max-width: 12rem;
 }
 
 .map-legend__title {
+  font-size: 18px !important;
   position: relative;
   display: block;
   background: white;
