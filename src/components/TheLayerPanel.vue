@@ -59,7 +59,15 @@ export default {
             attributeId: "HC03_VC163",
             type: MapTypes.CHOROPLETH,
             color: SequentialPalettes.ORANGE_RED
-         }]
+          },
+          { 
+            name: "Family Income", 
+            dataset: povertyData,
+            geographyId: geographies.counties.id,
+            attributeId: "HC03_VC162",
+            type: MapTypes.CHOROPLETH,
+            color: SequentialPalettes.PURPLE_BLUE
+          }]
         }
       ]
     };
