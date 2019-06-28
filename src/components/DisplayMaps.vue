@@ -1,8 +1,6 @@
 <template>
-    <div class="container">
-        <div class="display-maps">
-            <img :src="image" />
-        </div>
+    <div class="display-maps">
+      <img :src="image" />
     </div> 
 </template>
 <script>
@@ -20,22 +18,19 @@ export default {
 };
 </script>
 <style lang="scss">
-.container {
+  .display-maps {
     position: relative;
     left: 20px;
-}
-
-.display-maps {
     padding: 1em 1em 1em 1em;
     border-radius: 20px;
     border: 3px $dark-orange--border solid;
-}
+  }
 
-.display-maps img {
+  .display-maps img {
     position: relative;
     width: 1190px;
     height: 760px;
     bottom: 5px;
     border-radius: 20px;
-}
+  }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tour-info">
     <div class="container">
       <p class="story-content" v-html="narrative"></p>
     </div>
@@ -31,23 +31,29 @@ export default {
 </script>
 
 <style lang="scss">
-.story-content, .tutorial-content {
+.tour-info {
+  position: relative;
+  width: 30vw;
+  height: auto;
+}
+
+.tour-info .story-content, .tour-info .tutorial-content {
   position: relative;
   width: 450px;
 }
 
-.container {
+.tour-info .container {
   display:flex;
   justify-content: center;
 }
 
-.container .tutorial-content {
+.tour-info .container .tutorial-content {
   top: 28px;
   padding-top: 2em;
   text-align: center;
 }
 
-.container .story-content {
+.tour-info  .container .story-content {
   background-color: $dark-orange;
   border-radius: 20px;
   border: 2px solid $dark-orange;
@@ -55,12 +61,12 @@ export default {
   text-align: left;
 }
 
-.container a {
+.tour-info  .container a {
   text-decoration: underline !important;
   color: $dark-purple;
 }
 
-.container h3 {
+.tour-info  .container h3 {
   text-align: center !important;
   font-weight: bold;
 }
