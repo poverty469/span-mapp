@@ -366,11 +366,11 @@ export default {
             </h3>
             <p class="popup--race__text">
               <span class="popup--p__title">1 Adult:</span>
-              ${hoveredFeature.properties.a1}<br>
+              ${hoveredFeature.properties.a1}<br/><br/>
               <span class="popup--p__title">1 Adult, 1 Kid:</span>
-              ${hoveredFeature.properties.a1p1}<br>
+              ${hoveredFeature.properties.a1p1}<br><br/>
               <span class="popup--p__title">1 Adult, 2 Kids:</span>
-              ${hoveredFeature.properties.a1p1s1}<br>
+              ${hoveredFeature.properties.a1p1s1}<br><br/>
               <span class="popup--p__title">2 Adults, 2 Kids:</span>
               ${hoveredFeature.properties.a2p1s1}
             </p>
@@ -413,5 +413,13 @@ export default {
 
 .popup--p__title {
   font-weight: bold;
+}
+
+.map-container p {
+  font-size: 18px;
+}
+
+.map-container h3 {
+  font-size: 24px;
 }
 </style>

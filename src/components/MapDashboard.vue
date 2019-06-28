@@ -231,4 +231,5 @@ $map-width: calc(100vw + #{$map-right-shift});
   outline: 2px solid $dark-grey;
   border-top: 0 !important;
 }
+
 </style>
