@@ -1,6 +1,7 @@
 <template>
   <div class="map-dashboard">
     <mb-map
+      v-bind="activeData"
       class="map-dashboard__map"
       :mapId="mapId"
       :activeData="activeData"
@@ -127,8 +128,11 @@ export default {
         ? _.delay(() => window.dispatchEvent(new Event("resize")), 50)
         : null;
     },
-    handleToggleLayer(layerTitle) {
-      // TODO: add or remove the layer associated with the title from the active data list
+    handleToggleLayer(layer) {
+      if(this.activeData.length !== 0) {
+        this.activeData.pop();
+      }
+      this.activeData.push(layer);
     }
   },
   computed: {
@@ -227,4 +231,5 @@ $map-width: calc(100vw + #{$map-right-shift});
   outline: 2px solid $dark-grey;
   border-top: 0 !important;
 }
+
 </style>

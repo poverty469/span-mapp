@@ -49,7 +49,7 @@ export default {
 
 .action-button__text {
   position: relative;
-
+  text-align: center;
   padding: 0 0.5rem;
   @include char-style($action-button...);
   letter-spacing: 1px;

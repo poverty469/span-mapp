@@ -1,5 +1,6 @@
 <template>
-  <div class="the-footer">
+  <div class="footer-container">
+    <div class="the-footer">
     <div class="social-media__container">
       <a href="https://www.instagram.com/poverty_action/" target="_blank">
         <instagram-logo
@@ -21,6 +22,7 @@
       ></action-button>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -28,6 +30,8 @@ import TwitterLogo from "@/assets/svg/twitter_icon.svg";
 import InstagramLogo from "@/assets/svg/instagram_icon.svg";
 import FacebookLogo from "@/assets/svg/facebook_icon.svg";
 import ActionButton from "@/components/ActionButton";
+import InfoBar from '@/components/InfoBar';
+import LayerMenuItem from '@/components/LayerMenuItem';
 
 export default {
   name: "TheFooter",
@@ -40,13 +44,17 @@ export default {
 </script>
 
 <style lang="scss">
+.footer-container {
+  position: relative !important;
+  bottom:0;
+}
+
 .the-footer {
   display: flex;
   justify-content: space-between;
   background: $light-tan;
   border-top: $thin-border solid $charcoal;
   box-shadow: $standard-box-shadow;
-
   overflow: hidden;
 }
 

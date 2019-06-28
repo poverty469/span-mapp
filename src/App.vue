@@ -1,16 +1,5 @@
 <template>
-  <div id="app">
-    <!-- temp tag to test loading states -->
-    <div class="test-button-container">
-      <button
-        v-show="!appLoading"
-        class="test-button"
-        @click="forceToggleMapData()"
-      >
-        Toggle Map Data (don't click until washington outline loads)
-      </button>
-      <button class="test-button" @click="forceLoad()">'Force load'</button>
-    </div>
+  <div id="app" v-bind="forceLoad()">
     <the-logo class="the-logo" rel="preload"></the-logo>
     <the-header class="the-header"></the-header>
     <transition name="fade-quick">
@@ -40,6 +29,8 @@ import geographies from "@/assets/geographies";
 import povertyData from "@/assets/data/dataLayer";
 
 import { mapGetters } from "vuex";
+import { setTimeout } from 'timers';
+import InstagramLogo from '@/assets/svg/instagram_icon.svg';
 
 export default {
   name: "app",
@@ -69,27 +60,7 @@ export default {
      * Forces the state of the app from loading to loaded
      */
     forceLoad() {
-      this.$store.dispatch("mapLoaded");
-    },
-    forceToggleMapData() {
-      if (this.activeData.length == 0) {
-        this.activeData.push({
-          dataset: povertyData,
-          geographyId: geographies.counties.id,
-          attributeId: "HC03_VC161",
-          type: MapTypes.CHOROPLETH,
-          color: SequentialPalettes.RED_PURPLE
-        });
-        this.activeData.push({
-          dataset: povertyData,
-          geographyId: geographies.counties.id,
-          attributeId: "HC03_VC164",
-          type: MapTypes.CHOROPLETH,
-          color: SequentialPalettes.BLUE
-        });
-      } else {
-        this.activeData.pop();
-      }
+      setTimeout(() => this.$store.dispatch("mapLoaded"), 3000);
     }
   },
   computed: {
@@ -134,7 +105,7 @@ body {
 }
 
 .router-view {
-  position: absolute;
+  position: fixed;
   top: $header-height;
   bottom: $footer-height;
   left: 0;
@@ -158,7 +129,7 @@ body {
 }
 
 .the-footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: $app-width;
@@ -220,4 +191,35 @@ body {
   transform: translateX(#{$righter-width});
   opacity: 0;
 }
+
+  .shadow {
+    box-shadow: 0 0 6em 4em $dark-orange--shadow;
+    border-radius: 50%/25%;
+    z-index: -2;
+  }
+
+  .contact button {
+    background: inherit;
+    border: $medium-border $dark-orange--border solid;
+    font-size: 24px !important;
+    color: $dark-orange--border;
+    text-transform: uppercase;
+  }
+
+  .contact button:hover {
+    background: $dark-orange--shadow;
+    color: $light-orange;
+  }
+
+  .address h3 {
+    margin: 2em 0em 0em 1em;
+    padding: 0.5em;
+    font-size: 24px !important;
+    color: $dark-orange;
+  }
+
+  .contact-container h1 {
+    color: $light-orange !important;
+    font-size: 32px !important;
+  }
 </style>
