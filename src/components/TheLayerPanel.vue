@@ -39,7 +39,7 @@ export default {
            color: SequentialPalettes.BLUE
          }]
         },
-        {
+        /* {
           title: "criminal justice",
           layers: [
             { name: "cj One" },
@@ -50,7 +50,7 @@ export default {
         {
           title: "state revenue",
           layers: [{ name: "bn One" }, { name: "cj One" }]
-        },
+        }, */
         { title: "consumer protection", layers: [
           { 
             name: "Median Income", 
