@@ -23,7 +23,7 @@ export default {
       layerGroups: [
         { title: "basic needs", layers: [
           { 
-            name: "Families Below Poverty", 
+            name: "Families in Poverty", 
             dataset: povertyData,
             geographyId: geographies.counties.id,
             attributeId: "HC03_VC161",
@@ -31,7 +31,7 @@ export default {
             color: SequentialPalettes.RED_PURPLE
          },
          {
-           name: "Married Couples Below Poverty",
+           name: "Married Couples in Poverty",
            dataset: povertyData,
            geographyId: geographies.counties.id,
            attributeId: "HC03_VC164",
@@ -56,7 +56,7 @@ export default {
             name: "Median Income", 
             dataset: povertyData,
             geographyId: geographies.counties.id,
-            attributeId: "HC03_VC163",
+            attributeId: "HC03_VC178",
             type: MapTypes.CHOROPLETH,
             color: SequentialPalettes.ORANGE_RED
           },

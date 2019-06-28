@@ -186,6 +186,7 @@ $tour-dashboard__body-height: calc(100% - #{$tour-dashboard__header-height});
 .tour__body {
   display: inline-flex;
   height: $tour-dashboard__body-height;
+  left: 2vw;
 }
 
 .tour__map,
@@ -257,12 +258,15 @@ $tour__map-margin-left: 22px;
 .nav__container {
   text-align: center;
   position: relative;
-  top: -2vh;
+  position: relative;
+  bottom: 4vh;
 }
 
 .progress__container {
   text-align: center;
-  margin-top: -3em;
+  position: relative;
+  bottom: 8vh;
+  margin-left: 4em;
   margin-left:4em;
 }
 

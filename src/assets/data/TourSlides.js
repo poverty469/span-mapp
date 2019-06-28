@@ -1,20 +1,8 @@
-import { MapTypes, SequentialPalettes } from "@/util/enums";
-import geographies from "@/assets/geographies";
-import povertyData from "@/assets/data/dataLayer";
 
 const tourSlideData = [
   {
     title: "Living in Poverty",
     subtitle: "By Census Tract",
-    dataLayers: [
-      {
-        dataset: povertyData,
-        geographyId: geographies.counties.properties,
-        attributeId: '"HC03_VC161"',
-        type: MapTypes.CHOROPLETH,
-        color: SequentialPalettes.GREEN
-      }
-    ],
     narrativeHtml: 'Although poverty rates have been falling both in Washington state and nationwide, <a target="blank_" href="https://www.kuow.org/stories/census-poverty-has-deepened">people living in poverty are getting poorer</a>. The rate of Washingtonians living below 50 percent of the Federal Poverty Line(defined by the US Census Bureau as “Deep Poverty”) has grown over the past x years.',
     tutorialHtml: "",
     imageHtml: './images/belowpov.jpg'
@@ -22,22 +10,6 @@ const tourSlideData = [
   {
     title: 'Median Incomes',
     subtitle: 'by County',
-    dataLayers: [
-      {
-        dataset: povertyData,
-        geographyId: geographies.counties.id,
-        attributeId: '"HC03_VC163"',
-        type: MapTypes.CHOROPLETH,
-        color: SequentialPalettes.PURPLE_BLUE
-      },
-      {
-        dataset: povertyData,
-        geographyId: geographies.counties.id,
-        attributeId: '"HC03_VC162"',
-        type: MapTypes.CHOROPLETH,
-        color: SequentialPalettes.ORANGE_RED
-      }
-    ],
     narrativeHtml: 'Although certain sectors of our state’s economy are booming, <a target="blank_" href="http://www.opportunityinstitute.org/research/post/growing-jobs-stagnant-wages-increasing-inequality-rising-prices/wages">have not risen for everyone</a>. By many measures, Washington’s economy has soared since the Great Recession. The state has added over 400,000 jobs since 2008 – more than making up for previous losses – and average hourly wages have climbed 13 percent after adjusting for inflation. However, those rosy numbers mask the fact that sluggish wage growth, increasing inequality and rising prices are leaving many Washington residents struggling.',
     tutorialHtml: '',
     imageHtml: './images/medIncome.jpg'
@@ -58,7 +30,7 @@ const tourSlideData = [
       ' and, if they have criminal convictions, <a target="blank_" href="https://povertyaction.org/criminal-justice/">rebuild their lives</a> after leaving prison. Additionally, Washington’s' + 
       ' regressive <a target="blank_" href="https://povertyaction.org/revenue/">state tax structure</a> further exacerbates poverty. <br/> <br/>Poverty Action works to advocate for and advance progressive policy solutions that fix our state tax code, strengthen state basic needs programs, create robust consumer protections, and offer people with criminal convictions a second chance.</p>'
     ,
-    tutorialHtml: '<img src="./takeAction.png" alt="Take action in Washington" width="210px" height="100px"/>',
+    tutorialHtml: '<a href="https://povertyaction.org/advocacy-actions/" target="_blank"><img src="./images/getInvolved.png" alt="Get Involved" width="200px" height="80px"/></a>',
     imageHtml: './images/fourFocuses.png'
   },
   {
