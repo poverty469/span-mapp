@@ -70,6 +70,8 @@ export default {
 <style lang="scss">
 body {
   background: $light-tan;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 #app {
