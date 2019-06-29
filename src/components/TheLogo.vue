@@ -106,7 +106,7 @@ export default {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-  height: calc(#{$header-height} * 0.9);
+  height: 50px;
   left: 14px; // Aligns with legends
 
   transition: opacity 250ms ease-in;

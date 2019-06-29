@@ -32,10 +32,9 @@ export default {
 
 <style lang="scss">
 .tour-info {
-  position: relative;
-  width: 30vw;
+  width: auto;
   height: auto;
-  left: 1vw;
+  margin-left: 4vw;
 }
 
 .tour-info .story-content, .tour-info .tutorial-content {
@@ -55,11 +54,12 @@ export default {
 }
 
 .tour-info  .container .story-content {
-  background-color: $dark-orange;
+  background-color: #fcd3c1;
   border-radius: 20px;
-  border: 2px solid $dark-orange;
-  padding:1em;
+  border: 2px solid #fcd3c1;
+  padding: 1em;
   text-align: left;
+  font-size: 14px;
 }
 
 .tour-info  .container a {

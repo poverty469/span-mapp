@@ -400,7 +400,7 @@ export default {
   left: 0;
   width: 100vw;
   height: 100%;
-  color: rgb(220, 174, 96);
+  color: #dcae60;
 }
 
 .popup--race {

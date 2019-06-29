@@ -61,6 +61,8 @@ export default {
   .bio-container img {
     border-radius: 100%;
     box-shadow: 0px 10px 10px 2px rgba(34, 34, 33, 0.418);
+    width: 300px;
+    height: auto;
   }
   
   .paragraph-container {
@@ -76,13 +78,6 @@ export default {
     position: relative;
     top: 3vh;
     color: $dark-grey;
-    font-size: 24px;
-  }
-
-  @media only screen and (max-width: 1100px) {
-    .bio-container img {
-      width: 220px;
-      height: 200px;
-    }
+    font-size: 18px;
   }
 </style>

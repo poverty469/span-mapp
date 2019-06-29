@@ -239,13 +239,12 @@ $tour__map-margin-left: 22px;
 }
 
 .nav__buttons {
-  background-color: $dark-orange;
+  background-color: #fcd3c1;
   text-transform: uppercase;
   padding: 1em;
-  font-size: 16px;
-  width: 6rem;
+  font-size: 15px;
   border-radius: 5px;
-  margin: 4vw;
+  margin: 3vw;
   position: relative;
   left: 30px;
 }
@@ -258,16 +257,14 @@ $tour__map-margin-left: 22px;
 .nav__container {
   text-align: center;
   position: relative;
-  position: relative;
-  bottom: 4vh;
+  bottom: 13vh;
 }
 
 .progress__container {
   text-align: center;
   position: relative;
-  bottom: 8vh;
+  bottom: 16vh;
   margin-left: 4em;
-  margin-left:4em;
 }
 
 .nav__progress {
@@ -286,8 +283,8 @@ $tour__map-margin-left: 22px;
 .tour__close-button {
     display: block;
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     right: 20px;
     top: 4px;
     transition: transform .25s ease-in-out;
@@ -306,7 +303,7 @@ $tour__map-margin-left: 22px;
     right: 0;
     top: 0;
     bottom: 0;
-    width: 40px;
+    width: 30px;
     height: 0;
     border-top: 4px solid rgba(0,0,0,0.5);
     transform: rotate(45deg);
@@ -322,7 +319,7 @@ $tour__map-margin-left: 22px;
     right: 0;
     top: 0;
     bottom: 0;
-    width: 40px;
+    width: 30px;
     height: 0;
     border-top: 4px solid rgba(0,0,0,0.5);
     transform: rotate(-45deg);

@@ -64,27 +64,11 @@ export default {
   }
 
   .the-about-view .address h3 {
-    margin: 5vh 0em 0em 7vw;
+    margin: 5vh 0 0 10vw;
   }
 
   .the-about-view .address {
     position: relative;
     right: 3vw;
-  }
-
-  @media only screen and (max-width: 1100px) {
-    .the-about-view .contact {
-      position: relative;
-      left: 0vw;
-    }
-
-    .the-about-view .address {
-      position: relative;
-      right: 0vw;
-    }
-
-    .the-about-view .address h3 {
-    margin: 5vh 0em 0em 12vw;
-  }
   }
 </style>
