@@ -7,7 +7,7 @@ import TheStoriesView from "@/views/TheStoriesView";
 import TheTourView from "@/views/TheTourView";
 
 export default new VueRouter({
-  mode: "history",
+//  mode: "history",
   routes: [
     { name: "home", path: "/", redirect: "/tour" },
     { name: "about", path: "/about", component: TheAboutView },
