@@ -15,23 +15,23 @@ class MapSupport {
    * @return {String} Mapbox style URL.
    */
   getBaseMap() {
-    if (process.env.NODE_ENV == "development") {
-      return {
-        version: 8,
-        sources: {},
-        layers: [
-            {
-            id: "background",
-            type: "background",
-            paint: {
-              "background-color": "rgb(255, 246, 242)"
-            }
+    // if (process.env.NODE_ENV == "development") {
+    return {
+      version: 8,
+      sources: {},
+      layers: [
+          {
+          id: "background",
+          type: "background",
+          paint: {
+            "background-color": "rgb(255, 246, 242)"
           }
-        ]
-      };
-    } else {
-      return process.env.VUE_APP_MAPBOX_STYLE_URL;
-    }
+        }
+      ]
+    };
+    // } else {
+    //   return process.env.VUE_APP_MAPBOX_STYLE_URL;
+    // }
   }
 
   /**
