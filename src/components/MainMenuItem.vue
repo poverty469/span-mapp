@@ -59,6 +59,7 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   padding: 0 0.8rem;
+  margin: 0 0.8rem;
   @include char-style($menu-item...);
 }
 
