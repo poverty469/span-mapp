@@ -17,9 +17,9 @@
       v-show="!bare"
       @toggleLayer="handleToggleLayer"
     ></the-layer-panel>
-    <transition name="slide-left">
+   <!--  <transition name="slide-left">
       <info-bar v-show="!bare" class="map-dashboard__info-bar"></info-bar>
-    </transition>
+    </transition> -->
   </div>
 </template>
 

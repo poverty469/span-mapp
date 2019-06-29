@@ -37,7 +37,23 @@ export default {
            attributeId: "HC03_VC164",
            type: MapTypes.CHOROPLETH,
            color: SequentialPalettes.BLUE
-         }]
+         },
+        {
+            name: "Median Income", 
+            dataset: povertyData,
+            geographyId: geographies.counties.id,
+            attributeId: "HC03_VC178",
+            type: MapTypes.CHOROPLETH,
+            color: SequentialPalettes.ORANGE_RED
+          },
+          { 
+            name: "Family Income", 
+            dataset: povertyData,
+            geographyId: geographies.counties.id,
+            attributeId: "HC03_VC162",
+            type: MapTypes.CHOROPLETH,
+            color: SequentialPalettes.PURPLE_BLUE
+          }]
         },
         /* {
           title: "criminal justice",
@@ -51,7 +67,7 @@ export default {
           title: "state revenue",
           layers: [{ name: "bn One" }, { name: "cj One" }]
         }, */
-        { title: "consumer protection", layers: [
+        /* { title: "consumer protection", layers: [
           { 
             name: "Median Income", 
             dataset: povertyData,
@@ -68,7 +84,7 @@ export default {
             type: MapTypes.CHOROPLETH,
             color: SequentialPalettes.PURPLE_BLUE
           }]
-        }
+        } */
       ]
     };
   },
