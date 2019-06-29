@@ -1,6 +1,6 @@
 const path = require("path");
 module.exports = {
-  publicPath: '/span-mapp',
+  publicPath: "/span-mapp",
   pluginOptions: {
     "style-resources-loader": {
       preProcessor: "scss",
