@@ -113,8 +113,8 @@ export default {
   display: block;
   margin-top: 2rem;
   padding: 15px 40px;
-  background: $dark-orange;
-  font-size: 3rem;
+  background: #fcd3c1;
+  font-size: 2.5rem;
 }
 
 .splash-page__start-tour-button:hover {
@@ -139,32 +139,5 @@ export default {
 
 .splash-page__skip-tour-button:active {
   background: $dark-orange--shadow;
-}
-
-@media only screen and (max-width: 1500px) {
-  .splash-page__card {
-    height: 40vh;
-    width: 45vw;
-  }
-
-  .splash-page__skip-tour-button {
-    height: 2vh;
-    width: 21vw;
-  }
-
-  .splash-page__start-tour-button {
-    height: 6vh;
-    width: 30vw;
-  }
-}
-
-@media only screen and (max-height: 900px) {
-  .splash-page__skip-tour-button {
-    height: 3vh;
-  }
-
-  .splash-page__start-tour-button {
-    height: 5vh;
-  }
 }
 </style>
