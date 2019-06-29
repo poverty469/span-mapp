@@ -2,7 +2,9 @@
   <div class="story-container">
     <h1>{{name}} - {{city}}</h1>
     <div class="bio-container">
-      <img :src="image" alt="Bio Image">
+      <div v-if="image !== ''">
+        <img :src="image" alt="Bio Image">
+      </div>
       <div class="paragraph-container">
         <p v-html="bio"></p>
       </div>
