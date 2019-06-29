@@ -30,7 +30,7 @@ const tourSlideData = [
       ' and, if they have criminal convictions, <a target="blank_" href="https://povertyaction.org/criminal-justice/">rebuild their lives</a> after leaving prison. Additionally, Washington’s' + 
       ' regressive <a target="blank_" href="https://povertyaction.org/revenue/">state tax structure</a> further exacerbates poverty. <br/> <br/>Poverty Action works to advocate for and advance progressive policy solutions that fix our state tax code, strengthen state basic needs programs, create robust consumer protections, and offer people with criminal convictions a second chance.</p>'
     ,
-    tutorialHtml: '<a href="https://povertyaction.org/advocacy-actions/" target="_blank"><img src="./images/getInvolved.png" alt="Get Involved" width="200px" height="80px"/></a>',
+    tutorialHtml: '<a href="https://povertyaction.org/advocacy-actions/" target="_blank"><img src="./images/getInvolved.png" alt="Get Involved" width="220px" height="60px"/></a>',
     imageHtml: './images/fourFocuses.png'
   },
   {
@@ -56,7 +56,7 @@ const tourSlideData = [
   },
   {
     title: 'Criminal Justice in Washington State',
-    subtitle: '',
+    subtitle: 'By County',
     narrativeHtml: '<p>Our country’s broken criminal justice system, which disproportionately targets people' +
       ' from Black, Latino, and Native American communities, further upholds systems of poverty. ' +
       'Due to stigma and bias, people with criminal records often have a very difficult time finding employment' +

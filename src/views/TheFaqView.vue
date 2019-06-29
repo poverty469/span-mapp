@@ -63,7 +63,7 @@ export default {
   .the-faq-view .contact-container {
     background: #192930;
     padding: 5em;
-    margin-top: 10vh;
+    margin-top: 20vh;
     display:flex;
     justify-content: space-between;
   }
@@ -74,7 +74,9 @@ export default {
   }
 
   .the-faq-view .address h3 {
-    margin: 0vh 0em 0em 10vw;
+    position: relative;
+    bottom: 2vh;
+    margin: 0 0 0 13vw;
   }
 
   .the-faq-view .address {

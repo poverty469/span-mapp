@@ -24,7 +24,7 @@ export default {
     padding: 10px;
     height: 66vh;
     border-radius: 20px;
-    border: 3px $dark-orange--border solid;
+    border: 3px solid #f28d79;
   }
 
   .display-maps img {
